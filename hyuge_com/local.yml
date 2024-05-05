@@ -1,0 +1,43 @@
+apiHost: testserver.aitmed.io
+apiPort: "443"
+webApiHost: apiHost
+appApiHost: apiHost
+connectiontimeout: "5"
+loadingLevel: 1
+debug: console_log_api
+isGetPosition: true
+createPlatform: Web
+preloadlib:
+  - https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.0.0/swiper-bundle.min.js
+  - https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.0.0/swiper-bundle.min.css
+  - https://sdk.twilio.com/js/video/releases/2.26.1/twilio-video.min.js
+  - https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.min.js
+  - https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js
+  - https://cdn.staticfile.org/echarts/5.4.1/echarts.min.js
+viewWidthHeightRatio:
+  min: 0.45
+  max: 0.5
+web:
+  cadlVersion:
+    stable: 14.33
+    test: 14.33
+ios:
+  cadlVersion:
+    stable: 14.33
+    test: 14.33
+android:
+  cadlVersion:
+    stable: 14.33
+    test: 14.33
+## 方式1 只给 cadlBaseUrl, 则从相对路径去加载 项目
+#cadlBaseUrl: '../product/aitmed/provider/'
+cadlBaseUrl: './noodlapp/cadl/web/'
+## 方式2 给了 baseUrl 则去线上加载config，并且以yml 结尾并根据加载到的 config文件加载 项目
+#baseUrl: "https://hyuge.com/../noodlapp/config/www.yml"
+# baseUrl:  "https://hyuge.net/noodlapp/config/"
+#works fine baseUrl:  "https://public.aitmed.com/config/"
+# has CORS error baseUrl:  "https://public.aitmed.us/config/"
+## 方式3 给了baseurl 以 / 结尾 则根据subdomain 去解析
+cadlMain: cadlEndpoint.yml
+timestamp: 12222023.1PDT
+shippoToken: shippo_test_d19eee0e8b2918f58d86a83ab2f96bc1224dbade

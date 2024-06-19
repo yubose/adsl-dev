@@ -230,7 +230,7 @@ BaseHeader: # base top
                                   dataIn:
                                     string1: $var.title
                                     string2: "Clients & Partners"
-                              - goto: Clients&Partners
+                              - goto: ClientsPartners
                               - continue
                           - if:
                               - =.builtIn.string.equal:
@@ -1878,6 +1878,29 @@ OurSolutionsLabel:
   style:
     fontSize: calc(20.42/1724.81*100vw)
     marginTop: calc(31.06/1724.81*100vw)
+    fontFamily: "Arial"
+    text-align: justify
+
+ClientsPartnersTitle:
+  type: label
+  text: "Our Vision and Mission"
+  style:
+    color: "0x000000"
+    fontSize: calc(34.04/1724.81*100vw)
+    fontStyle: "bold"
+    fontFamily: "Arial"
+    marginTop: calc(59.57/1724.81*100vw)
+    marginBottom: calc(8.51/1724.81*100vw)
+    textAlign:
+      y: center
+    height: calc(85.1/1724.81*100vw)
+    # left: '0.16'
+
+ClientsPartnersLabel:
+  type: label
+  style:
+    fontSize: calc(20.42/1724.81*100vw)
+    # marginTop: calc(31.06/1724.81*100vw)
     fontFamily: "Arial"
     text-align: justify
 

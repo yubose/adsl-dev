@@ -1870,8 +1870,9 @@ OurSolutionsTitle:
     fontFamily: "Arial"
     textAlign:
       x: left
+      y: center
     height: calc(85.1/1724.81*100vw)
-    # left: '0.16'
+    marginTop: calc(59.57/1724.81*100vw)
 
 OurSolutionsLabel:
   type: label

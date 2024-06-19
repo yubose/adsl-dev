@@ -21,10 +21,6 @@ OurSolutions:
           text: "Our Solutions"
 
         - .OurSolutionsTitle:
-          style:
-            marginTop: calc(59.57/1724.81*100vw)
-            textAlign:
-              y: center
           text: "At Hyuge Intelligent Systems, we offer a suite of cutting-edge AI technologies"
 
         - .OurSolutionsLabel:
@@ -35,10 +31,6 @@ OurSolutions:
 
         - .OurSolutionsTitle:
           text: "PIE (Persistent Information Embedding)"
-          style:
-            marginTop: calc(59.57/1724.81*100vw)
-            textAlign:
-              y: center
 
         - .OurSolutionsLabel:
           text: "- Enables continuous, lifelong learning across domains and languages"
@@ -56,10 +48,6 @@ OurSolutions:
 
         - .OurSolutionsTitle:
           text: "PALM (Progressive Adaptive Learning Mathing)"
-          style:
-            marginTop: calc(59.57/1724.81*100vw)
-            textAlign:
-              y: center
 
         - .OurSolutionsLabel:
           text: "- Mimics human cognition, allowing AI to learn and adapt organically from experience"
@@ -80,10 +68,6 @@ OurSolutions:
 
         - .OurSolutionsTitle:
           text: "ADSL (Application Design Specification Language)"
-          style:
-            marginTop: calc(59.57/1724.81*100vw)
-            textAlign:
-              y: center
 
         - .OurSolutionsLabel:
           text: "- Offers a high-level, intuitive language for defining AI application behavior"
@@ -107,10 +91,6 @@ OurSolutions:
 
         - .OurSolutionsTitle:
           text: "BECOS (Blockchain Empowered Content Organizing System)"
-          style:
-            marginTop: calc(59.57/1724.81*100vw)
-            textAlign:
-              y: center
 
         - .OurSolutionsLabel:
           text: "- Provides a secure, decentralized framework for storing and managing AI data"
@@ -131,10 +111,6 @@ OurSolutions:
 
         - .OurSolutionsTitle:
           text: "Open Source Access"
-          style:
-            marginTop: calc(59.57/1724.81*100vw)
-            textAlign:
-              y: center
 
         - .OurSolutionsLabel:
           text: "As part of our commitment to advancing the field of AI, we provide open source access to ADSL and BECOS."

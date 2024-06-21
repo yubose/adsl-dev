@@ -1860,6 +1860,42 @@ BaseFooterText1:
     fontSize: calc(16/1724.81*100vw)
     color: "0x000000"
 
+HomeTitle:
+  type: label
+  text: "Our Vision and Mission"
+  style:
+    color: "0x000000"
+    fontSize: calc(34.04/1724.81*100vw)
+    fontStyle: "bold"
+    fontFamily: "Arial"
+    textAlign:
+      x: left
+      y: center
+    height: calc(85.1/1724.81*100vw)
+    marginTop: calc(59.57/1724.81*100vw)
+
+HomeLabel:
+  type: label
+  style:
+    fontSize: calc(20.42/1724.81*100vw)
+    # marginTop: calc(31.06/1724.81*100vw)
+    fontFamily: "Arial"
+    text-align: justify
+
+HomeSubTitle:
+  type: label
+  text: "Our Vision and Mission"
+  style:
+    color: "0x000000"
+    fontSize: calc(24.04/1724.81*100vw)
+    fontStyle: "bold"
+    fontFamily: "Arial"
+    textAlign:
+      x: left
+      y: center
+    height: calc(85.1/1724.81*100vw)
+    marginTop: calc(59.57/1724.81*100vw)
+
 OurSolutionsTitle:
   type: label
   text: "Our Vision and Mission"

@@ -1,0 +1,261 @@
+PatientChart:
+  pageNumber: "170"
+  title: "Patient Chart"
+  init:
+    - .SignInCheck
+    - ..Chart.docAPI.get
+    - actionType: evalObject
+      object:
+        .PatientChart.PatientChartObject@: =..docResponse.doc.0
+  save:
+    - =.PatientChart.shareDocuments.docAPI.store: ""  
+  #get mock data
+  PatientChartObject: ""        
+  Chart:
+    docAPI: 
+      get:
+        .DocAPI.get: "" 
+        dataKey: docResponse
+        ids:
+          - .Global.rootNotebookID
+        xfname: eid
+        type: .DocType.PatientChart #  type: "257"
+        obfname: "mtime"
+        maxcount: "1"
+  docResponse: 
+    doc:
+      - type: .DocType.PatientChart # - type: "257" # private profile
+        eid: .Global.rootNotebookID
+        name: ""
+    error: ""
+    jwt: ""
+
+  sharedDoc: ""
+  selectedDoc: "" 
+
+  waitingRoom:
+    edge:
+      atime: 1606562649
+      atimes: 1
+      besak: ""
+      bvid: "NzczFCtoRgYkcD3yEvGhRA=="
+      ctime: 1606562649
+      deat:
+        roomId: "RM189a34f43e2daf4d8d3a57d3e3c47360"
+      eesak: ""
+      etime: 0
+      evid: ""
+      id: "fSEVtTLCSM+Q2//YZXIs4A=="
+      mtime: 1606562649
+      name: 
+        date: "11/29/2020"
+        roomName: "testforsharedoc"
+        videoProvider: "yaokai"
+      refid: ""
+      sig: ""
+      subtype: 0
+      tage: 0
+      type: 40000
+  chart: .PatientChart.PatientChartObject.name.data
+  components:
+    - .BaseHeader:
+    - .HeaderLeftButton:  
+    - .HeaderRightButton:
+      text: Update
+      onClick:
+        - goto: PatientChartGeneralInfo
+    - type: view
+      style:
+        top: "0.1"
+        left: "0"
+        width: "1"
+        height: "1"
+      children:
+        - type: view
+          style:
+            top: "0"
+            left: "0"
+            width: "1"
+            height: "0.55"
+            border:
+              style: "2"
+              width: "3"
+              color: "#bfbfbf"
+          children:
+            - .H6:
+              text: "Chart Summary"
+              style:
+                top: "0"
+                left: "0.1"
+                color: "#353535"
+                fontStyle: "bold"
+                fontSize: "15"
+            - .H6:
+              text: "General Information"
+              style:
+                top: "0.05"
+                left: "0.1"
+                fontSize: "15"
+                fontStyle: "bold"
+            - type: view
+              style:
+                top: "0.13"
+                width: "0.4"
+                left: "0.1"
+              children:
+                - type: label
+                  textBoard:
+                  - text: "First name"
+                  - br:
+                  - text: "Middle name or initial"
+                  - br:
+                  - text: "Last name"
+                  - br:
+                  - text: "Preferred name"
+                  - br:
+                  - text: "Gender"
+                  - br:
+                  - text: "Date of birth"
+                  - br:
+                  - text: "Occupation"
+                  - br:
+                  - text: "Relationship status"
+                  - br:
+                  - text: "Primary Care Physician"
+                  - br:
+                  - text: "Primary Care clinic"
+                  style:
+                    fontSize: "14"
+                    color: "0x000000"
+                    top: "0"
+                    left: "0"
+                    width: "0.4"
+                    lineHeight: "30px"
+                - type: label
+                  dataKey: chart.generalInfo.frstName
+                  style:
+                    fontSize: "14"
+                    color: "#5f5f5f"
+                    top: "0"
+                    left: "0.5"
+                    width: "0.4"
+                    lineHeight: "30px"
+                    textAlign:
+                      x: center
+                - type: label
+                  dataKey: chart.generalInfo.middleNameInitial
+                  style:
+                    fontSize: "14"
+                    color: "#5f5f5f"
+                    top: "0.037"
+                    left: "0.5"
+                    width: "0.4"
+                    lineHeight: "30px"
+                    textAlign:
+                      x: center
+                - type: label
+                  dataKey: chart.generalInfo.lastName
+                  style:
+                    fontSize: "14"
+                    color: "#5f5f5f"
+                    top: "0.074"
+                    left: "0.5"
+                    width: "0.4"
+                    lineHeight: "30px"
+                    textAlign:
+                      x: center
+                - type: label
+                  dataKey: chart.generalInfo.preferredName
+                  style:
+                    fontSize: "14"
+                    color: "#5f5f5f"
+                    top: "0.111"
+                    left: "0.5"
+                    width: "0.4"
+                    lineHeight: "30px"
+                    textAlign:
+                      x: center
+                - type: label
+                  dataKey: chart.generalInfo.gender
+                  style:
+                    fontSize: "14"
+                    color: "#5f5f5f"
+                    top: "0.148"
+                    left: "0.5"
+                    width: "0.4"
+                    lineHeight: "30px"
+                    textAlign:
+                      x: center
+                - type: label
+                  dataKey: chart.generalInfo.dateOfBirth
+                  style:
+                    fontSize: "14"
+                    color: "#5f5f5f"
+                    top: "0.185"
+                    left: "0.5"
+                    width: "0.4"
+                    lineHeight: "30px"
+                    textAlign:
+                      x: center
+                - type: label
+                  dataKey: chart.generalInfo.occupation
+                  style:
+                    fontSize: "14"
+                    color: "#5f5f5f"
+                    top: "0.222"
+                    left: "0.5"
+                    width: "0.4"
+                    lineHeight: "30px"
+                    textAlign:
+                      x: center
+                - type: label
+                  dataKey: chart.generalInfo.relationshipStatus
+                  style:
+                    fontSize: "14"
+                    color: "#5f5f5f"
+                    top: "0.259"
+                    left: "0.5"
+                    width: "0.4"
+                    lineHeight: "30px"
+                    textAlign:
+                      x: center
+                - type: label
+                  dataKey: chart.generalInfo.primaryCarePhysician
+                  style:
+                    fontSize: "14"
+                    color: "#5f5f5f"
+                    top: "0.296"
+                    left: "0.5"
+                    width: "0.4"
+                    lineHeight: "30px"
+                    textAlign:
+                      x: center
+                - type: label
+                  dataKey: chart.generalInfo.primaryCareClinic
+                  style:
+                    fontSize: "14"
+                    color: "#5f5f5f"
+                    top: "0.333"
+                    left: "0.5"
+                    width: "0.4"
+                    lineHeight: "30px"
+                    textAlign:
+                      x: center
+                
+            - .SmallButton:
+              text: "Share"
+              onClick: 
+               
+                - actionType: evalObject     # to download the selected document and using target edge id 
+                  object:                    # to encrypt new document with the same content
+                    =.builtIn.ecos.shareDoc: 
+                      dataIn:                
+                        sourceDoc: =.PatientChart.PatientChartObject
+                        targetEdgeID: =..waitingRoom.edge.id
+                      dataOut: =.PatientChart.sharedDoc
+              style:
+                top: "0.7"
+                width: "0.6"
+                left: "0.2"
+                height: "0.05"
+                backgroundColor: "#388ecc"

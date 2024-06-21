@@ -1,0 +1,27 @@
+NoodlFontSize:
+    title: Noodl Font Size
+    components:
+        - type: label
+          text: Nfont.n1
+          style:
+            fontSize: .Nfont.n1
+        - type: label
+          text: Nfont.n2
+          style:
+            fontSize: .Nfont.n2
+        - type: label
+          text: Nfont.n3
+          style:
+            fontSize: .Nfont.n3
+        - type: label
+          text: Nfont.n4
+          style:
+            fontSize: .Nfont.n4
+        - type: label
+          text: Nfont.n5
+          style:
+            fontSize: .Nfont.n5
+        - type: label
+          text: Nfont.n6
+          style:
+            fontSize: .Nfont.n6

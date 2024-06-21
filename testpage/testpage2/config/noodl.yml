@@ -1,0 +1,27 @@
+webApiHost: apiHost 
+appApiHost: apiHost 
+connectiontimeout: '5' 
+loadingLevel: 1 
+versionNumber: 0.4
+web: 
+  cadlVersion : 
+    stable: 0.4
+    test : 0.4
+ios: 
+  cadlVersion: 
+    stable: 0.4
+    test : 0.4
+android: 
+  cadlVersion: 
+    stable : 0.4
+    test : 0.4
+viewWidthHeightRatio:
+    min: "1.33"
+    max: "2.1"
+#cadlBaseUrl: ../cadl/aitmedWebsite/
+#cadlBaseUrl: ../cadl/patient/
+#adlBaseUrl: ../cadl/noodl_0.1/
+#cadlBaseUrl: ../cadl/meet2/
+cadlBaseUrl: https://public.aitmed.com/cadl/noodl_${cadlVersion}/
+cadlMain: cadlEndpoint.yml 
+timestamp: 04292021

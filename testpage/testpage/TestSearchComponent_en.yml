@@ -1,0 +1,74 @@
+TestSearchComponent:
+  title: "Test Search Component"
+  components: 
+    - type: view
+      style:
+        width: "1"
+        height: "1"
+      children:
+        - type: view
+          contentType: search
+          placeholder: 3 characters minimum
+          isdeleteAble: true
+          inputlimit: 3
+          searchImagePath: search.png
+          deleteImagePath: delete.png
+          searchDataKey: formData.input
+          deleteCallBack:
+            - actionType: evalObject
+              object:
+                - ..formData.test@: "1234"
+          onInput:
+            - actionType: evalObject
+              object:
+                - ..formData.test2@: "test3"
+          style:
+            width: "0.92"
+            height: "0.04"
+
+        - type: view
+          style:
+            top: 0.5
+            marginTop: "0.0123"
+            boxSizing: border-box
+            border: "1.5px solid #2988e6"
+            paddingLeft: "0.032"
+            paddingRight: "0.032"
+            width: "0.92"
+            borderRadius: "4"
+            verticalAlign: middle
+          children:
+            - type: image
+              path: searchGray.svg
+              style:
+                height: "0.0160098"
+                width: "0.0346666"
+                display: "inline-block"
+                verticalAlign: middle
+            - type: textField
+              viewTag: searchInputTag
+              placeholder: 3 characters minimum
+              dataKey: formData.searchContent
+              debounce: 500
+              style:
+                border: "none"
+                display: "inline-block"
+                verticalAlign: middle
+                paddingLeft: "0.032"
+                height: "0.036945"
+                boxSizing: "border-box"
+                width: "0.75733333333"
+              onInput:
+                - ..event.searchInput
+            - type: image
+              viewTag: searchInputImgTag
+              path: searchCancel.svg
+              bubble: true
+              onClick:
+                - ..event.reviseChange
+              style:
+                # visibility: ..formData.displayDeleFlag
+                height: "0.018"
+                marginLeft: "0.012"
+                display: inline-block
+                verticalAlign: "middle"

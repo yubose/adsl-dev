@@ -1,0 +1,46 @@
+TestValidate:
+  count: "0"
+  id: "XiBJBQAAAACC0wJCrBIAAw=="
+  style1:
+    width: "0.6"
+    left: "0.2"
+    top: "0.1"
+    height: "0.08"
+    backgroundColor: "0xFF9966"
+    borderRadius: "10"
+    color: "0xFFFFFF"
+  style2:
+    width: "0.6"
+    left: "0.2"
+    top: "0.1"
+    height: "0.08"
+    backgroundColor: ..bg
+    borderRadius: "10"
+    color: "0xCCFFFF"
+  bg: "0xcc0000"
+  components: 
+    - type: scrollView
+      style:
+        width: "1"
+        # height: "1.92"
+        height: "1"
+        left: "0"
+        overflow: scroll
+      children:
+        - type: button
+          text: validate test
+          validateField: 
+            emit:
+              dataKey:
+              actions:        
+                - if:
+                  - =.builtIn.string.equal:
+                      dataIn:
+                        string1: "test1"
+                        string2: "test2"
+                  - true
+                  - false
+          usuallyClass:
+            ..style1
+          validateClass:
+            ..style2

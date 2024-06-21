@@ -1,0 +1,78 @@
+TestCustomForm:
+  pageNumber: "176.5"
+  title: "TestRightAlign"
+  flag: "1"
+  init:
+    # - =..apiRequest.createjwt.edgeApi.create: ""
+    # - =..apiRequest.getJson.docApi.create: ""
+    # - =..apiRequest.getJson.docApi.get: ""
+    - if:
+      - .TestCustomForm.apiRequest.getJson.resp.doc.0.name.data
+      - goto: ShowComponents
+      - continue
+  formData:
+    page: ""
+    yaml: ""
+  apiRequest:
+    createjwt:
+      resp: ""
+      edge:
+        bvid: 'XeKoZgAAAAAMwQJCrBIABQ=='
+        type: 1030
+      edgeApi:
+        create:
+          api: ce
+          dataIn: apiRequest.createjwt.edge
+    getJson:
+      resp: ""
+      docCreateResp: 
+      docCreateReq:
+        type: 1537
+        eid: 'XeKoZgAAAACM4AJCrBIABQ=='
+        name:
+          data: 
+            classTag:
+              name: Patient
+              fontColor: "0xf8ae29"
+              backgroundColor: "0xfff4e0"
+              display: block
+            formData:
+              label1: "已填写"
+              label2: ""
+            view:
+              - type: view
+                style:
+                  width: "1"
+                  marginTop: "0"
+                children:
+                  - type: label
+                    text: this is page2
+                    dataKey: formData.label1
+                    style:
+                      width: "1"
+                      marginTop: "0"
+                  - type: button
+                    text: go to by TestPage1
+                    onClick:
+                      - goto: TestPage1
+                    dataKey: formData.label2
+                    style:
+                      width: "1"
+                      marginTop: "0"
+      doc:
+        id: 'XeKoZgAAAACM4AJCrBIABQ=='
+        type: '1537'
+        xfname: eid
+        maxcount: "1"
+        obfname: ctime
+      docApi:
+        get:
+          api: rd
+          dataIn: apiRequest.getJson.doc
+          dataOut: TestCustomForm.apiRequest.getJson.resp
+        create:
+          api: cd
+          dataIn: apiRequest.getJson.docCreateReq
+          dataOut: TestCustomForm.apiRequest.getJson.docCreateResp
+  components: 
+    .Global.jsonData

@@ -1,0 +1,22 @@
+TestAutoExpand:
+  components: 
+    - type: scrollView
+      style:
+        width: "1"
+        # height: "1.92"
+        height: "1"
+        left: "0"
+        overflow: scroll
+      children:
+        - type: textView
+          autoExpand: true
+          dataKey: formData.input
+          style:
+            top: "0.2"
+            width: "0.5"
+            left: "0.25"
+            maxHeight: "0.1"
+            # height: 'auto'
+            # overflow: hidden
+            # resize: none
+          

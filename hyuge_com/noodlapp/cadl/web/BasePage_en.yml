@@ -1864,23 +1864,26 @@ OurSolutionsTitle:
   type: label
   text: "Our Vision and Mission"
   style:
-    color: "0x000000"
-    fontSize: calc(34.04/1724.81*100vw)
+    color: "0x1B1B1B"
+    fontSize: calc(44.04/1724.81*100vw)
     fontStyle: "bold"
     fontFamily: "Arial"
     textAlign:
-      x: left
+      x: center
       y: center
     height: calc(85.1/1724.81*100vw)
     marginTop: calc(59.57/1724.81*100vw)
+    marginBottom: calc(19.57/1724.81*100vw)
 
 OurSolutionsLabel:
   type: label
   style:
-    fontSize: calc(20.42/1724.81*100vw)
+    fontSize: calc(25.42/1724.81*100vw)
     marginTop: calc(31.06/1724.81*100vw)
     fontFamily: "Arial"
-    text-align: justify
+    textAlign: center
+    color: "0x5E5E5E"
+    # text-align: justify
 
 HealthNav:
   type: view

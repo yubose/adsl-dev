@@ -7,7 +7,7 @@ OurSolutions:
     - type: view
       style:
         marginTop: "0"
-        width: calc(1060.35/1724.81*100vw)
+        width: calc(1160.35/1724.81*100vw)
         margin: "auto"
       children:
         - .OurSolutionsTitle:
@@ -18,7 +18,14 @@ OurSolutions:
             fontStyle: "bold"
             fontSize: calc(34.04/1724.81*100vw)
             justifyContent: center
+            color: "0x595959"
           text: "Our Solutions"
+
+        - type: image
+          path: our_solutions.webp
+          style:
+            display: block
+            margin: auto
 
         - .OurSolutionsTitle:
           text: "At Hyuge Intelligent Systems, we offer a suite of cutting-edge AI technologies"

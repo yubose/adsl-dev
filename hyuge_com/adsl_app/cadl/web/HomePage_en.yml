@@ -233,28 +233,28 @@ HomePage:
           style:
             # mouseOver:
             #   backgroundColor: white
-            fontSize: calc(31/1920*100vw)
+            fontSize: calc(21/1920*100vw)
             color: "0xffffff"
             # hover:
             #   color: "0x000000"
             fontFamily: "Arial"
             borderWidth: "2px"
             borderColor: "white"
+            borderStyle: "solid"
             backgroundColor: "transparent"
             zIndex: "99"
             fontWeight: "Regular"
-            borderRadius: calc(4.85/1920*100vw)
+            borderRadius: "0.001"
             boxShadow: 1px 1px 2px 0x000000
             height: calc(65.89/1920*100vw)
             left: calc(275.97/1920*100vw)
             top: calc(544.58/1920*100vw)
             # width: calc(384.64/1920*100vw)
-            padding: "0 20px"
+            padding: "15px 20px"
             textAlign:
               x: center
               y: center
 
-    # why us
     - type: view
       style:
         width: calc(1514.77/1724.81*100vw)
@@ -290,7 +290,7 @@ HomePage:
                 # width: calc(1500.9/1920*100vw)
                 width: calc(1514.77/1724.81*100vw)
                 # height: calc(656/1920*100vw)
-                justifyContent: center
+                justifyContent: left
                 alignItems: center
               children:
                 - .HomeTitle:
@@ -315,6 +315,8 @@ HomePage:
                         - goto: https://calendly.com/drisyavilaya/hyuge-ai-discovery-call
 
                 - type: view
+                  style:
+                    alignSelf: center
                   children:
                     - .HomeSubTitle:
                       text: 'INTRODUCING AGI - ARTIFICIAL "GENOMATIC" INTELLIGENCE'
@@ -327,37 +329,42 @@ HomePage:
                     - .HomeLabel:
                       text: 'Hyuge Intelligent Systems is pioneering the next major leap forward in artificial intelligence with our groundbreaking Artificial "Genomatic" Intelligence technology, or AGI. Moving beyond the limitations of current mechanical neural networks and large language models (LLMs), AGI takes inspiration from the principles of biology and the human genome to enable AI systems that can organically learn, grow and adapt.'
 
-                - .HomeTitle:
-                  text: "How AGI is Different"
+                - type: view
 
-                - .HomeLabel:
-                  text: '- Rather than relying on brute force pre-training, AGI systems start as a "seed" and progressively learn through interaction and experience, just like a human child'
+                  children:
+                    - .HomeTitle:
+                      text: "How AGI is Different"
 
-                - .HomeLabel:
-                  text: "- AGI embeds knowledge in a compressed genomatic representation, enabling fast inference and efficient storage"
+                    - .HomeLabel:
+                      text: '- Rather than relying on brute force pre-training, AGI systems start as a "seed" and progressively learn through interaction and experience, just like a human child'
 
-                - .HomeLabel:
-                  text: "- Each AGI model adapts to its specific user, learning their preferences, communication style and needs to provide a uniquely personalized AI assistant"
+                    - .HomeLabel:
+                      text: "- AGI embeds knowledge in a compressed genomatic representation, enabling fast inference and efficient storage"
 
-                - .HomeTitle:
-                  text: "Under the hood, AGI is powered by several key innovations developed by our Founder and Chief Technic"
+                    - .HomeLabel:
+                      text: "- Each AGI model adapts to its specific user, learning their preferences, communication style and needs to provide a uniquely personalized AI assistant"
 
-                - .HomeLabel:
-                  text: "- PIE (Persistent Information Embedding): A information embedding system for continuous AI learning"
+                - type: view
+                  children:
+                    - .HomeTitle:
+                      text: "Under the hood, AGI is powered by several key innovations developed by our Founder and Chief Technic"
 
-                - .HomeLabel:
-                  text: "- PALM (Progressive Adaptive Learning Machine): An organic neural network architecture modeled on human cognition"
+                    - .HomeLabel:
+                      text: "- PIE (Persistent Information Embedding): A information embedding system for continuous AI learning"
 
-                - .HomeLabel:
-                  text: "- ADSL (Application Design Specification Language): An intuitive interface for human-AI interaction"
+                    - .HomeLabel:
+                      text: "- PALM (Progressive Adaptive Learning Machine): An organic neural network architecture modeled on human cognition"
 
-                - .HomeLabel:
-                  text: "- BECOS (Blockchain Empowered Content Organizing System): A blockchain framework for secure AI data storage"
+                    - .HomeLabel:
+                      text: "- ADSL (Application Design Specification Language): An intuitive interface for human-AI interaction"
 
-                - .HomeLabel:
-                  text: "By integrating these technologies, we enable efficient, secure, and user-centric AI that evolves alongside each individual."
-                  style:
-                    marginTop: calc(31.06/1724.81*100vw)
+                    - .HomeLabel:
+                      text: "- BECOS (Blockchain Empowered Content Organizing System): A blockchain framework for secure AI data storage"
+
+                    - .HomeLabel:
+                      text: "By integrating these technologies, we enable efficient, secure, and user-centric AI that evolves alongside each individual."
+                      style:
+                        marginTop: calc(31.06/1724.81*100vw)
 
                 - type: view
                   children:
@@ -384,11 +391,6 @@ HomePage:
         margin: "auto"
         height: calc(786.94/1920*100vw)
       children:
-        - type: image
-          path: HomeBottom.png
-          style:
-            width: calc(1514.77/1724.81*100vw)
-            top: "0"
         - type: label
           text: "About Hyuge"
           style:
@@ -396,7 +398,6 @@ HomePage:
             justifyContent: center
             alignItems: center
             width: calc(1514.77/1724.81*100vw)
-            color: "0xffffff"
             height: calc(187.4/1920*100vw)
             fontWeight: "600"
             fontSize: calc(37.5/1920*100vw)
@@ -434,7 +435,6 @@ HomePage:
                     textAlign:
                       x: center
                     width: calc(333.56/1920*100vw)
-                    color: "0xffffff"
                     fontSize: calc(22/1700*100vw)
                     fontWeight: "600"
                     fontFamily: "Arial"
@@ -471,7 +471,6 @@ HomePage:
                     justifyContent: center
                     alignItems: center
                     width: calc(333.56/1920*100vw)
-                    color: "0xffffff"
                     fontSize: calc(22/1700*100vw)
                     fontWeight: "600"
                     fontFamily: "Arial"
@@ -510,7 +509,6 @@ HomePage:
                     alignItems: flex-start
                     width: calc(333.56/1920*100vw)
                     height: calc(103.06/1920*100vw)
-                    color: "0xffffff"
                     fontSize: calc(22/1700*100vw)
                     fontWeight: "600"
                     fontFamily: "Arial"
@@ -594,7 +592,57 @@ HomePage:
             "Mon 09:00 am – 05:00 pm\nTue 09:00 am – 05:00 pm\nWed 09:00 am – 05:00 pm\nThu 09:00 am – 05:00 pm\nFri 09:00 am – 05:00
             pm\nSat Closed\nSun Closed"
 
-        - type: button
+    - type: view
+      style:
+        width: calc(1514.77/1724.81*100vw)
+        height: calc(786.94/1920*100vw)
+        margin: "auto"
+      children:
+        - type: image
+          path: HomeBottom.png
+          style:
+            width: calc(1514.77/1724.81*100vw)
+            top: 0
+
+        - type: label
+          text: "Subscribe"
+          style:
+            display: flex
+            justifyContent: center
+            alignItems: center
+            width: calc(1514.77/1724.81*100vw)
+            color: "0xffffff"
+            height: calc(187.4/1920*100vw)
+            fontWeight: "600"
+            fontSize: calc(37.5/1920*100vw)
+            fontFamily: "Arial"
+
+        - .HomeLabel:
+          text: "Get 10% off your first purchase when you sign up for our newsletter!"
+
+        - type: view
+          style:
+            display: flex
+            flexDirection: row
+            padding: "0 20px"
+          children:
+            - type: textField
+              placeholder: "Email"
+              style:
+                textAlign:
+                  x: left
+                fontSize: "14"
+                # left: "0.007"
+                # top: "0.003"
+                height: "0.04"
+                required: "true"
+                borderWidth: "1"
+                box-sizing: "border-box"
+                border: "none"
+                margin: auto
+
+            - type: button
+              text: "SIGN UP"
 
     - type: view
       style:

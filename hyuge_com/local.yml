@@ -32,6 +32,7 @@ android:
 ## 方式1 只给 cadlBaseUrl, 则从相对路径去加载 项目
 #cadlBaseUrl: '../product/aitmed/provider/'
 cadlBaseUrl: './noodlapp/cadl/web/'
+#cadlBaseUrl: '../testpage/'
 ## 方式2 给了 baseUrl 则去线上加载config，并且以yml 结尾并根据加载到的 config文件加载 项目
 #baseUrl: "https://hyuge.com/../noodlapp/config/www.yml"
 # baseUrl:  "https://hyuge.net/noodlapp/config/"

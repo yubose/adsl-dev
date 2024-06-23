@@ -41,6 +41,5 @@ cadlBaseUrl: './HelloWorld/'
 # has CORS error baseUrl:  "https://public.aitmed.us/config/"
 ## 方式3 给了baseurl 以 / 结尾 则根据subdomain 去解析
 cadlMain: init.adsl
-#cadlMain: cadlEndpoint.yml
 timestamp: 12222023.1PDT
 shippoToken: shippo_test_d19eee0e8b2918f58d86a83ab2f96bc1224dbade

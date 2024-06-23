@@ -23,3 +23,12 @@ THis rendering engine is fast website developing and mobile app proto-typing and
 
   the ADSL (yaml) config file is local.yml is in the same directory as index.html. The ADSL rendering engine uses it to load the ADSL file set for the website of web app.
   
+In this repo, there are 4 adsl file sets:
+	hyuge_com/adsl_app
+		This is a completed website in ADSL
+    hyuge_com/HelloWorld
+		This is the minimal text(Hello World) web site to display simply text.
+    testpage/testpage
+		This shows various view components which can be rendered with current renderring engine.
+	testpage/testpage2
+		This is typical web-app with signin/signup with cloud resource connection to BECOS

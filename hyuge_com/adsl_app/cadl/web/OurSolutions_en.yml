@@ -26,6 +26,8 @@ OurSolutions:
           style:
             display: block
             margin: auto
+            maxWidth: "100%"
+            width: calc(1060.35/1724.81*100vw)
 
         - .OurSolutionsTitle:
           text: "At Hyuge Intelligent Systems, we offer a suite of cutting-edge AI technologies"

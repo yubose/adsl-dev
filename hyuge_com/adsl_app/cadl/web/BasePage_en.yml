@@ -1883,14 +1883,13 @@ OurSolutionsLabel:
     fontFamily: "Arial"
     textAlign: center
     color: "0x5E5E5E"
-    # text-align: justify
 
 ClientsPartnersTitle:
   type: label
   text: "Our Vision and Mission"
   style:
     color: "0x000000"
-    fontSize: calc(34.04/1724.81*100vw)
+    fontSize: calc(44.04/1724.81*100vw)
     fontStyle: "bold"
     fontFamily: "Arial"
     marginTop: calc(59.57/1724.81*100vw)
@@ -1898,15 +1897,14 @@ ClientsPartnersTitle:
     textAlign:
       y: center
     height: calc(85.1/1724.81*100vw)
-    # left: '0.16'
 
 ClientsPartnersLabel:
   type: label
   style:
-    fontSize: calc(20.42/1724.81*100vw)
-    # marginTop: calc(31.06/1724.81*100vw)
+    fontSize: calc(25.42/1724.81*100vw)
+    marginTop: calc(31.06/1724.81*100vw)
     fontFamily: "Arial"
-    text-align: justify
+    color: "0x5E5E5E"
 
 HealthNav:
   type: view

@@ -16,10 +16,20 @@ ClientsPartners:
             fontStyle: "bold"
             fontSize: calc(34.04/1724.81*100vw)
             justifyContent: center
+            color: "0x595959"
           text: "Clients and Partners"
 
+        - type: image
+          path: clients_partners.webp
+          style:
+            display: block
+            margin: auto
+            maxWidth: "100%"
+            width: calc(1060.35/1724.81*100vw)
+
         - .ClientsPartnersLabel:
-          # style:
+          style:
+            marginTop: calc(31.06/1724.81*100vw)
           text: "At Hyuge Intelligent Systems, we are proud to collaborate with innovative organizations across industries to bring the benefits of personalized AI to real-world applications. Our clients and partners recognize the transformative potential of our technologies and share our vision for a future where AI empowers individuals and businesses alike."
 
         - .ClientsPartnersTitle:
@@ -28,7 +38,17 @@ ClientsPartners:
         - .ClientsPartnersLabel:
           text: "We are excited to announce our first client, AiTMed, a leading provider of medical software solutions. In partnership with AiTMed, we are developing a groundbreaking AI-powered customer service platform that will revolutionize the way healthcare providers interact with their patients."
 
-        # add link to AiTMED
+        - type: button
+          text: "CHECK AITMED"
+          onClick:
+            - goto: "https://web.aitmed.com/"
+          style:
+            marginTop: calc(15/1724.81*100vw)
+            backgroundColor: transparent
+            border: none
+            borderBottom: 1px solid black
+            outline: none
+            fontSize: calc(25.42/1724.81*100vw)
 
         - .ClientsPartnersTitle:
           text: "The AI+ project leverages our cutting-edge technologies:"
@@ -78,10 +98,23 @@ ClientsPartners:
         - .ClientsPartnersLabel:
           text: "- Establish Hyuge Intelligent Systems as a key player in the global AI ecosystem"
 
-        - .ClientsPartnersLabel:
-          text: "As we engage with potential partners, we remain committed to our core values of innovation, mutual-understanding, collaboration, and user-centricity. We believe that by working together with like-minded organizations, we can achieve our vision of a future where AI empowers individuals and transforms industries for the better. If you are interested in exploring partnership or collaboration opportunities with Hyuge Intelligent Systems, please contact our partnerships team at driz@hyuge.com."
+        - type: view
           style:
-            marginTop: calc(31.06/1724.81*100vw)
             marginBottom: calc(59.57/1724.81*100vw)
+          children:
+            - .ClientsPartnersLabel:
+              text: "As we engage with potential partners, we remain committed to our core values of innovation, mutual-understanding, collaboration, and user-centricity. We believe that by working together with like-minded organizations, we can achieve our vision of a future where AI empowers individuals and transforms industries for the better. If you are interested in exploring partnership or collaboration opportunities with Hyuge Intelligent Systems, please contact our partnerships team at "
+              style:
+                marginTop: calc(31.06/1724.81*100vw)
+                display: "inline"
+                verticalAlign: middle
+
+            - .ClientsPartnersLabel:
+              text: "driz@hyuge.com"
+              style:
+                display: "inline-block"
+                marginTop: 0
+                verticalAlign: middle
+                color: "0x5B7A8F"
 
     - .BaseFooter1:

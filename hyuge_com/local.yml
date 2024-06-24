@@ -31,16 +31,16 @@ android:
     test: 14.33
 ## 方式1 只给 cadlBaseUrl, 则从相对路径去加载 项目
 #cadlBaseUrl: '../product/aitmed/provider/'
-#cadlBaseUrl: './adsl_app/cadl/web/'
+cadlBaseUrl: "./adsl_app/cadl/web/"
 #cadlBaseUrl: '../testpage/testpage2/'
-cadlBaseUrl: './HelloWorld/'
+# cadlBaseUrl: './HelloWorld/'
 ## 方式2 给了 baseUrl 则去线上加载config，并且以yml 结尾并根据加载到的 config文件加载 项目
 #baseUrl: "https://hyuge.com/../adsl_app/config/www.yml"
 # baseUrl:  "https://hyuge.net/adsl_app/config/"
 #works fine baseUrl:  "https://public.aitmed.com/config/"
 # has CORS error baseUrl:  "https://public.aitmed.us/config/"
 ## 方式3 给了baseurl 以 / 结尾 则根据subdomain 去解析
-cadlMain: init.adsl
-#cadlMain: cadlEndpoint.yml
+# cadlMain: init.adsl
+cadlMain: cadlEndpoint.yml
 timestamp: 12222023.1PDT
 shippoToken: shippo_test_d19eee0e8b2918f58d86a83ab2f96bc1224dbade

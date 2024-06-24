@@ -1,0 +1,51 @@
+AdminSideMenuBar:
+  title: AdminSideMenuBar
+  pageNumber: 
+  init: #Page initialization
+
+  formData: #Input data here
+    # 定义一个结构  sideMenuDM
+    sideMenubarDM:
+      img:
+        nulliconPath: null.png
+        iconDownPath: arrowDown.svg
+        iconUpPath: arrowUp.svg
+      sideMenubarDM:
+        - logoPath: scheduleManagement.svg
+          title: Schedule Management
+          pageName: ScheduleManagement
+          keyName: ScheduleManagement
+          sideMenubar:
+            - logoPath: null.png
+              title: Provider Schedule
+              pageName: ScheduleManagement
+              keyName: ProviderSchedule
+              backgroundColor: "0x1871b3"
+            - logoPath: null.png
+              title: Room Schedule
+              pageName: ScheduleManagementRoom
+              keyName: RoomSchedule
+              backgroundColor: "0x00528c"
+        - logoPath: users.svg
+          title: User Management
+          pageName: StaffManagement
+          keyName: StaffManagement
+        - logoPath: accountManagement.svg
+          title: Account Management
+          pageName: FacilityInfo1
+          keyName: AccountManagement
+# 1. 拿到权限之后 先从 .SideMenubarDM直接把某一项 remove掉， 然后存在 global.sideMenuDM里面， 这个东西是原数据。 然后 把 global.sideMenuDM 赋值给 global.sideMenuShow 用来展示
+# 两种方法：
+# 方法一： 使用目前相似的一重list来展示
+# 3. 点击的时候使用 sdk 来控制 global.sideMenuDM  然后赋值给 global.sideMenuShow 用来展示
+  # 3.1 如果点击的是一级目录，且没有 二级目录 。只需要处理global.sideMenuDM 把所有的一级目录返回
+  # 3.2 如果点击的是 二级目录 ，返回的应该是 一级目录 和当前一级目录的二级目录
+  # 3. 如果点击一级目录 且有二级目录 返回的是 当前一级目录 和 二级目录
+# 方法二： 使用 二重循环，后来不对global.sideMenuDM 任何值进行增删改查，知识向日历一样对数据的 display 进行控制
+  formDataTemp: #Input data temp here, datatemp should not mix with formData
+
+  apiRequest: #Input data request here
+
+  style: #Input style fragment here
+
+  components:

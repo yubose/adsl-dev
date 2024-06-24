@@ -1,0 +1,33 @@
+TestSetRoute:
+  components: 
+    - type: scrollView
+      style:
+        width: "1"
+        # height: "1.92"
+        height: "1"
+        left: "0"
+        overflow: scroll
+      children:
+        - type: button
+          text: goBack
+          onClick:
+            - actionType: evalObject
+              object:  
+                - =.builtIn.utils.getPageNames:
+                    dataIn:
+                    dataOut: ThreeList.pageName  
+                - .ThreeList.pageName.0@: "TestSord"
+                - =.builtIn.routeRediredct:
+                    dataIn:
+                      pageNames: =.ThreeList.pageName
+                    dataOut: 
+                - actionType: builtIn
+                  funcName: goBack
+          style:
+            width: "0.6"
+            left: "0.2"
+            top: "0.1"
+            height: "0.08"
+            backgroundColor: "0xFF9966"
+            borderRadius: "10"
+            color: "0xFFFFFF"

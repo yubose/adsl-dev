@@ -1,0 +1,120 @@
+ClientsPartners:
+  viewPort: top
+  components:
+    - .BaseHeader:
+    - type: view
+      style:
+        marginTop: "0"
+        width: calc(1060.35/1724.81*100vw)
+        margin: "auto"
+      children:
+        - .ClientsPartnersTitle:
+          style:
+            marginTop: calc(222.111/1724.81*100vw)
+            textAlign:
+              y: center
+            fontStyle: "bold"
+            fontSize: calc(34.04/1724.81*100vw)
+            justifyContent: center
+            color: "0x595959"
+          text: "Clients and Partners"
+
+        - type: image
+          path: clients_partners.webp
+          style:
+            display: block
+            margin: auto
+            maxWidth: "100%"
+            width: calc(1060.35/1724.81*100vw)
+
+        - .ClientsPartnersLabel:
+          style:
+            marginTop: calc(31.06/1724.81*100vw)
+          text: "At Hyuge Intelligent Systems, we are proud to collaborate with innovative organizations across industries to bring the benefits of personalized AI to real-world applications. Our clients and partners recognize the transformative potential of our technologies and share our vision for a future where AI empowers individuals and businesses alike."
+
+        - .ClientsPartnersTitle:
+          text: "AitMed: Our First Client"
+
+        - .ClientsPartnersLabel:
+          text: "We are excited to announce our first client, AiTMed, a leading provider of medical software solutions. In partnership with AiTMed, we are developing a groundbreaking AI-powered customer service platform that will revolutionize the way healthcare providers interact with their patients."
+
+        - type: button
+          text: "CHECK AITMED"
+          onClick:
+            - goto: "https://web.aitmed.com/"
+          style:
+            marginTop: calc(15/1724.81*100vw)
+            backgroundColor: transparent
+            border: none
+            borderBottom: 1px solid black
+            outline: none
+            fontSize: calc(25.42/1724.81*100vw)
+
+        - .ClientsPartnersTitle:
+          text: "The AI+ project leverages our cutting-edge technologies:"
+
+        - .ClientsPartnersLabel:
+          text: "including PIE for continuous learning, PALM for organic adaptation, ADSL for seamless integration of medical knowledge, and BECOS for secure data management. By integrating our AI solutions with AiTMed's existing platform, we aim to:"
+
+        - .ClientsPartnersLabel:
+          text: "- Enhance patient engagement and satisfaction through personalized, intelligent interactions"
+          style:
+            marginTop: calc(31.06/1724.81*100vw)
+
+        - .ClientsPartnersLabel:
+          text: "- Improve the efficiency and accuracy of healthcare customer support"
+
+        - .ClientsPartnersLabel:
+          text: "- Provide healthcare providers with valuable insights and recommendations based on patient data"
+
+        - .ClientsPartnersLabel:
+          text: "- Ensure the highest standards of privacy and security for sensitive medical information"
+
+        - .ClientsPartnersLabel:
+          text: "We are confident that our collaboration with AiTMed will set a new standard for AI-powered customer service in the healthcare industry and pave the way for future partnerships in this space."
+          style:
+            marginTop: calc(31.06/1724.81*100vw)
+
+        - .ClientsPartnersTitle:
+          text: "Courting Major Players in AI"
+
+        - .ClientsPartnersLabel:
+          text: "As we continue to push the boundaries of what's possible with AI, we are actively engaging with major players in the AI industry to explore potential partnerships and collaborations."
+
+        - .ClientsPartnersLabel:
+          text: "By partnering with influential organizations, we aim to:"
+          style:
+            marginTop: calc(31.06/1724.81*100vw)
+
+        - .ClientsPartnersLabel:
+          text: "- Expand the reach and impact of our technologies across industries and applications"
+
+        - .ClientsPartnersLabel:
+          text: "- Accelerate the development and commercialization of our AI solutions through shared resources and expertise"
+
+        - .ClientsPartnersLabel:
+          text: "- Gain valuable insights and feedback from industry leaders to inform our product roadmap and strategy"
+
+        - .ClientsPartnersLabel:
+          text: "- Establish Hyuge Intelligent Systems as a key player in the global AI ecosystem"
+
+        - type: view
+          style:
+            marginBottom: calc(59.57/1724.81*100vw)
+          children:
+            - .ClientsPartnersLabel:
+              text: "As we engage with potential partners, we remain committed to our core values of innovation, mutual-understanding, collaboration, and user-centricity. We believe that by working together with like-minded organizations, we can achieve our vision of a future where AI empowers individuals and transforms industries for the better. If you are interested in exploring partnership or collaboration opportunities with Hyuge Intelligent Systems, please contact our partnerships team at "
+              style:
+                marginTop: calc(31.06/1724.81*100vw)
+                display: "inline"
+                verticalAlign: middle
+
+            - .ClientsPartnersLabel:
+              text: "driz@hyuge.com"
+              style:
+                display: "inline-block"
+                marginTop: 0
+                verticalAlign: middle
+                color: "0x5B7A8F"
+
+    - .BaseFooter1:

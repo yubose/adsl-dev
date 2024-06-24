@@ -1,0 +1,17 @@
+aitcombetaDev.yml
+aitmed.yml
+aitmeetandroida01t.yml
+aitmeetiosa02t.yml
+care.yml
+docc19.yml
+meet2.yml
+meet2d.yml
+meet2d_ios.yml
+meet2p.yml
+message.yml
+patc19.yml
+patd.yml
+prod.yml
+provider.yml
+testpage.yml
+testpage2.yml

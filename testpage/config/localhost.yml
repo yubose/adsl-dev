@@ -1,0 +1,32 @@
+apiHost: albh2.aitmed.io
+apiPort: 443
+webApiHost: apiHost
+appApiHost: apiHost
+connectiontimeout: '5'
+loadingLevel: 1
+debug: console_log_api
+syncHost: https://syncd2.aitmed.io:443
+elasticClient: https://elasticd2.aitmed.io
+prResetUrl: https://passwordresetd.aitmed.io/
+isGetPosition: true
+platform: patient
+superAdminID: "XV6uKAAAAAAIhwJCrBIABQ=="
+viewWidthHeightRatio:
+    min: 0.45 # iphone 12 9:19.5 Samsung Galaxy A71 5G 9:20
+    max: 0.5 # normal 3:4 ratio ipad
+web:
+  cadlVersion:
+    stable: 9.86
+    test : 9.86
+ios:
+  cadlVersion:
+    stable: 9.86 
+    test : 9.86
+android:
+  cadlVersion:
+    stable : 9.86
+    test : 9.86
+# cadlBaseUrl: ../testpage/testpage/
+cadlBaseUrl: ../testpage/testpage2/
+cadlMain: cadlEndpoint.yml
+timestamp: 07082022PDT

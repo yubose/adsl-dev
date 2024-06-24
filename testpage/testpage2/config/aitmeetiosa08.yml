@@ -1,0 +1,26 @@
+apiHost: testapi2.aitmed.com
+apiPort: '443'
+webApiHost: apiHost
+appApiHost: apiHost
+connectiontimeout: '5'
+loadingLevel: 1
+debug: console_log_api
+viewWidthHeightRatio:
+    min: 0.56 # 9:16
+    max: 0.6 # 3:4
+web:
+  cadlVersion :
+    stable: 0.34i
+    test : 0.34i
+ios:
+  cadlVersion:
+    stable: 0.34i
+    test : 0.34i
+android:
+  cadlVersion:
+    stable : 0.34i
+    test : 0.34i
+cadlBaseUrl: https://public.aitmed.com/noodl/aitcom_${cadlVersion}/
+cadlMain: cadlEndpoint.yml
+timestamp: 03092021
+myBaseUrl: https://public.aitmed.com/noodl/aitcom_0.34i/

@@ -1,0 +1,20 @@
+apiHost: testapi2.aitmed.com 
+apiPort: '443' 
+webApiHost: apiHost 
+appApiHost: apiHost 
+connectiontimeout: '5' 
+loadingLevel: 1 
+timestamp: Nov 2, 2020
+web: 
+  cadlVersion : 
+    stable: 0.118
+    test : 0.203
+ios: 
+  cadlVersion: 
+    stable: 0.118
+    test : 0.203
+android: 
+  cadlVersion: 
+    stable : 0.118
+    test : 0.203
+cadlEndpoint: https://public.aitmed.com/cadl/helloWorld_${cadlVersion}/helloworld.yml 

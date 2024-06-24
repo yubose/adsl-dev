@@ -1,0 +1,29 @@
+Demo:
+  components:
+    - type: textField
+      placeholder: "text"
+      dataKey:
+      style: 
+        top: "0.15"
+        left: "0.1"
+        width: "0.5"
+        height: "0.05"
+    - .LargeButton:
+      text: Done
+      onClick:
+        # - actionType: evalObject
+        #   object: ..save
+        - actionType: evalObject
+          object: 
+            .Global._nonce@: 
+              =.builtIn.math.random: ""
+        - goto: ShowPic
+      style:
+        top: "0.5"
+    - .LargeButton:
+      text: Back
+      onClick:
+        - actionType: builtIn
+          funcName: goBack
+      style:
+        top: "0.7"

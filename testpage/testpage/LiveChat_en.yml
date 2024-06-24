@@ -1,0 +1,69 @@
+LiveChat:
+  pageNumber: "170"
+  title: "LiveChat"
+  formData:
+    currentMessageType: ""
+    messageList:
+      - type: textM   # textMessage
+        message:
+          info: "你好"
+          size: ""
+        ovid: "userid"
+        contentId: ""
+      - type: pdfM   # pdf Message
+        message:
+          info: "aitmed通知"  # pdf message
+          size: ""
+        ovid: "userid"
+        contentId: "pdffile.id"
+      - type: appointmentM # appointmentMessage
+        message:
+          patdName: ""
+          reason: ""
+          time: ""
+        ovid: ""
+        contentId: ""  # appointment Id
+      - type: medicalDocM # medical document 
+        message:
+          docName: "" # name of document
+          docType: "" # jump page
+        ovid: ""
+        contentId: "" # 文件id
+      - type: imageM
+        message: 
+          path: ""
+          size: ""
+        ovid: ""
+      - type: cardM  # 名片
+        message: 
+          avatarid: "" # 头像
+          name: "" #name
+        ovid: ""
+      
+  components:
+    - type: liveChat
+      dataKey: roomId
+      messageType: formData.currentMessageType
+      onClick: # 怎么知道点了什么组件 ？
+        - actionType: evalObecjt
+          object:
+            - if: 
+              - =.builtIn.string.equal:
+                  dataIn:
+                    string1: =..formData.currentMessageType
+                    string2: 'pdfM'
+            - if: 
+              - =.builtIn.string.equal:
+                  dataIn:
+                    string1: =..formData.currentMessageType
+                    string2: 'appointmentM'
+            - if: 
+              - =.builtIn.string.equal:
+                  dataIn:
+                    string1: =..formData.currentMessageType
+                    string2: 'medicalDocM'
+            - if: 
+              - =.builtIn.string.equal:
+                  dataIn:
+                    string1: =..formData.currentMessageType
+                    string2: 'cardM'

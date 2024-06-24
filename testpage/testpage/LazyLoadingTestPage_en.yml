@@ -1,0 +1,142 @@
+LazyLoadingTestPage:
+  title: "Test Page"
+  init:
+    - =..apiRequest.email.docAPI.get: ""
+    - actionType: evalObject
+      object:
+        - =.builtIn.utils.cloneDeepData:
+            dataIn:
+              data: =..apiRequest.email.docQueryResp.doc
+            dataOut: LazyLoadingTestPage.formData.testData
+    - .Global.lazyDoc@: true
+    # - ..formData.testData@: =..apiRequest.email.docQueryResp.doc
+  formDataTemp:
+  formData:
+    display: "none"
+    testData: []
+    loid: ""
+    textViewData: "ddd"
+    data:
+      testData: {id: "12121"}
+      index: {}
+    color: "red"
+  apiRequest:
+    email:
+      docQueryResp: ""
+      docQueryReq:
+        id: "XSrUtgAAAAAAyAJCrBIABQ=="
+        ObjType: 544
+        loid: ""
+        type: 1281
+        # sCondition: E.type=10002 AND (D2.type & 0xFF18 =0xE00 OR D2.reid is NULL OR D2.Type = 66561)
+        xfname: (E.bvid|E.evid)&!D.ovid
+        obfname: D.mtime
+        maxcount: "12"
+        _nonce: =.Global._nonce
+      docAPI:
+        get:
+          api: rd
+          dataIn: LazyLoadingTestPage.apiRequest.email.docQueryReq
+          dataOut: LazyLoadingTestPage.apiRequest.email.docQueryResp
+  components:
+    - type: view
+      style:
+        width: "1"
+        textAlign:
+          x: center
+          y: center
+        # flexWrap: wrap
+        height: "1"
+        margin: "0"
+      children:
+        - type: list
+          viewTag: Showcontent
+          contentType: listObject
+          listObject: ..formData.testData
+          iteratorVar: itemObject
+          style:
+            width: "1"
+            margin: "auto"
+            height: "1"
+            fontFamily: "Arial"
+            overflow: auto
+            textAlign:
+              x: center
+              y: center
+          onLazyLoading:
+            - actionType: evalObject
+              object:
+                - if:
+                    - =.Global.lazyDoc
+                    - actionType: evalObject
+                      object:
+                        - ..formData.data.testData.id@: "111"
+                        - =.builtIn.array.GetSomeData:
+                            dataIn:
+                              dataArray: =..apiRequest.email.docQueryResp.doc
+                            dataOut: LazyLoadingTestPage.formData.data.index
+                        - ..formData.loid@: =..formData.data.index.id
+                        - ..apiRequest.email.docQueryReq.loid@: =..formData.loid
+                        - =..apiRequest.email.docAPI.get: ""
+                        - if:
+                          - =.builtIn.array.judgeListLength:
+                              dataIn:
+                                array: =..apiRequest.email.docQueryResp.doc
+                                len: 0
+                          - .Global.lazyDoc@: false
+                          - continue
+                        - if:
+                          - .Global.lazyDoc
+                          - actionType: evalObject
+                            object:
+                              - =.builtIn.array.pushAny:
+                                  dataIn:
+                                    messages: =..formData.testData
+                                    newMessage: =.LazyLoadingTestPage.apiRequest.email.docQueryResp.doc
+                                  dataOut: LazyLoadingTestPage.formData.testData
+                              - actionType: builtIn
+                                funcName: redraw
+                                viewTag: Showcontent
+                          - actionType: popUp
+                            popUpView: warningView
+                            wait: true
+                    - continue
+          children:
+            - type: listItem
+              itemObject:
+              style:
+                width: "1"
+                height: "0.1"
+                textAlign:
+                  x: center
+                  y: center
+                marginTop: "0"
+                borderWidth: "1px"
+                borderColor: "0x707070"
+                boxSizing: "border-box"
+                border:
+                  style: 2
+                overflow: hidden
+              children:
+                - type: view
+                  style:
+                    width: "1"
+                    height: "0.1"
+                    textAlign:
+                      y: center
+                  children:
+                    - type: label
+                      dataKey: itemObject.id
+                      style:
+                        margin: "0"
+                        width: "1"
+                        height: "auto"
+                        fontSize: .Nfont.n1
+                        color: "0x333333"
+                        textAlign:
+                          x: center
+                          y: center
+
+    - .TipsMultiLine:
+      viewTag: warningView
+      message: "No more data!"

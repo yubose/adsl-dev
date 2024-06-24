@@ -1,0 +1,84 @@
+TestPopup:
+  firstName: ""
+  lastName: "123"
+  # test1: ""
+  # test2: ""
+  name: "redraw d"
+  formData:
+    message: "this is a message1"  
+    message2: "this is a message2"  
+    message3: "this is a message3" 
+    flag: true 
+  components: 
+    - type: scrollView
+      style:
+        width: "1"
+        # height: "1.92"
+        height: "1"
+        left: "0.1"
+        overflow: scroll
+      children:
+        - type: button
+          dataKey: name
+          onClick:
+            - actionType: evalObject
+              object:
+                - if:
+                  - =..formData.flag
+                  - actionType: evalObject
+                    object:
+                      - ..formData.flag@: false
+                      - ..formData.message@: ..formData.message2
+                  - actionType: evalObject
+                    object:
+                      - ..formData.flag@: true
+                      - ..formData.message@: ..formData.message3
+            - actionType: builtIn
+              funcName: redraw
+              viewTag: test2Tag 
+            - actionType: popUp
+              popUpView: test2Tag
+              # wait: 2000
+          style:
+            width: "0.6"
+            left: "0.2"
+            top: "0.1"
+            height: "0.08"
+            backgroundColor: "0xFF9966"
+            color: "0xFFFFFF"
+    
+        - type: button
+          text: redraw2
+          onClick:
+            - actionType: evalObject
+              object:
+                - if:
+                  - =.builtIn.string.equal:
+                      dataIn:
+                        string1: =.TestPopup.firstName
+                        string2: ""
+                  - actionType: evalObject
+                    object: 
+                      - if: 
+                        - true
+                        - actionType: evalObject
+                          object:
+                            - ..test1@: "123"
+                            - ..test2@: "123"
+                        - continue
+                  - continue
+          style:
+            width: "0.6"
+            left: "0.2"
+            top: "0.3"
+            height: "0.08"
+            backgroundColor: "0xFF9966"
+            color: "0xFFFFFF"
+    # - .BaseWarningView:
+    #   viewTag: test1Tag  
+    #   message: "this is a message1"    
+    - .BaseWarningView:
+      viewTag: test2Tag  
+      message: ..formData.message
+      # message: "this is a message1"   
+      

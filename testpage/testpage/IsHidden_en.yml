@@ -1,0 +1,21 @@
+IsHidden:
+  title: 
+  pageNumber: 
+  init: #Page initialization
+
+  formData: #Input data here
+    hidden: true
+  formDataTemp: #Input data temp here, datatemp should not mix with formData
+
+  apiRequest: #Input data request here
+
+  style: #Input style fragment here
+
+  components:
+    - type: view
+      style:
+        width: "0.5"
+        height: "0.2"
+        left: "0.1"
+        backgroundColor: "#005792"
+        isHidden: ..formData.hidden

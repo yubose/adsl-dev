@@ -1,0 +1,86 @@
+Index:
+  title: "Test Home Page"
+  pageNumber: "80"
+  test: 'VideoChat'
+  init:
+    - .SignInCheck
+  pageGoto: 
+    - title: livechat
+      pageName: ChatPage
+    - title: TestSetRoute
+      pageName: TestSetRoute
+    - title: TestInvite
+      pageName: TestInvite
+    - title: sCondition
+      pageName: AppointmentSchedule
+    - title: updateDoc
+      pageName: UpdateDoc
+    - title: TestsCondition
+      pageName: TestsCondition
+    - title: TestSord
+      pageName: TestSord
+    - title: TestSord
+      pageName: TestSord
+    - title: Demo
+      pageName: Demo  
+    - title: RedrawList
+      pageName: NewConnections
+    - title: Noodl Font Size
+      pageName: NoodlFontSize
+  components:
+    - .BaseHeader:
+    - .HeaderRightImg:
+      path: sideNav2.png
+    - type: view
+      style:
+        top: "0.1"
+        width: "0.9"
+        left: "0.05"
+        display: flex
+        flexFlow: "row wrap"
+      children:
+        - type: list
+          contentType: listObject
+          listObject: ..pageGoto
+          iteratorVar: itemObject
+          style: 
+            width: "0.9"
+            display: block
+            position: static
+          children:   
+            - type: listItem
+              itemObject: ""
+              style: 
+                width: "0.9"
+                height: "0.06"
+                borderBottom: "1px solid"
+                borderColor: "0x00000022"
+                display: block
+                position: static
+              onClick:  
+                    emit: 
+                      dataKey:
+                        var: itemObject
+                      actions: 
+                        - if:
+                          - true
+                          - goto: $var.pageName 
+                          - goto: $var.pageName 
+              children: 
+                - type: label
+                  dataKey: itemObject.title
+                  style: 
+                    width: "0.7"
+                    height: '0.06'
+                    fontSize: "20"
+                    textIndent: "20px"
+                    textAlign: 
+                      y: center
+                - type: image
+                  path: rightArrow.png
+                  style: 
+                    height: "0.03"
+                    top: "0.015"
+                    left: "0.8"
+
+  

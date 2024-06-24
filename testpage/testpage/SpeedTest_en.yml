@@ -1,0 +1,14 @@
+SpeedTest:
+  title: "Double Loop"
+  init:
+    - actionType: evalObject
+      object:
+        - if:
+          - true
+          - =..formdata@: "1"
+          - =..formdata@: "2"
+  formdata: ""
+  components: 
+    - .BaseHeader:
+    - .HeaderLeftButton:
+   

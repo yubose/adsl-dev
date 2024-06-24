@@ -1,0 +1,97 @@
+AutoDismiss:
+  title: AutoDismiss
+  pageNumber: 
+  init: #Page initialization
+
+  formData: #Input data here
+
+  formDataTemp: #Input data temp here, datatemp should not mix with formData
+
+  apiRequest: #Input data request here
+
+  style: #Input style fragment here
+
+  components:
+    - .BaseHeader:
+    - .HeaderLeftButton:  
+    - .HeaderRightButton:
+    - type: button
+      text: "弹窗出来后 1 秒后自动消失并执行下面的动作"
+      onClick:
+        # 弹窗出来后 1 秒后自动消失并执行下面的动作
+        - actionType: popUp
+          popUpView: finalView
+          wait: 1000
+        - goto: Index
+      style:
+        width: "0.5"
+        left: "0.25"
+        top: "0.25"
+        height: "auto"
+    - type: button
+      text: "弹窗出来后 1 秒后自动消失并  不  执行下面的动作"
+      onClick:
+        # 弹窗出来后 1 秒后自动消失并  不  执行下面的动作
+        - actionType: popUp
+          popUpView: finalView
+          wait: true
+          popUpDismiss: 1000
+        - goto: Index
+      style:
+        width: "0.5"
+        left: "0.25"
+        top: "0.4"
+        height: "auto"
+    - type: popUp
+      viewTag: finalView
+      style:
+        left: "0"
+        top: "0"
+        width: "1"
+        height: "1"
+        backgroundColor: "0x00000033"
+        zIndex: "1000"
+      children:
+        - type: view
+          style:
+            left: "0.15"
+            top: "0.3"
+            width: "0.7"
+            height: "0.25"
+            backgroundColor: "0xefefef"
+            borderRadius: "10"
+          children:
+            - type: label
+              text: Success!
+              style:
+                left: "0"
+                top: "0.125"
+                width: "0.7"
+                height: "0.05"
+                fontSize: "23"
+                fontWeight: "350"
+                textAlign:
+                  x: center
+            - type: label
+              text: Your invite link has been sent to
+              style:
+                left: "0"
+                top: "0.18"
+                width: "0.7"
+                fontSize: "15"
+                fontWeight: "330"
+                textAlign:
+                  x: center
+            - type: label
+              viewTag: inviteLabel
+              dataKey: inviteMessage
+              style:
+                left: "0"
+                top: "0.22"
+                width: "0.7"
+                height: "0.05" 
+                fontSize: "13"
+                fontWeight: "500"
+                textAlign: 
+                  x: center
+     

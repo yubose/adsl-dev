@@ -1,0 +1,52 @@
+Emitvar:
+  title: "Double Loop"
+  init:
+    - actionType: evalObject
+      object:
+        - if:
+          - true
+          - =..formdata@: "1"
+          - =..formdata@: "2"
+  formdata: 
+    - a12312312321
+    - b
+    - c
+    - d
+    - e
+  formdata2: ""
+  components: 
+    - type: list
+      contentType: listObject
+      listObject: ..formdata
+      iteratorVar: itemObject
+      style: 
+        width: '0.39'
+        height: auto
+        left: "0"
+      children:    
+        - type: listItem
+          itemObject: ""
+          style:  
+            height: '0.05'
+            left: '0'
+          onClick:
+            - emit:
+                dataKey:
+                  var: itemObject
+                actions:
+                  - if:
+                    - true
+                    - actionType: evalObject
+                      object:
+                          - ..formdata2@: $var
+                    - actionType: evalObject
+                      object:
+                          - ..formdata2@: '4'
+          children: 
+            - type: label
+              dataKey: itemObject
+              style:
+                height: "0.05"
+                top: "0.1"
+              
+

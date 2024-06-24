@@ -1,0 +1,13 @@
+LeftPage:
+  components:
+    - .BaseHeader:
+    - .HeaderLeftButton:  
+    - .HeaderRightButton:
+    - type: image
+      path: doctorman.png
+      style:
+        left: "0"
+        width: "1"
+        height: "1"
+        top: "0"
+    

@@ -1,0 +1,21 @@
+Class:
+  components:
+    - type: lable
+      text: 'test'
+      style:
+        emit:
+          actions:
+            - if:
+                - true
+                - if:
+                  - true 
+                  - =..style.style1
+                  - =..style.style3
+                - =..style.style2
+  style:
+    style1:
+      color: '0x121212'
+    style2:
+      color: '0xeb4a4a'
+    style3:
+      color: '0x19574d'

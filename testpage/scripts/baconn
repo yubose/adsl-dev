@@ -1,0 +1,11 @@
+if [ -z $1 ]
+then
+  echo 'baconn.sh [localport no] [remote port no]'
+  exit 1
+fi
+LOCALPORT=$1
+sshconnpid=`ps -ef | grep "svn.omniserve.com -L$1:localhost" | grep ssh | awk     '{print $2}'`
+if [ -n "$sshconnpid" ]; then
+    kill -9 $sshconnpid
+fi
+ssh -f -C -N ec2-user@ecos-west2-1.aitmed.io -L$1:localhost:$2

@@ -1,0 +1,24 @@
+Rd:
+  title: Provider Documents
+  pageNumber:
+  init:
+    # - .SignInCheck
+    - actionType: evalObject
+      object:
+        - =..apiRequest.uplaodDoc.docAPI.get: ""
+  
+  apiRequest: 
+    uplaodDoc:
+      docResp: ""
+      docReq:
+        id: 'XwKFuAAAAABNCAJCrBIABA=='
+      docAPI:
+        get:
+          api: rd
+          dataIn: Rd.apiRequest.uplaodDoc.docReq
+          dataOut: Rd.apiRequest.uplaodDoc.docResp
+  components:
+    - type: view
+      style:
+        width: "1"
+   

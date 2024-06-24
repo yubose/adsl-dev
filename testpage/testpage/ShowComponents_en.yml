@@ -1,0 +1,11 @@
+ShowComponents:
+  init:
+    - if:
+      - =.TestCustomForm.apiRequest.getJson.resp.doc.0.name.data
+      - continue
+      - actionType: builtIn
+        funcName: goBack
+        reload: true
+  formData: .TestCustomForm.apiRequest.getJson.resp.doc.0.name.data.formData
+  components: 
+    .TestCustomForm.apiRequest.getJson.resp.doc.0.name.data.view

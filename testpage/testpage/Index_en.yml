@@ -1,0 +1,208 @@
+Index:
+  title: "Test Home Page"
+  pageNumber: "80"
+  test: "VideoChat"
+  init:
+    
+    # - =..apiRequest.getJson.docApi.create: ""
+  apiRequest:
+    createjwt:
+      resp: ""
+      edge:
+        bvid: 'XeKoZgAAAAAMwQJCrBIABQ=='
+        type: 1030
+      edgeApi:
+        create:
+          api: ce
+          dataIn: apiRequest.createjwt.edge
+    getJson:
+      resp: ""
+      docCreateResp: 
+      docCreateReq:
+        # type: 1537
+        # eid: 'XeKoZgAAAACM4AJCrBIABQ=='
+        # name:
+        #   data: 
+        #     - type: view
+        #       style:
+        #         width: "1"
+        #         marginTop: "0"
+        #       children:
+        #         - type: label
+        #           text: this is page2
+        #           dataKey: 
+        #           style:
+        #             width: "1"
+        #             marginTop: "0"
+        #         - type: button
+        #           text: go to by TestPage1
+        #           onClick:
+        #             - goto: TestPage1
+        #           dataKey: 
+        #           style:
+        #             width: "1"
+        #             marginTop: "0"
+      doc:
+        id: 'XeKoZgAAAACM4AJCrBIABQ=='
+        type: '1537'
+        xfname: eid
+        maxcount: "1"
+        obfname: ctime
+      docApi:
+        get:
+          api: rd
+          dataIn: apiRequest.getJson.doc
+          dataOut: Global.jsonData
+        create:
+          api: cd
+          dataIn: apiRequest.getJson.docCreateReq
+          dataOut: Index.apiRequest.getJson.docCreateResp
+  pageGoto:
+    - title: ResetPassword
+      pageName: ResetPassword
+    - title: rd issues
+      pageName: Rd
+    - title: Emitvar
+      pageName: Emitvar
+    - title: SpeedTest
+      pageName: SpeedTest
+    - title: TestCustomForm
+      pageName: TestCustomForm
+    - title: TestStyleChange
+      pageName: TestStyleChange
+    - title: TestRedrawCurrent
+      pageName: TestRedrawCurrent
+    - title: IsHidden
+      pageName: IsHidden
+    - title: ItemObjectParent
+      pageName: ItemObjectParent
+    - title: AutoDismiss
+      pageName: AutoDismiss
+    - title: lazyLoad
+      pageName: LazyLoadingTestPage
+    - title: TestPagejumpInIframe
+      pageName: TestPage
+    - title: vwvh
+      pageName: Vwvh
+    - title: pageGoto
+      pageName: TestTypePage
+    - title: ShowInInitIsInvalid
+      pageName: ShowInInitIsInvalid
+    - title: RedrawPage
+      pageName: RedrawPage
+    - title: TestTypePage
+      pageName: TestTypePage
+    - title: TestSelectOfListitem
+      pageName: TestSelectOfListitem
+    - title: TestChangeButtonColor
+      pageName: TestChangeButtonColor
+    - title: TestRightAlign
+      pageName: TestRightAlign
+    - title: ViewInList
+      pageName: ViewInList
+    - title: TestTopAlign
+      pageName: TestTopAlign
+    - title: EmitRedraw
+      pageName: EmitRedraw
+    - title: Noodl Layout
+      pageName: NoodlLayout
+    - title: PatientChart
+      pageName: PatientChart
+    - title: PatientChartAddAllergies
+      pageName: PatientChartAddAllergies
+    - title: PatientChartAddHospitalization
+      pageName: PatientChartAddHospitalization
+    - title: PatientChartAddMedications
+      pageName: PatientChartAddMedications
+    - title: PatientChartGeneralInfo
+      pageName: PatientChartGeneralInfo
+    - title: PatientChartImmunizations
+      pageName: PatientChartImmunizations
+    - title: PatientChartObstetrical
+      pageName: PatientChartObstetrical
+    - title: PatientChartPastMedicalHistory
+      pageName: PatientChartPastMedicalHistory
+    - title: PopUpPage
+      pageName: PopUpPage
+    - title: SelectKey
+      pageName: SelectKey
+    - title: SelectRedraw
+      pageName: SelectRedraw
+    - title: StyleObject
+      pageName: StyleObject
+    - title: TestEchart
+      pageName: TestEchart
+    - title: TestSearch
+      pageName: TestSearch
+    - title: TestRedraw
+      pageName: TestRedraw
+    - title: DoubleLoop
+      pageName: DoubleLoop
+    - title: MultiList
+      pageName: MultiList
+
+  components:
+    - .BaseHeader:
+    - .HeaderRightImg:
+      path: sideNav2.png
+    - type: view
+      style:
+        #top: "0.1"
+        marginTop: "0.1"
+        width: "0.9"
+        left: "0.05"
+      #  height: "0.8"
+      #  display: flex
+      #  flexFlow: "row wrap"
+      children:
+        - type: list
+          contentType: listObject
+          listObject: ..pageGoto
+          iteratorVar: itemObject
+          style:
+            width: "0.9"
+          children:
+            - type: listItem
+              itemObject: ""
+              style:
+                width: "0.9"
+                height: "0.06"
+                borderBottom: "1px solid"
+                borderColor: "0x00000022"
+              onClick:
+                emit:
+                  dataKey:
+                    var: itemObject
+                  actions:
+                    - if:
+                      - =.builtIn.string.equal:
+                          dataIn:
+                            string1: 'TestCustomForm'
+                            string2: $var.pageName
+                      - actionType: evalObject
+                        object:
+                          - =..apiRequest.createjwt.edgeApi.create: ""
+                          - =..apiRequest.getJson.docApi.get: ""
+                          # - .Global.jsonData@: =.Index.apiRequest.getJson.resp.doc.0.name.data
+                      - continue    
+                    - if:
+                        - true
+                        - goto: $var.pageName
+                        - goto: $var.pageName
+              children:
+                - type: label
+                  dataKey: itemObject.title
+                  style:
+                    width: "0.7"
+                    height: "0.06"
+                    fontSize: "20"
+                    textIndent: "20px"
+                    textAlign:
+                      y: center
+                - type: image
+                  path: rightArrow.png
+                  style:
+                    # marginTop: "0.02"
+                    top: "0.02"
+                    height: "0.03"
+                    left: "0.8"

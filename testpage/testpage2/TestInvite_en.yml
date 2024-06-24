@@ -1,0 +1,79 @@
+TestInvite:
+  title: "TestInvite"
+  jwt:
+    edge:
+      .Edge: ""
+      type: 1030
+      id: ""
+      xfname: "bvid"
+    edgeAPI:
+      store:
+        api: ce
+        dataIn: jwt.edge
+  invite:
+    edge:
+      type: "1053"
+      bvid: ""
+      evid: ""
+      # bvid: .Global.currentUser.vertex.id
+      refid: "YDqsDlE3TtSyKlKw0a5+wg=="
+      # evid: "NzczFCtoRgYkcD3yEvGhRA=="
+      name:
+        phoneNumber: ""
+        firstName: ""
+        lastName: ""
+        name: ""
+        hostName: ""
+        roomName: ""
+        date: ""
+      _nonce: =.Global._nonce
+    edgeAPI:
+      .EdgeAPI: ""
+      store:
+        api: ce
+        dataIn: invite.edge
+    
+  components: 
+    - .BaseHeader:
+    - .HeaderLeftButton:
+    - type: view
+      style:
+        width: "1"
+        top: '0.1'
+        height: "0.9"
+      children:
+        - type: button
+          text: "medical facility invite provider"
+          style:
+            backgroundColor: "0x2988E6"
+            color: "0xffffff"
+            top: "0.1"
+            height: "0.06"
+            width: "0.8"
+            left: "0.1"
+          onClick:
+            - actionType: evalObject
+              object: 
+                  - .TestInvite.jwt.edge.bvid@: "yVY0cadPS8AbZ2H2kmEwrg=="
+                  - =.TestInvite.jwt.edgeAPI.store: ""
+                  - .TestInvite.invite.edge.bvid@: "yVY0cadPS8AbZ2H2kmEwrg=="
+                  - .TestInvite.invite.edge.evid@: "iQYflQQ6Q7kC0vKzK4t52g=="
+                  - =.TestInvite.invite.edgeAPI.store: ""
+        
+        - type: button
+          text: "provider invite medical facility "
+          style:
+            backgroundColor: "0x2988E6"
+            color: "0xffffff"
+            top: "0.3"
+            height: "0.06"
+            width: "0.8"
+            left: "0.1"
+          onClick:
+            - actionType: evalObject
+              object: 
+                  - .TestInvite.jwt.edge.bvid@: "iQYflQQ6Q7kC0vKzK4t52g=="
+                  - =.TestInvite.jwt.edgeAPI.store: ""
+                  - .TestInvite.invite.edge.bvid@: "iQYflQQ6Q7kC0vKzK4t52g=="
+                  - .TestInvite.invite.edge.evid@: "yVY0cadPS8AbZ2H2kmEwrg=="
+                  - =.TestInvite.invite.edgeAPI.store: ""

@@ -1,0 +1,177 @@
+ItemObjectParent:
+  title: 
+  pageNumber: 
+  init: #Page initialization
+
+  formData: #Input data here
+    socreList:
+      - name: xiaoming
+        sex: woman
+        socre:
+          - key
+          - key
+          - key
+      - name: yongjian
+        sex: man
+        socre:
+          - key
+          - key
+          - key
+    socreList2:
+      - name: xiaoming2
+        sex: woman2
+        socre:
+          - key: yuwen2
+            value: 10
+          - key: shuxue
+            value: 9
+          - key: yingyu
+            value: 8
+      - name: yongjian
+        sex: man
+        socre:
+          - key: yuwen
+            value: 20
+          - key: shuxue
+            value: 9
+          - key: yingyu
+            value: 801
+  formDataTemp: #Input data temp here, datatemp should not mix with formData
+
+  apiRequest: #Input data request here
+
+  style: #Input style fragment here
+
+  components:
+    - .BaseHeader:
+    - .HeaderLeftButton:
+    - type: button
+      text: redraw
+      onClick:
+        - actionType: evalObject
+          object:
+            - ..formData.socreList@: =..formData.socreList2
+        - actionType: builtIn
+          funcName: redraw
+          viewTag: TestTag
+      style:
+            width: "0.6"
+            left: "0.2"
+            top: "0.1"
+            height: "0.08"
+            backgroundColor: "0xFF9966"
+            color: "0xFFFFFF"
+    - type: view
+      style:
+        width: "1"
+        top: '0.2'
+        height: "0.9"
+      children:
+        - type: list
+          contentType: listObject
+          listObject: =..formData.socreList
+          iteratorVar: itemObject
+          viewTag: TestTag
+          style:
+            width: '1'
+            margin: '0'
+            height: auto
+          children:
+            - type: listItem
+              itemObject: 
+              style:
+                width: '1'
+                height: ''
+                left: '0'
+                marginTop: '0.3'
+              children:
+                # - type: label
+                #   text: 
+                #   dataKey: itemObject.attr.index
+                #   style:
+                #     width: "0.2"
+                #     marginLeft: "0.1"
+                #     display: inline-block
+                # - type: label
+                #   text: 
+                #   dataKey: itemObject.attr.length
+                #   style:
+                #     width: "0.2"
+                #     marginLeft: "0.1"
+                #     display: inline-block
+                - type: label
+                  text: 
+                  dataKey: itemObject.name
+                  style:
+                    width: "0.2"
+                    marginLeft: "0.1"
+                    display: inline-block
+                - type: label
+                  text: 
+                  dataKey: itemObject.sex
+                  style:
+                    width: "0.2"
+                    marginLeft: "0.1"
+                    display: inline-block
+                - type: list
+                  contentType: listObject
+                  listObject: itemObject.socre
+                  iteratorVar: itemObject
+                  style:
+                    width: '1'
+                    margin: '0'
+                    height: auto
+                  children:
+                    - type: listItem
+                      itemObject: 
+                      style:
+                        width: '1'
+                        height: ''
+                        left: '0'
+                        marginTop: '0.05'
+                      onClick:
+                        emit:
+                          dataKey:
+                            var: itemObject
+                            var2: listAttr
+                          actions:
+                            - ..test@: $var2
+                            - =.builtIn.utils.toaster:
+                                dataIn:
+                                  toastMessage: $var2.index
+                      children:
+                        # - type: label
+                        #   text: 
+                        #   dataKey: itemObject.attr.parentIndex
+                        #   style:
+                        #     width: "0.1"
+                        #     marginLeft: "0.1"
+                        #     display: inline-block
+                        # - type: label
+                        #   text: 
+                        #   dataKey: itemObject.attr.index
+                        #   style:
+                        #     width: "0.1"
+                        #     marginLeft: "0.1"
+                        #     display: inline-block
+                        # - type: label
+                        #   text: 
+                        #   dataKey: itemObject.attr.length
+                        #   style:
+                        #     width: "0.1"
+                        #     marginLeft: "0.1"
+                        #     display: inline-block
+                        - type: label
+                          text: 
+                          dataKey: itemObject
+                          style:
+                            width: "0.1"
+                            marginLeft: "0.1"
+                            display: inline-block
+                        # - type: label
+                        #   text: 
+                        #   dataKey: itemObject.value
+                        #   style:
+                        #     width: "0.1"
+                        #     marginLeft: "0.1"
+                        #     display: inline-block

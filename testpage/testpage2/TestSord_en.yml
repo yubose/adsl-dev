@@ -1,0 +1,67 @@
+TestSord:
+  pageNumber: "170"
+  title: "Test sCondition"
+  init:
+    - .SignInCheck
+    - ..listData.get
+    - =.builtIn.array.SortBy:
+        dataIn:
+          obejct: ..listData.contactList.doc
+          iterate: "atime"
+          orders: "asc"
+        dataOut: listData.response
+  listData:
+    response: ""
+    contactList:
+      docuemnt: ""
+    get:
+      .DocAPI.get : ""
+      api: rd
+      dataKey: listData.contactList
+      # type: "2"
+      ids: 
+        - .Global.rootNotebookID
+      xfname: eid
+      maxcount : "10"
+      obfname : "mtime" 
+      sCondition: .DocType.GetAllContact
+      _nonce: =.Global._nonce
+  components:
+    - .BaseHeader:
+    - .HeaderLeftButton:  
+    - type: view
+      style:
+        top: "0.1"
+        width: "0.9"
+        left: "0.05"
+        display: flex
+        flexFlow: "row wrap"
+      children:
+        - type: list
+          contentType: listObject
+          listObject: ..listData.contactList.doc
+          iteratorVar: itemObject
+          style: 
+            width: "0.9"
+            display: block
+            position: static
+          children:   
+            - type: listItem
+              itemObject: ""
+              style: 
+                width: "0.9"
+                height: "0.06"
+                borderBottom: "1px solid"
+                borderColor: "0x00000022"
+                display: block
+                position: static
+              children: 
+                - type: label
+                  dataKey: itemObject.atime
+                  style: 
+                    width: "0.7"
+                    height: '0.06'
+                    fontSize: "20"
+                    textIndent: "20px"
+                    textAlign: 
+                      y: center

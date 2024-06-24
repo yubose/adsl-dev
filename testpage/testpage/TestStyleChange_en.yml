@@ -1,0 +1,78 @@
+TestStyleChange:
+  count: "0"
+  id: "XiBJBQAAAACC0wJCrBIAAw=="
+  test1: "test1"
+  test2: "test2"
+  style1:
+    backgroundColor: "0xFF9966"
+    color: "0xFFFFFF"
+  
+  style2: 
+    backgroundColor: "blue"
+    color: "0xFFFFFF"
+  style0: 
+    backgroundColor: "green"
+    color: "0xFFFFFF"
+  style3:
+    width: "0.6"
+    left: "0.2"
+    top: "0.3"
+    height: "0.08"
+    # backgroundColor: "0xFF9966"
+    # color: "0xFFFFFF"
+    borderRadius: "20px 0 0 20px"
+    textAlign:
+      x: center
+      y: center
+  components: 
+    - type: scrollView
+      style:
+        width: "1"
+        # height: "1.92"
+        height: "1"
+        left: "0"
+        overflow: scroll
+      children:
+        - type: label
+          text: redraw
+          onClick:
+            - actionType: evalObject
+              object:
+                - ..test1@: "test2"
+            - actionType: builtIn
+              funcName: redraw
+              viewTag: ShowTag
+          style:
+            width: "0.6"
+            left: "0.2"
+            top: "0.2"
+            height: "0.08"
+            backgroundColor: "0xFF9966"
+            color: "0xFFFFFF"
+            borderRadius: "10px"
+            textAlign:
+              x: center
+              y: center
+        - type: label
+          text: this is test
+          viewTag: ShowTag
+          style:
+            emit:
+              dataKey:
+              actions:        
+                - if:
+                  - =.builtIn.string.equal:
+                      dataIn:
+                        string1: 'test2'
+                        string2: =..test1
+                  - if:
+                    - =.builtIn.string.equal:
+                        dataIn:
+                          string1: 'test2'
+                          string2: =..test2
+                    - ..style1
+                    - ..style0
+                  - ..style2
+            ..style3:
+            
+                

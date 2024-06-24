@@ -1,0 +1,1 @@
+ssh -f -N -C -L33062:localhost:33062 ec2-user@ecos-west2-1.aitmed.io

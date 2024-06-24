@@ -1,0 +1,66 @@
+TestsCondition:
+  pageNumber: "170"
+  title: "Test sCondition"
+  init:
+    - .SignInCheck
+    - ..listData.get
+  listData:
+    contactList:
+      - .Document:
+        name:
+          data:
+            firstName: "Test"
+            isFavorite: false
+    get:
+      .DocAPI.get : ""
+      api: rd
+      dataKey: listData.contactList
+      ids:
+        - .Global.rootNotebookID
+      xfname: eid
+      maxcount : "500"
+      obfname : "mtime" 
+      # sCondtion: .DocType.GetAllContact
+      sCondtion: .DocType.GetFavContact
+      _nonce: =.Global._nonce
+  components:
+    - .BaseHeader:
+    - .HeaderLeftButton:  
+    - type: view
+      style:
+        top: "0.1"
+        width: "0.9"
+        left: "0.05"
+        display: flex
+        flexFlow: "row wrap"
+      children:
+        - .LargeButton:
+          text: "condition1"
+          style:
+            top: "0.02"
+            width: "0.4"
+            left: "0.05"
+        - .LargeButton:
+          text: "condition2"
+          style:
+            top: "0.02"
+            width: "0.4"
+            left: "0.5"
+        - type: list
+          contentType: listObject
+          listObject: ..pageGoto
+          iteratorVar: itemObject
+          style: 
+            width: "0.9"
+            display: block
+            position: static
+          children:   
+            - type: listItem
+              itemObject: ""
+              style: 
+                width: "0.9"
+                height: "0.06"
+                borderBottom: "1px solid"
+                borderColor: "0x00000022"
+                display: block
+                position: static

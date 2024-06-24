@@ -1,0 +1,4 @@
+HomePage:
+  components: 
+    - type: view
+      text: Hello World

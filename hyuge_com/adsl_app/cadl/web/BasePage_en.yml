@@ -1950,6 +1950,28 @@ PrivacyPolicyLabel:
     fontFamily: "Arial"
     color: "0x5E5E5E"
 
+ContactTitle:
+  type: label
+  text: "Our Vision and Mission"
+  style:
+    color: "0x000000"
+    fontSize: calc(44.04/1724.81*100vw)
+    fontStyle: "bold"
+    fontFamily: "Arial"
+    marginTop: calc(59.57/1724.81*100vw)
+    marginBottom: calc(8.51/1724.81*100vw)
+    textAlign:
+      y: center
+    height: calc(85.1/1724.81*100vw)
+
+ContactLabel:
+  type: label
+  style:
+    fontSize: calc(25.42/1724.81*100vw)
+    marginTop: calc(31.06/1724.81*100vw)
+    fontFamily: "Arial"
+    color: "0x5E5E5E"
+
 HealthNav:
   type: view
   trueColor: "0x30b354"

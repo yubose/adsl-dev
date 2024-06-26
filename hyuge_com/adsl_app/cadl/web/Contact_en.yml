@@ -1,0 +1,64 @@
+Contact:
+  viewPort: top
+  components:
+    - .BaseHeader:
+    - type: view
+      style:
+        marginTop: "0"
+        width: calc(1060.35/1724.81*100vw)
+        margin: "auto"
+      children:
+        - .ContactTitle:
+          style:
+            marginTop: calc(222.111/1724.81*100vw)
+            textAlign:
+              y: center
+            fontStyle: "bold"
+            fontSize: calc(34.04/1724.81*100vw)
+            justifyContent: center
+            color: "0x595959"
+          text: "Contact Us"
+
+        - .ContactTitle:
+          text: "Hyuge Intelligent Systems"
+
+        - .ContactLabel:
+          style:
+            marginTop: calc(31.06/1724.81*100vw)
+          text: "88 Saddleback Rd. Rolling Hills CA 90274"
+
+        - .ContactLabel:
+          text: "(310) 938-1451"
+          style:
+            color: "0x5B7A8F"
+
+        - .ContactTitle:
+          text: "Hours"
+
+        - .ContactLabel:
+          text:
+            "Mon 09:00 am – 05:00 pm\nTue 09:00 am – 05:00 pm\nWed 09:00 am – 05:00 pm\nThu 09:00 am – 05:00 pm
+            \nFri 09:00 am – 05:00 pm\nSat Closed\nSun Closed"
+
+        - .ContactTitle:
+          text: "CONNECT WITH US"
+          style:
+            marginTop: calc(222.111/1724.81*100vw)
+            textAlign:
+              y: center
+            fontStyle: "bold"
+            fontSize: calc(34.04/1724.81*100vw)
+            justifyContent: center
+            color: "0x595959"
+
+        - type: image
+          path: externalLinkedin.png
+          onClick:
+            - goto: https://www.linkedin.com/in/hongtao-yu-8b6895/
+          style:
+            width: calc(34.5/1724.81*100vw)
+            margin: auto
+            display: block
+            marginBottom: calc(59.57/1724.81*100vw)
+
+    - .BaseFooter1:

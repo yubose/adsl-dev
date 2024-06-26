@@ -102,8 +102,24 @@ PrivacyPolicy:
           style:
             marginTop: calc(8.51/1724.81*100vw)
 
-        - .PrivacyPolicyLabel:
-          text: "- You may access, update, or delete your personal information by contacting us at [insert contact information]"
+        - type: view
+          style:
+            marginTop: calc(31.06/1724.81*100vw)
+          children:
+            - .ClientsPartnersLabel:
+              text: "- You may access, update, or delete your personal information by contacting us at "
+              style:
+                marginTop: calc(31.06/1724.81*100vw)
+                display: "inline"
+                verticalAlign: middle
+
+            - .ClientsPartnersLabel:
+              text: "driz@hyuge.com"
+              style:
+                display: "inline-block"
+                marginTop: 0
+                verticalAlign: middle
+                color: "0x5B7A8F"
 
         - .PrivacyPolicyTitle:
           text: "6. Changes to this Policy"
@@ -113,8 +129,24 @@ PrivacyPolicy:
           style:
             marginTop: calc(8.51/1724.81*100vw)
 
-        - .PrivacyPolicyLabel:
-          text: "- You may access, update, or delete your personal information by contacting us at [insert contact information]"
+        - type: view
+          style:
+            marginTop: calc(31.06/1724.81*100vw)
+          children:
+            - .ClientsPartnersLabel:
+              text: "- You may access, update, or delete your personal information by contacting us at "
+              style:
+                marginTop: calc(31.06/1724.81*100vw)
+                display: "inline"
+                verticalAlign: middle
+
+            - .ClientsPartnersLabel:
+              text: "driz@hyuge.com"
+              style:
+                display: "inline-block"
+                marginTop: 0
+                verticalAlign: middle
+                color: "0x5B7A8F"
 
         - .PrivacyPolicyTitle:
           style:
@@ -204,10 +236,25 @@ PrivacyPolicy:
           style:
             marginTop: calc(8.51/1724.81*100vw)
 
-        - .PrivacyPolicyLabel:
-          text: "If you have any questions or concerns about our Privacy Policy or Terms of Service, please contact us at [insert contact information]."
+        - type: view
           style:
+            marginTop: calc(31.06/1724.81*100vw)
             marginBottom: calc(59.57/1724.81*100vw)
+          children:
+            - .ClientsPartnersLabel:
+              text: "If you have any questions or concerns about our Privacy Policy or Terms of Service, please contact us at "
+              style:
+                marginTop: calc(31.06/1724.81*100vw)
+                display: "inline"
+                verticalAlign: middle
+
+            - .ClientsPartnersLabel:
+              text: "driz@hyuge.com"
+              style:
+                display: "inline-block"
+                marginTop: 0
+                verticalAlign: middle
+                color: "0x5B7A8F"
 
     - .BaseFooter1:
       style:

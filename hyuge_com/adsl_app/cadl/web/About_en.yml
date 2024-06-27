@@ -1,0 +1,139 @@
+About:
+  viewPort: top
+  components:
+    - .BaseHeader:
+    - type: view
+      style:
+        marginTop: "0"
+        width: calc(1060.35/1724.81*100vw)
+        margin: "auto"
+      children:
+        - .AboutTitle:
+          style:
+            marginTop: calc(222.111/1724.81*100vw)
+            textAlign:
+              y: center
+            fontStyle: "bold"
+            fontSize: calc(34.04/1724.81*100vw)
+            justifyContent: center
+            color: "0x595959"
+          text: "About Us"
+
+        - type: view
+          style:
+            display: flex
+            flexDirection: row
+            maxWidth: "100%"
+          children:
+            - type: image
+              path: about_1.webp
+              style:
+                display: block
+                margin: auto
+                maxWidth: "48%"
+                width: calc(1060.35/1724.81*100vw)
+
+            - type: view
+              style:
+                marginLeft: calc(60.35/1724.81*100vw)
+                textAlign:
+                  x: center
+              children:
+                - .AboutTitle:
+                  style:
+                    fontSize: calc(35.04/1724.81*100vw)
+                  text: "Hyuge is Mutual Understanding. It is Hyuge!"
+
+                - .AboutLabel:
+                  text: "Company Overview"
+
+                - .AboutLabel:
+                  text: "Hyuge Intelligent Systems is a trailblazer in AI, developing solutions for the core limitations in AI itself, and creating advanced technologies for personalized, adaptive AI assistants. Our mission is to foster mutual understanding between humans and AI, driving innovation and expanding human potential. With our groundbreaking technologies - PIE, PALM, ADSL, and BECOS - we create AI that learns, evolves, and securely manages data to meet each user's unique needs."
+
+                - .AboutLabel:
+                  text: "Company History"
+
+                - .AboutLabel:
+                  text: "Founded in 2024 by visionary AI developer Hongtao Yu and Executive Coach Drisya Vilaya, Hyuge Intelligent Systems' name reflects our belief in harmony between humans and AI. We developed foundational technologies in information embedding, neural networks, human-AI interaction, and secure data management, paving the way for our flagship Hyuge Personal AI Assistant – AI+. Attracting top investors and businesses, we partner across industries to bring personalized AI to diverse applications. Today, Hyuge Intelligent Systems leads the AI revolution, pushing boundaries and unlocking new possibilities for growth and success through human-centric AI innovation."
+
+        - type: view
+          style:
+            marginTop: calc(101.06/1724.81*100vw)
+            display: flex
+            flexDirection: row
+            maxWidth: "100%"
+          children:
+            - type: view
+              style:
+                textAlign:
+                  x: center
+              children:
+                - .AboutTitle:
+                  style:
+                    fontSize: calc(35.04/1724.81*100vw)
+                    justifyContent: center
+                  text: "Grab interest"
+
+                - .AboutLabel:
+                  text: "Say something interesting about your business here."
+
+            - type: image
+              path: about_2.webp
+              style:
+                display: block
+                margin: auto
+                maxWidth: "48%"
+                width: calc(1060.35/1724.81*100vw)
+
+        - type: view
+          style:
+            marginTop: calc(101.06/1724.81*100vw)
+            display: flex
+            flexDirection: row
+            maxWidth: "100%"
+          children:
+            - type: image
+              path: about_3.webp
+              style:
+                display: block
+                margin: auto
+                maxWidth: "48%"
+                width: calc(1060.35/1724.81*100vw)
+
+            - type: view
+              style:
+                marginLeft: calc(60.35/1724.81*100vw)
+                textAlign:
+                  x: center
+              children:
+                - .AboutTitle:
+                  style:
+                    fontSize: calc(35.04/1724.81*100vw)
+                    justifyContent: center
+                  text: "Feature something"
+
+                - .AboutLabel:
+                  text: "What's a product or service you'd like to show."
+
+        - .AboutTitle:
+          text: "CONNECT WITH US"
+          style:
+            marginTop: calc(222.111/1724.81*100vw)
+            textAlign:
+              y: center
+            fontStyle: "bold"
+            fontSize: calc(34.04/1724.81*100vw)
+            justifyContent: center
+            color: "0x595959"
+
+        - type: image
+          path: externalLinkedin.png
+          onClick:
+            - goto: https://www.linkedin.com/in/hongtao-yu-8b6895/
+          style:
+            width: calc(34.5/1724.81*100vw)
+            margin: auto
+            display: block
+            marginBottom: calc(59.57/1724.81*100vw)
+
+    - .BaseFooter1:

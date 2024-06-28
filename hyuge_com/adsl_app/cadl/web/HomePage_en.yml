@@ -131,14 +131,126 @@ HomePage:
         number: "2"
       - img: circleLight.png
         number: "3"
+  # formData:
+  #   show:
+  #     - img: circleLight.png
+  #       number: "1"
+  #     - img: ellipseBlack.png
+  #       number: "2"
+  #     - img: ellipseBlack.png
+  #       number: "3"
+  formDataTemp:
+    data:
+      option: {
+          borderRadius: 10,
+          spaceBetween: 0,
+          direction: "vertical",
+          loop: true,
+          autoplay: { delay: 2000 },
+          effect: "slide",
+          # pagination: true,
+          pagination: {
+              # type: 'fraction',
+              type: "bullets",
+              clickable: true,
+            },
+          navigation: false,
+          slidesPerView: 1,
+          childStyle: { width: "100%", height: "100%", objectFit: "contain" },
+        }
+
   formData:
-    show:
-      - img: circleLight.png
-        number: "1"
-      - img: ellipseBlack.png
-        number: "2"
-      - img: ellipseBlack.png
-        number: "3"
+    backBtn: "inline-block"
+    # 商品视频首页图片数组
+    productCoverImageUrlList:
+      [
+        "rotation_1.webp",
+        "rotation_2.webp",
+        "rotation_3.webp",
+        "rotation_4.webp",
+        "rotation_5.webp",
+        "rotation_6.webp",
+        "rotation_7.webp",
+        "rotation_8.webp",
+        "rotation_9.webp",
+      ]
+    # 商品视频首页图片
+    productCoverImageUrl: ""
+    # 规格名字组成的数组，用于未选规格时的弹框展示
+    styleNameList: []
+    # 推荐信息
+    recommendInfo: ""
+    # 所有商品库存数组
+    quantityList: []
+    # 商品规格存在
+    productionNumShow: "block"
+    # 商品规格不存在提示
+    productionTipsShow: "none"
+    assetIdsAboutProductionAfterTransform:
+      [
+        "./adsl_app/cadl/web/assets/rotation_1.webp",
+        "./adsl_app/cadl/web/assets/rotation_2.webp",
+        "./adsl_app/cadl/web/assets/rotation_3.webp",
+        "./adsl_app/cadl/web/assets/rotation_4.webp",
+        "./adsl_app/cadl/web/assets/rotation_5.webp",
+        "./adsl_app/cadl/web/assets/rotation_6.webp",
+        "./adsl_app/cadl/web/assets/rotation_7.webp",
+        "./adsl_app/cadl/web/assets/rotation_8.webp",
+        "./adsl_app/cadl/web/assets/rotation_9.webp",
+      ]
+    assetIdsAboutProduction: []
+    # 控制选中面板是否显示
+    isDisplayPanel: "none"
+    # 数字形式的单价
+    priceForNumber: ""
+    # 总金额
+    totalMoney: ""
+    # 拼接后的商品型号信息
+    productInfo: ""
+    # 拼接后的总价
+    displayTotalPrice: ""
+    # 拼接后的单价,如$100
+    displayPrice: ""
+    backgroundColor:
+      confirm: "#2988e6"
+    pointerEvents:
+      confirm: ""
+      addBtn: ""
+    label:
+      noSelect: ""
+      outOfStock: ""
+      exceedStock: "The purchase amount cannot exceed stock."
+    # 订单详细信息
+    orderDetail:
+      # 供应商名称
+      inventorName: ""
+      # 购买的商品列表
+      productionList: []
+    # 控制各控件是否展示
+    display:
+      # 是否显示库存售完的信息
+      tipsBox: "none"
+      outOfStockStillSell: "none"
+      outOfStock: "none"
+    # 匹配得到的库存
+    inventory:
+      name:
+        data:
+          quantity: 0
+    # 当前商品子类别的状态
+    options: ""
+    # 当前产品
+    production: ""
+    firstListItem: ""
+    secondListItem: ""
+    currentChangeList: []
+    # true 表示添加购物车,false 去支付界面
+    shoppingState: true
+    isClick: ""
+    selectItem:
+      property: ""
+    productStatusList: []
+    shippingCost: "Standard(1-3 days)"
 
   components:
     - type: popUp
@@ -146,42 +258,18 @@ HomePage:
     - .BaseHeader:
     - type: popUp
       viewTag: topView
-
-    # - type: scrollView
-    #   style:
-    #     left: '0'
-    #     width: '1'
-    #     height: '1'
-    #     margin: auto
-    #     marginTop: '0'
-    #   children:
-    # main
     - type: view
       style:
-        # left: '0'
         width: calc(1514.77/1724.81*100vw)
         margin: "auto"
         height: calc(852.72/1920*100vw)
         marginTop: calc(130.2/1920*100vw)
         viewTag: topView
+        display: flex
+        justifyContent: center
+        textAlign:
+          x: center
       children:
-        # - type: list
-        #   contentType: listObject
-        #   listObject: ..resource
-        #   iteratorVar: itemObject
-        #   style:
-        #     width: calc(1514.77/1724.81*100vw)
-        #   children:
-        #     - type: listItem
-        #       itemObject:
-        #       style:
-        #         width: calc(1514.77/1724.81*100vw)
-        #       children:
-        #         - type: image
-        #           path: itemObject.imgPath
-        #           style:
-        #             filter: itemObject.filter
-        #             width: calc(1514.77/1724.81*100vw)
         - type: image
           path: homeNew11.png
           style:
@@ -189,54 +277,31 @@ HomePage:
         - type: label
           text: "AGI - Artificial Genomatic Intelligence Powering AI for 21st Century"
           style:
-            fontSize: calc(43.6/1920*100vw)
+            fontSize: calc(53.6/1920*100vw)
             fontWeight: "600"
             textShadow: "2px 2px 3px #999999"
             fontFamily: "Arial"
             color: "0xffffff"
             width: calc(620.92/1920*100vw)
             height: calc(145.34/1920*100vw)
-            left: calc(275.97/1920*100vw)
-            top: calc(251.94/1920*100vw)
+            top: calc(151.94/1920*100vw)
         - type: label
           text: "From Mechanical Neural Network to Organic Neural Network"
           style:
-            fontSize: calc(29.07/1920*100vw)
+            fontSize: calc(34.07/1920*100vw)
             color: "0xffffff"
             width: calc(862.41/1920*100vw)
             height: calc(96.89/1920*100vw)
-            left: calc(275.97/1920*100vw)
             fontFamily: Arial
             top: calc(437.99/1920*100vw)
         - type: button
           onClick:
             - actionType: popUp
               popUpView: JFreeTag
-            # - actionType: popUp
-            #   popUpView: JFreeShadowPop
-            # - actionType: evalObject
-            #   object:
-            #     # - ..res@: "blur(8px)"
-            #     - =.builtIn.object.setProperty:
-            #         dataIn:
-            #           obj: =..resource
-            #           label: 'imgPath'
-            #           text: 'homeNew1.png'
-            #           arr: ["filter"]
-            #           valueArr: ["blur(2px)"]
-            #           errorArr: ["blur(0px)"]
-            #         dataOut: HomePage.resource
-            # - actionType: builtIn
-            #   funcName: redraw
-            #   viewTag: topView
           text: "CONNECT WITH US"
           style:
-            # mouseOver:
-            #   backgroundColor: white
             fontSize: calc(21/1920*100vw)
             color: "0xffffff"
-            # hover:
-            #   color: "0x000000"
             fontFamily: "Arial"
             borderWidth: "2px"
             borderColor: "white"
@@ -247,13 +312,26 @@ HomePage:
             borderRadius: "0.001"
             boxShadow: 1px 1px 2px 0x000000
             height: calc(65.89/1920*100vw)
-            left: calc(275.97/1920*100vw)
             top: calc(544.58/1920*100vw)
-            # width: calc(384.64/1920*100vw)
             padding: "15px 20px"
             textAlign:
               x: center
               y: center
+
+        - type: label
+          text: "(310) 938-1451"
+          style:
+            fontFamily: Arial
+            fontSize: calc(21/1920*100vw)
+            color: "0xffffff"
+            top: calc(674.58/1920*100vw)
+
+    - type: image
+      path: home_1.webp
+      style:
+        width: calc(1514.77/1724.81*100vw)
+        display: block
+        margin: auto
 
     - type: view
       style:
@@ -261,7 +339,6 @@ HomePage:
         margin: auto
         display: flex
         justifyContent: center
-        # height: calc(836.25/1920*100vw)
         marginTop: calc(26.24/1920*100vw)
       children:
         - type: view
@@ -275,31 +352,38 @@ HomePage:
                 display: flex
                 flexDirection: column
                 width: calc(1514.77/1724.81*100vw)
-                fontSize: calc(37.5/1920*100vw)
+                fontSize: calc(29.04/1724.81*100vw)
                 fontFamily: "Arial"
                 fontWeight: "600"
-                # height: calc(180.25/1920*100vw)
-                justifyContent: center
-                alignItems: center
+                alignItems: left
+                color: "0x595959"
+                marginTop: calc(222.111/1724.81*100vw)
 
             - type: view
               style:
                 display: flex
                 flexDirection: row
                 flexWrap: wrap
-                # width: calc(1500.9/1920*100vw)
                 width: calc(1514.77/1724.81*100vw)
-                # height: calc(656/1920*100vw)
                 justifyContent: left
                 alignItems: center
               children:
                 - .HomeTitle:
                   text: "Unleash Your Personal AI Evolution"
+                  style:
+                    marginTop: 0
 
                 - .HomeLabel:
                   text: "Hyuge Intelligent Systems is pioneering a new paradigm of artificial intelligence - one where every individual has a unique, evolving AI assistant tailored to their needs. Our groundbreaking technologies integrate to create AI that efficiently scales to each user, continuously learns, and maintains data security."
 
                 - type: view
+                  style:
+                    display: flex
+                    flexDirection: column
+                    justifyContent: center
+                    alignItems: center
+                    textAlign:
+                      x: center
                   children:
                     - .HomeTitle:
                       text: "We envision a world where AI is not a tool,"
@@ -311,15 +395,23 @@ HomePage:
                       text: "Learn more"
                       style:
                         marginTop: calc(31.06/1724.81*100vw)
+                        textDecoration: underline
                       onClick:
                         - goto: https://calendly.com/drisyavilaya/hyuge-ai-discovery-call
 
                 - type: view
                   style:
-                    alignSelf: center
+                    margin: auto
                   children:
                     - .HomeSubTitle:
                       text: 'INTRODUCING AGI - ARTIFICIAL "GENOMATIC" INTELLIGENCE'
+
+                - type: image
+                  path: home_2.webp
+                  style:
+                    width: calc(1514.77/1724.81*100vw)
+                    display: block
+                    margin: auto
 
                 - type: view
                   children:
@@ -389,55 +481,39 @@ HomePage:
         flexDirection: column
         width: calc(1514.77/1724.81*100vw)
         margin: "auto"
-        height: calc(786.94/1920*100vw)
+        marginTop: calc(59.57/1724.81*100vw)
       children:
-        - type: label
+        - .HomeSubTitle:
           text: "About Hyuge"
-          style:
-            display: flex
-            justifyContent: center
-            alignItems: center
-            width: calc(1514.77/1724.81*100vw)
-            height: calc(187.4/1920*100vw)
-            fontWeight: "600"
-            fontSize: calc(37.5/1920*100vw)
-            fontFamily: "Arial"
 
         - type: view
           style:
             width: calc(1514.77/1724.81*100vw)
-            height: calc(421.64/1920*100vw)
             display: flex
             justifyContent: space-around
-            alignItems: center
+            marginTop: calc(59.57/1724.81*100vw)
           children:
             - type: view
               style:
                 display: flex
-                justifyContent: center
                 alignItems: center
                 flexDirection: column
-                width: calc(333.56/1920*100vw)
-                height: calc(421.64/1920*100vw)
+                width: calc(383.56/1920*100vw)
+                textAlign:
+                  x: center
               children:
-                - type: view
+                - type: image
+                  path: home_3.webp
                   style:
-                    width: calc(250.17/1920*100vw)
-                    height: calc(312.2/1920*100vw)
-                  children:
-                    - type: image
-                      path: phone4.png
-                      style:
-                        width: calc(250.17/1920*100vw)
-                        height: calc(312.2/1920*100vw)
+                    width: calc(350.17/1920*100vw)
                 - type: label
                   style:
-                    textAlign:
-                      x: center
-                    width: calc(333.56/1920*100vw)
-                    fontSize: calc(22/1700*100vw)
+                    width: calc(383.56/1920*100vw)
+                    fontSize: calc(32/1700*100vw)
                     fontWeight: "600"
                     fontFamily: "Arial"
+                    marginTop: "calc(31.06/1724.81*100vw)"
+                    marginBottom: "calc(31.06/1724.81*100vw)"
                   text: Our Story
 
                 - .HomeLabel:
@@ -446,24 +522,16 @@ HomePage:
             - type: view
               style:
                 display: flex
-                justifyContent: center
                 alignItems: center
                 flexDirection: column
-                width: calc(333.56/1920*100vw)
-                height: calc(421.64/1920*100vw)
+                width: calc(383.56/1920*100vw)
+                textAlign:
+                  x: center
               children:
-                - type: view
+                - type: image
+                  path: home_4.webp
                   style:
-                    width: calc(250.17/1920*100vw)
-                    height: calc(312.2/1920*100vw)
-                    display: flex
-                    justifyContent: center
-                    alignItems: center
-                  children:
-                    - type: image
-                      path: phone1.png
-                      style:
-                        width: calc(133.42/1920*100vw)
+                    width: calc(353.42/1920*100vw)
 
                 - type: label
                   style:
@@ -471,47 +539,41 @@ HomePage:
                     justifyContent: center
                     alignItems: center
                     width: calc(333.56/1920*100vw)
-                    fontSize: calc(22/1700*100vw)
+                    fontSize: calc(32/1700*100vw)
                     fontWeight: "600"
                     fontFamily: "Arial"
+                    marginTop: "calc(31.06/1724.81*100vw)"
+                    marginBottom: "calc(31.06/1724.81*100vw)"
                   text: "Our Expertise"
 
                 - .HomeLabel:
-                  text: "Our team using the first AGI language, NOODL(Neuron Organic Object Description Language) and The AGI foundation BECOS ( Blockchain Empowered Content Organizing System), with TOWFIG (Task Oriented Work Flow Intergraph) to provide no-code full stack soluion for any  software applications."
+                  text: "Our team using the first AGI language, NOODL(Neuron Organic Object Description Language) and The AGI foundation BECOS ( Blockchain Empowered Content Organizing System), with TOWFIG (Task Oriented Work Flow Intergraph) to provide no-code full stack soluion for any software applications."
 
             - type: view
               style:
                 display: flex
-                justifyContent: center
                 alignItems: center
                 flexDirection: column
-                width: calc(333.56/1920*100vw)
-                height: calc(402.91/1920*100vw)
-                # marginTop: '0.017'
+                width: calc(383.56/1920*100vw)
+                textAlign:
+                  x: center
               children:
-                - type: view
+                - type: image
+                  path: home_5.webp
                   style:
-                    display: flex
-                    alignItems: center
-                    justifyContent: center
-                    width: calc(250.17/1920*100vw)
-                    height: calc(352.2/1920*100vw)
-                  children:
-                    - type: image
-                      path: product1.png
-                      style:
-                        width: calc(200.14/1920*100vw)
+                    width: calc(350.14/1920*100vw)
                 - type: label
                   text: "Our Clients"
                   style:
                     display: flex
                     justifyContent: center
-                    alignItems: flex-start
+                    alignItems: center
                     width: calc(333.56/1920*100vw)
-                    height: calc(103.06/1920*100vw)
-                    fontSize: calc(22/1700*100vw)
+                    fontSize: calc(32/1700*100vw)
                     fontWeight: "600"
                     fontFamily: "Arial"
+                    marginTop: "calc(31.06/1724.81*100vw)"
+                    marginBottom: "calc(31.06/1724.81*100vw)"
 
                 - .HomeLabel:
                   text: "With our technologies, we have built the blockchain empowered AI Telemedicine System, aitmed.com. It merged the blockchain and AI to serve the medical professional and their customers. It greatly improved the efficiency of healthcare services."
@@ -524,7 +586,7 @@ HomePage:
         flexDirection: column
         justifyContent: center
         alignItems: center
-        marginTop: "0.025"
+        # marginTop: "0.025"
       children:
         - type: label
           text: "A VISUAL JOURNEY INTO THE WORLD OF ARTIFICIAL INTELLIGENCE"
@@ -538,6 +600,23 @@ HomePage:
             fontFamily: "Arial"
             fontWeight: "600"
 
+        - type: scrollView
+          style:
+            width: calc(1314.77/1724.81*100vw)
+            marginBottom: calc(59.57/1724.81*100vw)
+            ..style.scrollBox:
+          children:
+            - type: view
+              style:
+                ..style.rotationBox:
+              children:
+                - type: rotation
+                  dataKey: formData.assetIdsAboutProductionAfterTransform
+                  dataOption: formDataTemp.data.option
+                  videoOption: formData.productCoverImageUrl
+                  style:
+                    ..style.rotation:
+
         - type: button
           onClick:
             - goto: https://www.google.com/maps/dir//2573+Pacific+Coast+Hwy,+Torrance,+CA+90505/@33.7907247,-118.3345693,16z/data=!4m8!4m7!1m0!1m5!1m1!1s0x80dd4a5b4fe8b535:0xbea33e6e1770c1ab!2m2!1d-118.3294194!2d33.7907248?entry=ttu
@@ -549,7 +628,8 @@ HomePage:
             #   color: "0x000000"
             fontFamily: "Arial"
             borderWidth: "2px"
-            borderColor: "white"
+            borderColor: "black"
+            borderStyle: "solid"
             backgroundColor: "transparent"
             zIndex: "99"
             fontWeight: "Regular"
@@ -569,10 +649,13 @@ HomePage:
       children:
         - .HomeSubTitle:
           style:
-            justifyContent: center
+            textAlign:
+              x: left
           text: "CONTACT US"
 
         - .HomeTitle:
+          style:
+            marginTop: calc(29.57/1724.81*100vw)
           text: "Better yet, see us in person!"
 
         - .HomeLabel:
@@ -592,57 +675,57 @@ HomePage:
             "Mon 09:00 am – 05:00 pm\nTue 09:00 am – 05:00 pm\nWed 09:00 am – 05:00 pm\nThu 09:00 am – 05:00 pm\nFri 09:00 am – 05:00
             pm\nSat Closed\nSun Closed"
 
-    - type: view
-      style:
-        width: calc(1514.77/1724.81*100vw)
-        height: calc(786.94/1920*100vw)
-        margin: "auto"
-      children:
-        - type: image
-          path: HomeBottom.png
-          style:
-            width: calc(1514.77/1724.81*100vw)
-            top: 0
+    # - type: view
+    #   style:
+    #     width: calc(1514.77/1724.81*100vw)
+    #     height: calc(786.94/1920*100vw)
+    #     margin: "auto"
+    #   children:
+    #     - type: image
+    #       path: HomeBottom.png
+    #       style:
+    #         width: calc(1514.77/1724.81*100vw)
+    #         top: 0
 
-        - type: label
-          text: "Subscribe"
-          style:
-            display: flex
-            justifyContent: center
-            alignItems: center
-            width: calc(1514.77/1724.81*100vw)
-            color: "0xffffff"
-            height: calc(187.4/1920*100vw)
-            fontWeight: "600"
-            fontSize: calc(37.5/1920*100vw)
-            fontFamily: "Arial"
+    #     - type: label
+    #       text: "Subscribe"
+    #       style:
+    #         display: flex
+    #         justifyContent: center
+    #         alignItems: center
+    #         width: calc(1514.77/1724.81*100vw)
+    #         color: "0xffffff"
+    #         height: calc(187.4/1920*100vw)
+    #         fontWeight: "600"
+    #         fontSize: calc(37.5/1920*100vw)
+    #         fontFamily: "Arial"
 
-        - .HomeLabel:
-          text: "Get 10% off your first purchase when you sign up for our newsletter!"
+    #     - .HomeLabel:
+    #       text: "Get 10% off your first purchase when you sign up for our newsletter!"
 
-        - type: view
-          style:
-            display: flex
-            flexDirection: row
-            padding: "0 20px"
-          children:
-            - type: textField
-              placeholder: "Email"
-              style:
-                textAlign:
-                  x: left
-                fontSize: "14"
-                # left: "0.007"
-                # top: "0.003"
-                height: "0.04"
-                required: "true"
-                borderWidth: "1"
-                box-sizing: "border-box"
-                border: "none"
-                margin: auto
+    #     - type: view
+    #       style:
+    #         display: flex
+    #         flexDirection: row
+    #         padding: "0 20px"
+    #       children:
+    #         - type: textField
+    #           placeholder: "Email"
+    #           style:
+    #             textAlign:
+    #               x: left
+    #             fontSize: "14"
+    #             # left: "0.007"
+    #             # top: "0.003"
+    #             height: "0.04"
+    #             required: "true"
+    #             borderWidth: "1"
+    #             box-sizing: "border-box"
+    #             border: "none"
+    #             margin: auto
 
-            - type: button
-              text: "SIGN UP"
+    #         - type: button
+    #           text: "SIGN UP"
 
     - type: view
       style:

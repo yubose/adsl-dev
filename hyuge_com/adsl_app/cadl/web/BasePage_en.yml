@@ -1877,24 +1877,25 @@ HomeTitle:
 HomeLabel:
   type: label
   style:
-    fontSize: calc(20.42/1724.81*100vw)
-    # marginTop: calc(31.06/1724.81*100vw)
+    fontSize: calc(25.42/1724.81*100vw)
     fontFamily: "Arial"
-    text-align: justify
+    color: "0x5E5E5E"
 
 HomeSubTitle:
   type: label
   text: "Our Vision and Mission"
   style:
     color: "0x000000"
-    fontSize: calc(24.04/1724.81*100vw)
+    fontSize: calc(29.04/1724.81*100vw)
     fontStyle: "bold"
     fontFamily: "Arial"
     textAlign:
-      x: left
+      x: center
       y: center
     height: calc(85.1/1724.81*100vw)
+    width: 100%
     marginTop: calc(59.57/1724.81*100vw)
+    color: "0x595959"
 
 OurSolutionsTitle:
   type: label

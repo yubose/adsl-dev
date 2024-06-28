@@ -1,0 +1,1912 @@
+ProductDetails:
+  title: Product Details
+  pageNumber:
+  init:
+    - actionType: evalObject
+      object:
+        .Global._nonce@:
+          =.builtIn.math.random: ""
+    - actionType: evalObject
+      object:
+        - =..apiRequest.getProductDetail.docAPI.get: ""
+        - .Global.formData.production@: =..apiRequest.getProductDetail.docResp.doc.0
+        - =..apiRequest.originProduct.docAPI.get: ""
+
+        - actionType: evalObject
+          async: true
+          object:
+            # 查询库存doc数组
+            - =..apiRequest.inventory.docAPI.get: ""
+            - =..apiRequest.assetsAboutProduction.docAPI.get: ""
+            - =..apiRequest.productVideoImage.docAPI.get: ""
+            - =..apiRequest.productVideo.docAPI.get: ""
+            - =..apiRequest.productCoverImage.docAPI.get: ""
+        # ? 处理库存商品合并
+        - =.builtIn.array.getListByKey:
+            dataIn:
+              array: =..apiRequest.inventory.docQueryResp.doc
+              keyId: id
+            dataOut: ProductDetails.apiRequest.originVariant.docQueryReq.id
+        - =..apiRequest.originVariant.docAPI.get: ""
+
+        # ? 合并种类商品
+        - =.builtIn.array.mergeInventory:
+            dataIn:
+              source: =..apiRequest.originVariant.docQueryResp.doc
+              target: =..apiRequest.inventory.docQueryResp.doc
+            dataOut: ProductDetails.apiRequest.inventory.docQueryResp.doc
+        - if:
+            - =.builtIn.array.judgeListLength:
+                dataIn:
+                  array: =..apiRequest.productVideoImage.docQueryResp.doc
+                  len: 0
+            - continue
+            - actionType: evalObject
+              object:
+                - =.builtIn.utils.getImgByDocIds:
+                    dataIn:
+                      ids:
+                        - =..apiRequest.productVideoImage.docQueryResp.doc.0.id
+                    dataOut: ProductDetails.formData.productCoverImageUrlList
+                - ..formData.productCoverImageUrl@: =..formData.productCoverImageUrlList.0.path
+        - =.builtIn.array.SortBy:
+            dataIn:
+              object: =..apiRequest.assetsAboutProduction.docQueryResp.doc
+              iterate: ["name.title"]
+              orders: ["asc"]
+            dataOut: ProductDetails.apiRequest.assetsAboutProduction.docQueryResp.doc
+        - if:
+            - =.builtIn.array.judgeListLength:
+                dataIn:
+                  array: =..apiRequest.productCoverImage.docQueryResp.doc
+                  len: 0
+            - continue
+            - =.builtIn.array.push:
+                dataIn:
+                  newMessage: =..apiRequest.productCoverImage.docQueryResp.doc.0
+                  messages: =..apiRequest.assetsAboutProduction.docQueryResp.doc
+        - if:
+            - =.builtIn.array.judgeListLength:
+                dataIn:
+                  array: =..apiRequest.productVideo.docQueryResp.doc
+                  len: 0
+            - continue
+            - =.builtIn.array.push:
+                dataIn:
+                  newMessage: =..apiRequest.productVideo.docQueryResp.doc.0
+                  messages: =..apiRequest.assetsAboutProduction.docQueryResp.doc
+        - =.builtIn.object.extract:
+            dataIn:
+              array: =..apiRequest.assetsAboutProduction.docQueryResp.doc
+              field: id
+            dataOut: ProductDetails.formData.assetIdsAboutProduction
+        - =.builtIn.utils.getImgByDocIds:
+            dataIn:
+              ids: =..formData.assetIdsAboutProduction
+            dataOut: ProductDetails.formData.assetIdsAboutProductionAfterTransform
+        #初始化选项列表
+        - =.builtIn.array.modifyAttr:
+            dataIn:
+              objArr: =.Global.formData.production.name.data.options.optionsValue
+            dataOut: ProductDetails.formData.options
+        # 当前商品信息
+        - ..formData.production@: =.Global.formData.production
+        # # 加工后的规格数组
+        - ..formData.production.name.data.options.optionsValue@: =..formData.options.optionsValue
+
+        # 是否显示商品规格选择面板
+        - ..formData.isDisplayPanel@: "block"
+        - .ProductDetails.formData.producObj@: =.Global.formData.currentProductInfo
+
+        # ? 过滤出对于商品库存
+        - =.builtIn.object.matchSearchValue:
+            dataIn:
+              objArr: =..apiRequest.inventory.docQueryResp.doc
+              paths:
+                - id
+              value: =..formData.producObj.inventoryId
+            dataOut: ProductDetails.formData.inventory
+        - ..formData.inventory@: =.ProductDetails.formData.inventory.0
+        - ..formData.selectItem.num@: =..formData.producObj.num
+        - ..formData.selectItem.property@: =..formData.inventory.name.data.options
+        - =.builtIn.array.setReferProperty:
+            dataIn:
+              objectArr: =.ProductDetails.formData.production.name.data.options.optionsValue
+              referObject: =..formData.selectItem.property
+              arr: ["color", "borderStyle"]
+              valueArr: ["#fb5051", "1px solid #fb5051"]
+              errorArr: ["#333333", "none"]
+            dataOut: ProductDetails.formData.production.name.data.options.optionsValue
+
+        - if:
+            - =.builtIn.number.typeIsValid:
+                dataIn:
+                  docType: =..formData.inventory.tage
+                  localArr: [1, 2]
+                  binaryArr: [1, 0]
+            - actionType: evalObject
+              object:
+                - ..formData.deliveryMethodsTips@: "This product is pick up only."
+                - ..formData.deliveryMethodsTipsDisplay@: "flex"
+                - ..formData.deliveryMethod.type@: Pick up
+            - actionType: evalObject
+              object:
+                - if:
+                    - =.builtIn.number.typeIsValid:
+                        dataIn:
+                          docType: =..formData.inventory.tage
+                          localArr: [1, 2]
+                          binaryArr: [0, 1]
+                    - actionType: evalObject
+                      object:
+                        - ..formData.deliveryMethod.type@: Ship to me
+                        - ..formData.deliveryMethodsTips@: "This product is shipping only."
+                        - ..formData.deliveryMethodsTipsDisplay@: "flex"
+                    - actionType: evalObject
+                      object:
+                        - ..formData.deliveryMethodsTipsDisplay@: "none"
+                        - ..formData.deliveryMethod.type@: Ship to me
+
+        # # 判断是否购物车下订单项
+        # - if:
+        #     - =.Global.formData.whetherShopItem
+        #     - actionType: evalObject
+        #       object:
+        #         # 更新订单
+        #         - ..apiRequest.order.docCreateReq@: =.Global.formData.currentShopItem
+        #         # 更新当前选择的商品id
+        #         - ..apiRequest.inventory.docQueryReq.id@: =..apiRequest.order.docCreateReq.name.data.orderList.0.productionList.0.productionId
+        #         - ..apiRequest.production.docQueryReq.id@: =..apiRequest.order.docCreateReq.name.data.orderList.0.productionList.0.productionId
+        #         - =..apiRequest.production.docAPI.get: ""
+        #         - ..apiRequest.assetsAboutProduction.docQueryReq.id@: =..apiRequest.production.docQueryResp.doc.0.name.data.originProductId
+        #         - ..apiRequest.productVideoImage.docQueryReq.id@: =..apiRequest.production.docQueryResp.doc.0.name.data.originProductId
+        #         - ..apiRequest.productVideo.docQueryReq.id@: =..apiRequest.production.docQueryResp.doc.0.name.data.originProductId
+        #         - ..apiRequest.productCoverImage.docQueryReq.id@: =..apiRequest.production.docQueryResp.doc.0.name.data.originProductId
+        #         # 查询库存doc数组
+        #         - actionType: evalObject
+        #           async: true
+        #           object:
+        #             - =..apiRequest.inventory.docAPI.get: ""
+        #             - =..apiRequest.assetsAboutProduction.docAPI.get: ""
+        #             - =..apiRequest.productVideoImage.docAPI.get: ""
+        #             - =..apiRequest.productVideo.docAPI.get: ""
+        #             - =..apiRequest.productCoverImage.docAPI.get: ""
+        #         # ? 处理库存商品合并
+        #         - =.builtIn.array.getListByKey:
+        #             dataIn:
+        #               array: =..apiRequest.inventory.docQueryResp.doc
+        #               keyId: id
+        #             dataOut: ProductDetails.apiRequest.originVariant.docQueryReq.id
+        #         - =..apiRequest.originVariant.docAPI.get: ""
+
+        #         # ? 合并种类商品
+        #         - =.builtIn.array.mergeInventory:
+        #             dataIn:
+        #               source: =..apiRequest.originVariant.docQueryResp.doc
+        #               target: =..apiRequest.inventory.docQueryResp.doc
+        #             dataOut: ProductDetails.apiRequest.inventory.docQueryResp.doc
+        #         - if:
+        #             - =.builtIn.array.judgeListLength:
+        #                 dataIn:
+        #                   array: =..apiRequest.productVideoImage.docQueryResp.doc
+        #                   len: 0
+        #             - continue
+        #             - actionType: evalObject
+        #               object:
+        #                 - =.builtIn.utils.getImgByDocIds:
+        #                     dataIn:
+        #                       ids:
+        #                         - =..apiRequest.productVideoImage.docQueryResp.doc.0.id
+        #                     dataOut: ProductDetails.formData.productCoverImageUrlList
+        #                 - ..formData.productCoverImageUrl@: =..formData.productCoverImageUrlList.0.path
+        #         - =.builtIn.array.SortBy:
+        #             dataIn:
+        #               object: =..apiRequest.assetsAboutProduction.docQueryResp.doc
+        #               iterate: ["name.title"]
+        #               orders: ["asc"]
+        #             dataOut: ProductDetails.apiRequest.assetsAboutProduction.docQueryResp.doc
+        #         - if:
+        #             - =.builtIn.array.judgeListLength:
+        #                 dataIn:
+        #                   array: =..apiRequest.productCoverImage.docQueryResp.doc
+        #                   len: 0
+        #             - continue
+        #             - =.builtIn.array.push:
+        #                 dataIn:
+        #                   newMessage: =..apiRequest.productCoverImage.docQueryResp.doc.0
+        #                   messages: =..apiRequest.assetsAboutProduction.docQueryResp.doc
+        #         - if:
+        #             - =.builtIn.array.judgeListLength:
+        #                 dataIn:
+        #                   array: =..apiRequest.productVideo.docQueryResp.doc
+        #                   len: 0
+        #             - continue
+        #             - =.builtIn.array.push:
+        #                 dataIn:
+        #                   newMessage: =..apiRequest.productVideo.docQueryResp.doc.0
+        #                   messages: =..apiRequest.assetsAboutProduction.docQueryResp.doc
+        #         - =.builtIn.object.extract:
+        #             dataIn:
+        #               array: =..apiRequest.assetsAboutProduction.docQueryResp.doc
+        #               field: id
+        #             dataOut: ProductDetails.formData.assetIdsAboutProduction
+        #         - =.builtIn.utils.getImgByDocIds:
+        #             dataIn:
+        #               ids: =..formData.assetIdsAboutProduction
+        #             dataOut: ProductDetails.formData.assetIdsAboutProductionAfterTransform
+        #         # 控制是否显示商品规格选择面板
+        #         - ..formData.isDisplayPanel@: "block"
+        #         #初始化选项列表
+        #         - =.builtIn.array.modifyAttr:
+        #             dataIn:
+        #               objArr: =..apiRequest.production.docQueryResp.doc.0.name.data.options.optionsValue
+        #             dataOut: ProductDetails.formData.options
+        #         # 当前商品信息
+        #         - ..formData.production@: =..apiRequest.production.docQueryResp.doc.0
+        #         - .Global.formData.production@: =..apiRequest.production.docQueryResp.doc.0
+        #         # # 加工后的规格数组
+        #         - ..formData.production.name.data.options.optionsValue@: =..formData.options.optionsValue
+        #         # 上次选择的商品规格
+        #         - ..formData.selectItem.property@: =.Global.formData.currentShopItem.name.data.orderList.0.productionList.0.property
+        #         - ..formData.options.styleValue@: ""
+        #         - ..formData.options.styleValue@: =.Global.formData.currentShopItem.name.data.orderList.0.productionList.0.property
+        #         # 上次选择的商品规格数量
+        #         - ..formData.selectItem.num@: =.Global.formData.currentShopItem.name.data.orderList.0.productionList.0.num
+        #         # 上次的价钱
+        #         - ..formData.inventory.name.data.price@: =.Global.formData.currentShopItem.name.data.orderList.0.productionList.0.price
+        #         # 商品供应商
+        #         - ..formData.orderDetail.inventorName@: =..formData.production.name.data.basicInfo.vendor
+        #         # 处理全部的规格数组,显示上次选择的规格选项
+        #         - =.builtIn.array.setTxtProperties:
+        #             dataIn:
+        #               objArr: =..formData.production.name.data.options.optionsValue
+        #               property: =..formData.selectItem.property
+        #             dataOut: ProductDetails.formData.production.name.data.options.optionsValue
+        #         # 查询商品的库存
+        #         - =.builtIn.array.equivalentObj:
+        #             dataIn:
+        #               objArr: =..apiRequest.inventory.docQueryResp.doc
+        #               path: "name.data.options"
+        #               compareObj: =..formData.options.styleValue
+        #             dataOut: ProductDetails.formData.inventory
+        #     - actionType: evalObject
+        #       object:
+        #         - actionType: evalObject
+        #           async: true
+        #           object:
+        #             # 查询库存doc数组
+        #             - =..apiRequest.inventory.docAPI.get: ""
+        #             - =..apiRequest.assetsAboutProduction.docAPI.get: ""
+        #             - =..apiRequest.productVideoImage.docAPI.get: ""
+        #             - =..apiRequest.productVideo.docAPI.get: ""
+        #             - =..apiRequest.productCoverImage.docAPI.get: ""
+
+        #         # ? 处理库存商品合并
+        #         - =.builtIn.array.getListByKey:
+        #             dataIn:
+        #               array: =..apiRequest.inventory.docQueryResp.doc
+        #               keyId: id
+        #             dataOut: ProductDetails.apiRequest.originVariant.docQueryReq.id
+        #         - =..apiRequest.originVariant.docAPI.get: ""
+
+        #         # ? 合并种类商品
+        #         - =.builtIn.array.mergeInventory:
+        #             dataIn:
+        #               source: =..apiRequest.originVariant.docQueryResp.doc
+        #               target: =..apiRequest.inventory.docQueryResp.doc
+        #             dataOut: ProductDetails.apiRequest.inventory.docQueryResp.doc
+        #         - if:
+        #             - =.builtIn.array.judgeListLength:
+        #                 dataIn:
+        #                   array: =..apiRequest.productVideoImage.docQueryResp.doc
+        #                   len: 0
+        #             - continue
+        #             - actionType: evalObject
+        #               object:
+        #                 - =.builtIn.utils.getImgByDocIds:
+        #                     dataIn:
+        #                       ids:
+        #                         - =..apiRequest.productVideoImage.docQueryResp.doc.0.id
+        #                     dataOut: ProductDetails.formData.productCoverImageUrlList
+        #                 - ..formData.productCoverImageUrl@: =..formData.productCoverImageUrlList.0.path
+        #         - =.builtIn.array.SortBy:
+        #             dataIn:
+        #               object: =..apiRequest.assetsAboutProduction.docQueryResp.doc
+        #               iterate: ["name.title"]
+        #               orders: ["asc"]
+        #             dataOut: ProductDetails.apiRequest.assetsAboutProduction.docQueryResp.doc
+        #         - if:
+        #             - =.builtIn.array.judgeListLength:
+        #                 dataIn:
+        #                   array: =..apiRequest.productCoverImage.docQueryResp.doc
+        #                   len: 0
+        #             - continue
+        #             - =.builtIn.array.push:
+        #                 dataIn:
+        #                   newMessage: =..apiRequest.productCoverImage.docQueryResp.doc.0
+        #                   messages: =..apiRequest.assetsAboutProduction.docQueryResp.doc
+        #         - if:
+        #             - =.builtIn.array.judgeListLength:
+        #                 dataIn:
+        #                   array: =..apiRequest.productVideo.docQueryResp.doc
+        #                   len: 0
+        #             - continue
+        #             - =.builtIn.array.push:
+        #                 dataIn:
+        #                   newMessage: =..apiRequest.productVideo.docQueryResp.doc.0
+        #                   messages: =..apiRequest.assetsAboutProduction.docQueryResp.doc
+        #         - =.builtIn.object.extract:
+        #             dataIn:
+        #               array: =..apiRequest.assetsAboutProduction.docQueryResp.doc
+        #               field: id
+        #             dataOut: ProductDetails.formData.assetIdsAboutProduction
+        #         - =.builtIn.utils.getImgByDocIds:
+        #             dataIn:
+        #               ids: =..formData.assetIdsAboutProduction
+        #             dataOut: ProductDetails.formData.assetIdsAboutProductionAfterTransform
+        #         #初始化选项列表
+        #         - =.builtIn.array.modifyAttr:
+        #             dataIn:
+        #               objArr: =.Global.formData.production.name.data.options.optionsValue
+        #             dataOut: ProductDetails.formData.options
+        #         # 当前商品信息
+        #         - ..formData.production@: =.Global.formData.production
+        #         # # 加工后的规格数组
+        #         - ..formData.production.name.data.options.optionsValue@: =..formData.options.optionsValue
+        #         # 是否显示商品规格选择面板
+        #         - ..formData.isDisplayPanel@: "none"
+        #         # 默认商品规格对象
+        #         - ..formData.selectItem.property@: =..formData.options.styleValue
+        #         - ..formData.selectItem.num@: 1
+        #         # 一开始默认展示价格范围
+        #         - ..formData.inventory.name.data.price@: =.Global.formData.production.name.data.priceRange
+
+        #         # 处理上次选择结果视图和数据对不上的问题
+        #         - =.builtIn.array.setReferProperty:
+        #             dataIn:
+        #               objectArr: =.ProductDetails.formData.production.name.data.options.optionsValue
+        #               referObject: =..formData.selectItem.property
+        #               arr: ["color", "borderStyle"]
+        #               valueArr: ["#333333", "none"]
+        #               errorArr: ["#333333", "none"]
+        #             dataOut: ProductDetails.formData.production.name.data.options.optionsValue
+        #         # 计算总库存
+        #         - =.builtIn.object.extract:
+        #             dataIn:
+        #               array: =..apiRequest.inventory.docQueryResp.doc
+        #               field: name.title
+        #             dataOut: ProductDetails.formData.quantityList
+        #         - =.builtIn.utils.addArrayValue:
+        #             dataIn:
+        #               array: =..formData.quantityList
+        #             dataOut: ProductDetails.formData.inventory.name.title
+        #         # 商品供应商
+        #         - ..formData.orderDetail.inventorName@: =..formData.production.name.data.basicInfo.vendor
+
+        # # 如果规格是默认的，则自动选中
+        # - if:
+        #     - =..formData.production.name.data.options.isHasOptions
+        #     - continue
+        #     - actionType: evalObject
+        #       object:
+        #         - ..formData.production.name.data.options.optionsValue.0.styleValue.0.borderStyle@: "1px solid #fb5051"
+        #         - ..formData.production.name.data.options.optionsValue.0.styleValue.0.color@: "#fb5051"
+        #         # 查询商品的库存
+        #         - ..formData.inventory@: =..apiRequest.inventory.docQueryResp.doc.0
+        #         - =.builtIn.math.toFixedNum:
+        #             dataIn:
+        #               num: =..formData.inventory.name.data.price
+        #             dataOut: ProductDetails.formData.inventory.name.data.price
+        #         # 指定默认Options规格
+        #         - ..formData.selectItem.property.Options@: "Default"
+        # # 转字符型
+        # - =.builtIn.string.concat:
+        #     dataIn:
+        #       - =..formData.inventory.name.title
+        #     dataOut: ProductDetails.formData.inventory.name.title
+        # # 判断库存是否小于0
+        # - if:
+        #     - =.builtIn.number.less:
+        #         dataIn:
+        #           num1: =..formData.inventory.name.title
+        #           num2: 1
+        #     - actionType: evalObject
+        #       object:
+        #         - ..formData.display.outOfStock@: block
+        #         - ..formData.label.outOfStock@: "This product is out of stock,  please choose another style."
+        #         - ..formData.pointerEvents.confirm@: none
+        #         - ..formData.backgroundColor.confirm@: "#c1c1c1"
+        #         - ..formData.pointerEvents.addBtn@: none
+        #     - continue
+
+        # - =.builtIn.object.extract:
+        #     dataIn:
+        #       array: =..formData.production.name.data.options.optionsValue
+        #       field: styleName
+        #     dataOut: ProductDetails.formData.styleNameList
+        # - =.builtIn.string.concat:
+        #     dataIn:
+        #       - "Please select all options *"
+        #       - =..formData.styleNameList
+        #     dataOut: ProductDetails.formData.label.noSelect
+        # - if:
+        #     - =.Global.formData.whetherShopItem
+        #     - ..formData.backBtn@: "none"
+        #     - ..formData.backBtn@: "inline-block"
+        # - ..formData.orderDetail.facilityName@: =.Global.roomInfo.edge.name.locationName
+
+        # - =..apiRequest.pickupLocation.docAPI.get: ""
+        # - =.builtIn.object.extract:
+        #     dataIn:
+        #       array: =..apiRequest.pickupLocation.docQueryResp.doc
+        #       field: fid
+        #     dataOut: ProductDetails.apiRequest.locationVertex.vQueryReq.id
+        # - =..apiRequest.locationVertex.vertexAPI.get: ""
+        # - =.builtIn.array.classifyLocation:
+        #     dataIn:
+        #       pickupLocationList: =..apiRequest.pickupLocation.docQueryResp.doc
+        #       locationVertexList: =..apiRequest.locationVertex.vQueryResp.vertex
+        #       shoppingCartList:
+        #         [
+        #           {
+        #             facilityId: =.Global.roomInfo.edge.name.facilityId,
+        #             facilityName: =.Global.formData.currentStoreFacility.facilityName,
+        #           },
+        #         ]
+        #       shoppingCartFacilityNamePath: "facilityId"
+        #     dataOut: ProductDetails.formDataTemp.pickupLocationList
+        # - ..formData.deliveryMethodsSelectDisplay@: "none"
+        # - if:
+        #     - =.builtIn.number.typeIsValid:
+        #         dataIn:
+        #           docType: =..formData.inventory.tage
+        #           localArr: [1, 2]
+        #           binaryArr: [1, 0]
+        #     - actionType: evalObject
+        #       object:
+        #         - ..formData.deliveryMethodsTips@: "This product is pick up only."
+        #         - ..formData.deliveryMethodsTipsDisplay@: "flex"
+        #         - ..formData.deliveryMethod.type@: Pick up
+        #     - actionType: evalObject
+        #       object:
+        #         - if:
+        #             - =.builtIn.number.typeIsValid:
+        #                 dataIn:
+        #                   docType: =..formData.inventory.tage
+        #                   localArr: [1, 2]
+        #                   binaryArr: [0, 1]
+        #             - actionType: evalObject
+        #               object:
+        #                 - ..formData.deliveryMethod.type@: Ship to me
+        #                 - ..formData.deliveryMethodsTips@: "This product is shipping only."
+        #                 - ..formData.deliveryMethodsTipsDisplay@: "flex"
+        #             - actionType: evalObject
+        #               object:
+        #                 - ..formData.deliveryMethodsTipsDisplay@: "none"
+        #                 - ..formData.deliveryMethod.type@: Ship to me
+
+  apiRequest:
+    getProductDetail:
+      docResp: ""
+      docReq:
+        id: =.Global.formData.currentProductInfo.productionId
+        _nonce: =.Global._nonce
+      docAPI:
+        get:
+          api: rd
+          dataIn: ProductDetails.apiRequest.getProductDetail.docReq
+          dataOut: ProductDetails.apiRequest.getProductDetail.docResp
+    # 购买了virtual store的origin 商品的variant
+    originVariant:
+      docQueryResp:
+        doc: []
+      docQueryReq:
+        ObjType: 28
+        id: []
+        xfname: D3.Id
+        sfname: '{"join":"INNER JOIN Doc D2 ON D2.reid=D.id INNER JOIN Doc D3 ON D3.id=D2.fid","result":"D.*"}'
+        sCondition: "D.type=199681 AND D3.type=199681 AND D2.type=473601"
+        _nonce: =.Global._nonce
+      docAPI:
+        get:
+          api: rd
+          dataIn: ProductDetails.apiRequest.originVariant.docQueryReq
+          dataOut: ProductDetails.apiRequest.originVariant.docQueryResp
+    productVideoImage:
+      docQueryResp:
+      docQueryReq:
+        id: .Global.formData.currentProductInfo.originProductId
+        xfname: reid
+        type: .DocType.ProductVideoImage
+        obfname: ctime
+        maxcount: 1
+        _nonce: =.Global._nonce
+      docAPI:
+        get:
+          api: rd
+          dataIn: ProductDetails.apiRequest.productVideoImage.docQueryReq
+          dataOut: ProductDetails.apiRequest.productVideoImage.docQueryResp
+    productVideo:
+      docQueryResp:
+      docQueryReq:
+        id: .Global.formData.currentProductInfo.originProductId
+        xfname: reid
+        type: .DocType.ProductVideo
+        obfname: ctime
+        maxcount: 1
+        _nonce: =.Global._nonce
+      docAPI:
+        get:
+          api: rd
+          dataIn: ProductDetails.apiRequest.productVideo.docQueryReq
+          dataOut: ProductDetails.apiRequest.productVideo.docQueryResp
+    productCoverImage:
+      docQueryResp:
+      docQueryReq:
+        id: .Global.formData.currentProductInfo.originProductId
+        xfname: reid
+        obfname: ctime
+        maxcount: 1
+        type: .DocType.ProductCoverImage
+        _nonce: =.Global._nonce
+      docAPI:
+        get:
+          api: rd
+          dataIn: ProductDetails.apiRequest.productCoverImage.docQueryReq
+          dataOut: ProductDetails.apiRequest.productCoverImage.docQueryResp
+    assetsAboutProduction:
+      docQueryResp:
+      docQueryReq:
+        id: .Global.formData.currentProductInfo.originProductId
+        xfname: reid
+        type: .DocType.ProductDetailImage
+        _nonce: =.Global._nonce
+      docAPI:
+        get:
+          api: rd
+          dataIn: ProductDetails.apiRequest.assetsAboutProduction.docQueryReq
+          dataOut: ProductDetails.apiRequest.assetsAboutProduction.docQueryResp
+    inventory:
+      docQueryResp: ""
+      docQueryReq:
+        id: .Global.formData.currentProductInfo.productionId
+        xfname: reid
+        _nonce: =.Global._nonce
+        type: .DocType.Inventory
+      docAPI:
+        get:
+          api: rd
+          dataIn: ProductDetails.apiRequest.inventory.docQueryReq
+          dataOut: ProductDetails.apiRequest.inventory.docQueryResp
+
+    production:
+      docQueryResp: ""
+      docQueryReq:
+        id: ""
+        _nonce: =.Global._nonce
+      docAPI:
+        get:
+          api: rd
+          dataIn: ProductDetails.apiRequest.production.docQueryReq
+          dataOut: ProductDetails.apiRequest.production.docQueryResp
+    originProduct:
+      docQueryReq:
+        id: =.Global.formData.currentProductInfo.originProductId
+        _nonce: =.Global._nonce
+      docQueryResp:
+        doc: []
+      docAPI:
+        get:
+          api: rd
+          dataIn: ProductDetails.apiRequest.originProduct.docQueryReq
+          dataOut: ProductDetails.apiRequest.originProduct.docQueryResp
+  formDataTemp:
+    data:
+      option: {
+          borderRadius: 10,
+          spaceBetween: 0,
+          direction: "vertical",
+          loop: true,
+          autoplay: { delay: 2000 },
+          effect: "slide",
+          # pagination: true,
+          pagination: {
+              # type: 'fraction',
+              type: "bullets",
+              clickable: true,
+            },
+          navigation: false,
+          slidesPerView: 1,
+          childStyle: { width: "100%", height: "100%", objectFit: "contain" },
+        }
+    deliveryMethodTemp:
+      - key: type
+        value: "Ship to me"
+        text: "Shipping"
+        display: block
+        show: "none"
+      - key: type
+        value: "Pick up"
+        text: "Pick up"
+        display: none
+        show: "none"
+    shoppingCostTemp:
+      - key: shippingCost
+        value: "Standard(1-3 days)"
+        text: "Standard"
+      # - key: shippingCost
+      #   value: "Next Day"
+      #   text: "Expedited"
+    pickupLocationList: []
+  formData:
+    deliveryMethodsTipsDisplay: "none"
+    backBtn: "inline-block"
+    # 商品视频首页图片数组
+    productCoverImageUrlList: []
+    # 商品视频首页图片
+    productCoverImageUrl: ""
+    # 规格名字组成的数组，用于未选规格时的弹框展示
+    styleNameList: []
+    # 推荐信息
+    recommendInfo: ""
+    # 所有商品库存数组
+    quantityList: []
+    # 商品规格存在
+    productionNumShow: "block"
+    # 商品规格不存在提示
+    productionTipsShow: "none"
+    assetIdsAboutProductionAfterTransform: []
+    assetIdsAboutProduction: []
+    # 控制选中面板是否显示
+    isDisplayPanel: "none"
+    # 数字形式的单价
+    priceForNumber: ""
+    # 总金额
+    totalMoney: ""
+    # 拼接后的商品型号信息
+    productInfo: ""
+    # 拼接后的总价
+    displayTotalPrice: ""
+    # 拼接后的单价,如$100
+    displayPrice: ""
+    backgroundColor:
+      confirm: "#2988e6"
+    pointerEvents:
+      confirm: ""
+      addBtn: ""
+    label:
+      noSelect: ""
+      outOfStock: ""
+      exceedStock: "The purchase amount cannot exceed stock."
+    # 订单详细信息
+    orderDetail:
+      # 供应商名称
+      inventorName: ""
+      # 购买的商品列表
+      productionList: []
+    # 控制各控件是否展示
+    display:
+      # 是否显示库存售完的信息
+      tipsBox: "none"
+      outOfStockStillSell: "none"
+      outOfStock: "none"
+    # 匹配得到的库存
+    inventory:
+      name:
+        data:
+          quantity: 0
+    # 当前商品子类别的状态
+    options: ""
+    # 当前产品
+    production: ""
+    firstListItem: ""
+    secondListItem: ""
+    currentChangeList: []
+    # true 表示添加购物车,false 去支付界面
+    shoppingState: true
+    isClick: ""
+    selectItem:
+      property: ""
+    productStatusList: []
+    shippingCost: "Standard(1-3 days)"
+  components:
+    - .BasePublicHeader:
+        children:
+          - .BasePublicHeaderLeft:
+            leftClick:
+              - actionType: evalObject
+                object:
+                  - .Global.formData.whetherShopItem@: false
+                  - actionType: builtIn
+                    funcName: goBack
+                    reload: true
+          - .BasePublicHeaderTitle:
+    - type: scrollView
+      style:
+        ..style.scrollBox:
+      children:
+        - type: view
+          style:
+            ..style.rotationBox:
+          children:
+            - type: rotation
+              dataKey: formData.assetIdsAboutProductionAfterTransform
+              dataOption: formDataTemp.data.option
+              videoOption: formData.productCoverImageUrl
+              style:
+                ..style.rotation:
+        - type: view
+          style:
+            ..style.goodsBox:
+          children:
+            - type: label
+              dataKey: formData.production.name.data.priceRange
+              style:
+                ..style.price:
+            - type: label
+              dataKey: formData.production.name.data.basicInfo.type
+              style:
+                ..style.value:
+        - type: label
+          dataKey: formData.production.name.data.basicInfo.title
+          style:
+            ..style.titleLabel:
+        - type: label
+          textBoard:
+            - text: "Vendor:"
+            - text: "&nbsp;"
+            - text: ""
+              dataKey: formData.production.name.data.basicInfo.vendor
+          dataKey:
+          style:
+            ..style.vendor:
+        - type: label
+          text: "Product Introduction"
+          style:
+            ..style.titleLabel:
+        - type: label
+          text: "--"
+          dataKey: formData.production.name.data.basicInfo.introduction
+          style:
+            ..style.describe:
+        - type: label
+          text: "Product Directions"
+          style:
+            ..style.titleLabel:
+        - type: label
+          text: "--"
+          dataKey: formData.production.name.data.basicInfo.productDirection
+          style:
+            ..style.describe:
+
+    - type: view
+      style:
+        ..style.addOrBuy:
+      children:
+        - type: view
+          style:
+            ..style.btnBox:
+          children:
+            - type: button
+              text: Add to cart
+              style:
+                ..style.addBtn:
+                width: "0.84"
+              onClick:
+                - ..event.addCartClick
+            # - type: button
+            #   text: Buy now
+            #   style:
+            #     ..style.buyBtn:
+            #   onClick:
+            #     - ..event.buyClick
+    - type: view
+      viewTag: selectProduct
+      style:
+        ..style.popUpBox:
+        display: ..formData.isDisplayPanel
+      children:
+        - type: view
+          style:
+            ..style.panelBox:
+            height: "0.8399014778"
+            marginTop: "0.1600985222"
+          children:
+            - type: view
+              style:
+                ..style.topBox:
+              children:
+                - type: image
+                  path: good.svg
+                  path=func: .builtIn.utils.prepareDocToPath
+                  dataKey: formData.production.name.data.coverImgId
+                  style:
+                    ..style.goodImg:
+                - type: label
+                  viewTag: inventoryPrice
+                  text=func: .builtIn.string.dollarFormat
+                  dataKey: formData.inventory.name.data.price
+                  style:
+                    ..style.goodPrice:
+                - type: image
+                  path: greyDelete.svg
+                  style:
+                    ..style.close:
+                  onClick:
+                    - ..event.closeClick
+            - type: scrollView
+              style:
+                ..style.selectScroll:
+                height: "0.6280788177"
+                boxSizing: border-box
+                paddingBottom: "0.04"
+              children:
+                - type: label
+                  text: Select
+                  style:
+                    ..style.title:
+                - type: list
+                  viewTag: dataListTag
+                  contentType: listObject
+                  listObject: ..formData.production.name.data.options.optionsValue
+                  iteratorVar: itemObject
+                  scrollable: false
+                  style:
+                    ..style.list:
+                  children:
+                    - type: listItem
+                      itemObject:
+                      style:
+                        ..style.listItem:
+                      children:
+                        - type: view
+                          style:
+                            ..style.selectBox:
+                          children:
+                            - type: label
+                              dataKey: itemObject.styleName
+                              style:
+                                ..style.optionTitle:
+                            - type: view
+                              style:
+                                ..style.optionBox:
+                              children:
+                                - type: list
+                                  androidFlex: true
+                                  contentType: listObject
+                                  listObject: itemObject.styleValue
+                                  iteratorVar: itemObject
+                                  style:
+                                    ..style.optionList:
+                                  children:
+                                    - type: listItem
+                                      itemObject:
+                                      style:
+                                        ..style.optionListItem:
+                                        border: itemObject.borderStyle
+                                      onClick:
+                                        - ..event.optionsClick
+                                      children:
+                                        - type: label
+                                          dataKey: itemObject.value
+                                          style:
+                                            ..style.optionBtn:
+                                            color: itemObject.color
+                - type: view
+                  viewTag: productionTipsTag
+                  style:
+                    ..style.publickBox:
+                    marginTop: "0.036945"
+                    display: ..formData.productionTipsShow
+                  children:
+                    - type: image
+                      path: aboutRed.svg
+                      style:
+                        ..style.warnImg:
+                    - type: label
+                      text: This product doesn't exist.
+                      style:
+                        ..style.warnInfo:
+                - type: view
+                  viewTag: productionNumTag
+                  style:
+                    display: ..formData.productionNumShow
+                  children:
+                    - type: view
+                      style:
+                        ..style.publickBox:
+                        marginTop: "0.036945"
+                      children:
+                        - type: label
+                          text: QTY
+                          style:
+                            ..style.amount:
+                        - type: view
+                          viewTag: numTag
+                          style:
+                            ..style.numBox:
+                          children:
+                            - type: button
+                              text: "—"
+                              style:
+                                ..style.numbtn:
+                                pointerEvents: ..formData.isClick
+                              onClick:
+                                - ..event.reduceClick
+                            - type: textField
+                              viewTag: inputTag
+                              contentType: phoneNumber
+                              dataKey: formData.selectItem.num
+                              onChange:
+                                - ..event.inputEvent
+                              style:
+                                marginLeft: "0.008"
+                                color: "#333333"
+                                ..style.numbtn:
+                            - type: button
+                              text: "+"
+                              onClick:
+                                - ..event.addClick
+                              style:
+                                marginLeft: "0.008"
+                                ..style.numbtn:
+                                pointerEvents: ..formData.pointerEvents.addBtn
+                                fontSize: .Nfont.h16
+                    - type: label
+                      viewTag: inventoryQuantity
+                      textBoard:
+                        - text: "Stock:"
+                        - text: " "
+                        - text:
+                          dataKey: formData.inventory.name.title
+                      style:
+                        ..style.amount:
+                        display: block
+                        width: "0.92"
+                        marginTop: "0.0258620"
+                        fontSize: .Nfont.h14
+                    - type: view
+                      viewTag: outOfStockTag
+                      style:
+                        ..style.tipsBox:
+                        display: ..formData.display.outOfStock
+                      children:
+                        - type: image
+                          path: aboutRed.svg
+                          style:
+                            ..style.warnImg:
+                        # 数量超过库存
+                        # The purchase amount cannot exceed stock.
+                        - type: label
+                          dataKey: formData.label.outOfStock
+                          style:
+                            ..style.warnInfo:
+                    - type: view
+                      style:
+                        ..style.tipsBox:
+                        display: ..formData.display.outOfStockStillSell
+                      children:
+                        - type: label
+                          text: This product is out of stock but can be continued selling.
+                          style:
+                            ..style.warnInfo:
+                            marginLeft: "0"
+                            color: "#666666"
+                    - type: view
+                      viewTag: deliveryMethodsTipsTag
+                      style:
+                        ..style.tipsBox:
+                        display: =..formData.deliveryMethodsTipsDisplay
+                        align-items: center
+                      children:
+                        - type: image
+                          path: aboutBlue.svg
+                          style:
+                            width: "0.0426666667"
+                            height: "0.0197044335"
+
+                        - type: label
+                          dataKey: formData.deliveryMethodsTips
+                          style:
+                            ..style.warnInfo:
+                            marginLeft: "0.012"
+                            color: "#2988e6"
+                            fontWeight: 600
+                - type: view
+                  style:
+                    marginTop: "0.03"
+            - type: button
+              viewTag: ConfirmTag
+              text: Confirm
+              style:
+                ..style.btn:
+              onClick:
+                - ..event.confirmClick
+    - .SuccessfulOneLineNew:
+      viewTag: successTag
+      message: "Add Successfully!"
+    - .WarningOneLine:
+      message: "This product is unavailable"
+      viewTag: unavailableTag
+    - .WarningOneLine:
+      message: "Please select a pick up location"
+      viewTag: pickUpWarnTag
+    - type: popUp
+      viewTag: pickUpSelectWarnTag
+      style:
+        top: "0"
+        left: "0"
+        width: "1"
+        height: "1"
+        backgroundColor: "0x00000066"
+        zIndex: "50000"
+        textAlign:
+          y: center
+          x: center
+      children:
+        - type: view
+          style:
+            width: "0.72"
+            backgroundColor: "#ffffff"
+            borderRadius: "14"
+            overflow: hidden
+            boxSizing: border-box
+            paddingLeft: "0.053333333"
+            paddingRight: "0.053333333"
+            paddingTop: .Nfont.h20
+            paddingBottom: .Nfont.h20
+          children:
+            - type: label
+              text: "The product you purchased is not in stock at the location."
+              style:
+                fontSize: .Nfont.h14
+                fontWeight: 400
+                width: "0.6133"
+                color: "0x333333"
+                lineHeight: 2.58vh
+                textAlign:
+                  x: center
+            - type: view
+              style:
+                marginTop: .Nfont.h20
+                display: flex
+                align-items: center
+                justify-content: center
+              children:
+                - type: button
+                  text: OK
+                  onClick:
+                    - actionType: popUpDismiss
+                      popUpView: pickUpSelectWarnTag
+                  style:
+                    color: "#ffffff"
+                    fontWeight: 600
+                    flex: 1
+                    height: 0.0443349
+                    width: "0.6133"
+                    boxSizing: border-box
+                    border: none
+                    borderRadius: "18"
+                    backgroundColor: "0x2988e6"
+                    fontSize: .Nfont.h14
+                    backgroundImage: "linear-gradient(to right, #75A9FA , #2d8ae7)"
+                    textAlign:
+                      x: center
+                      y: center
+    - type: popUp
+      viewTag: noSelect
+      style:
+        top: "0"
+        left: "0"
+        width: "1"
+        height: "1"
+        zIndex: "5000"
+        textAlign:
+          y: center
+          x: center
+      onClick:
+        - actionType: popUpDismiss
+          popUpView: __.viewTag
+      children:
+        - type: view
+          style:
+            paddingTop: "0.0246"
+            paddingLeft: "0.02"
+            paddingRight: "0.02"
+            paddingBottom: "0.0246"
+            boxSizing: boder-box
+            backgroundColor: "rgba(0,0,0,0.7)"
+            borderRadius: "14px"
+            textAlign:
+              x: center
+          children:
+            - type: label
+              dataKey: formData.label.noSelect
+              style:
+                width: "0.6"
+                fontSize: .Nfont.h14
+                color: "0xFFFFFF"
+                fontWeight: "400"
+                textAlign:
+                  x: center
+  event:
+    closeClick:
+      - actionType: evalObject
+        object:
+          - ..formData.isDisplayPanel@: "none"
+      - actionType: builtIn
+        funcName: redraw
+        viewTag: selectProduct
+    optionsClick:
+      - emit:
+          dataKey:
+            var: itemObject
+            var2: listAttr
+          actions:
+            - ..formData.secondListItem@: $var # 当前二层的数据
+            - ..formData.firstListItem@: $var2 # 二层点击行为下的一层数据
+      - actionType: evalObject
+        object:
+          # 加工二层数据
+          - =.builtIn.object.setProperty:
+              dataIn:
+                obj: =..formData.firstListItem.parent.styleValue
+                label: "value"
+                text: =..formData.secondListItem.value
+                arr: ["color", "borderStyle"]
+                valueArr: ["#fb5051", "1px solid #fb5051"]
+                errorArr: ["#333333", "none"]
+              dataOut: ProductDetails.formData.currentChangeList
+          # 将change后的currentChangeList，去在一层下找他对应的父级，将原本的二层数据替换
+          - =.builtIn.array.setObjectByKey:
+              dataIn:
+                objectArr: =..formData.production.name.data.options.optionsValue
+                keyOne: "styleName"
+                keyTwo: "styleValue"
+                valueOne: =..formData.firstListItem.parent.styleName
+                valueTwo: =..formData.currentChangeList
+              dataOut: ProductDetails.formData.production.name.data.options.optionsValue
+          - =.builtIn.object.set:
+              dataIn:
+                object: =..formData.selectItem.property
+                key: =..formData.firstListItem.parent.styleName
+                value: =..formData.secondListItem.value
+          # - actionType: evalObject
+          #   object:
+          # 判断是否选择了全部规格
+          - if:
+              - =.builtIn.object.judgeAllValue:
+                  dataIn:
+                    obj: =..formData.selectItem.property
+              - actionType: evalObject
+                object:
+                  # 查询商品的库存
+                  - =.builtIn.array.equivalentObj:
+                      dataIn:
+                        objArr: =..apiRequest.inventory.docQueryResp.doc
+                        path: "name.data.options"
+                        compareObj: =..formData.selectItem.property
+                      dataOut: ProductDetails.formData.inventory
+                  # 判断当前商品规格是否存在
+                  - if:
+                      - =.ProductDetails.formData.inventory
+                      - actionType: evalObject
+                        object:
+                          - =.builtIn.math.toFixedNum:
+                              dataIn:
+                                num: =..formData.inventory.name.data.price
+                              dataOut: ProductDetails.formData.inventory.name.data.price
+                          - ..formData.productionNumShow@: "block"
+                          - ..formData.productionTipsShow@: "none"
+                          # - ..formData.pointerEvents.confirm@: ""
+                          - ..formData.backgroundColor.confirm@: "#2988e6"
+                      - actionType: evalObject
+                        object:
+                          - ..formData.inventory.name.data.price@: =.Global.formData.production.name.data.priceRange
+                          - ..formData.productionNumShow@: "none"
+                          - ..formData.productionTipsShow@: "block"
+                          # - ..formData.pointerEvents.confirm@: none
+                          - ..formData.backgroundColor.confirm@: "#c1c1c1"
+                  # 判断当前选择的规格数量是否超过 库存
+                  - actionType: evalObject
+                    object:
+                      - =.builtIn.string.retainNumber:
+                          dataIn:
+                            value: =..formData.selectItem.num
+                          dataOut: ProductDetails.formData.selectItem.num
+                      - =.builtIn.string.retainNumber:
+                          dataIn:
+                            value: =..formData.inventory.name.title
+                          dataOut: ProductDetails.formData.inventory.name.title
+                  # 判断库存是否为0
+                  - if:
+                      - =.builtIn.math.greaterThan:
+                          dataIn:
+                            num1: =..formData.inventory.name.title
+                            num2: 0
+                      - actionType: evalObject
+                        object:
+                          - ..formData.display.outOfStock@: none
+                          # - ..formData.pointerEvents.confirm@: ""
+                          - ..formData.backgroundColor.confirm@: "#2988e6"
+                          - ..formData.pointerEvents.addBtn@: ""
+                          # 判断数量是否超出当前库存
+                          - if:
+                              - =.builtIn.math.greaterThan:
+                                  dataIn:
+                                    num1: =..formData.selectItem.num
+                                    num2: =..formData.inventory.name.title
+                              - actionType: evalObject
+                                object:
+                                  - ..formData.pointerEvents.addBtn@: "none"
+                                  # 如果库存为0，不需要让选择数也为0，以避免后续引发可购买0个的bug。
+                                  - if:
+                                      - =.builtIn.string.equal:
+                                          dataIn:
+                                            string1: =..formData.inventory.name.title
+                                            string2: 0
+                                      - continue
+                                      - ..formData.selectItem.num@: =..formData.inventory.name.title
+                              - actionType: evalObject
+                                object:
+                                  - ..formData.pointerEvents.confirm@: ""
+                                  - ..formData.pointerEvents.addBtn@: ""
+                                  - ..formData.isClick@: ""
+                      - actionType: evalObject
+                        object:
+                          - ..formData.display.outOfStock@: block
+                          - ..formData.label.outOfStock@: "This product is out of stock,  please choose another style."
+                          - ..formData.pointerEvents.confirm@: none
+                          - ..formData.backgroundColor.confirm@: "#c1c1c1"
+                          - ..formData.pointerEvents.addBtn@: none
+              - continue
+          # 转字符型
+          - =.builtIn.string.concat:
+              dataIn:
+                - =..formData.inventory.name.title
+              dataOut: ProductDetails.formData.inventory.name.title
+
+          # ? 校验商品购买方式
+          # ! 是否是添加购物车操作
+          - if:
+              - =..formData.shoppingState
+              - actionType: evalObject
+                object:
+                  - if:
+                      - =.builtIn.number.typeIsValid:
+                          dataIn:
+                            docType: =..formData.inventory.tage
+                            localArr: [1, 2]
+                            binaryArr: [1, 0]
+                      - actionType: evalObject
+                        object:
+                          - ..formData.deliveryMethodsTips@: "This product is pick up only."
+                          - ..formData.deliveryMethodsTipsDisplay@: "flex"
+                      - actionType: evalObject
+                        object:
+                          - if:
+                              - =.builtIn.number.typeIsValid:
+                                  dataIn:
+                                    docType: =..formData.inventory.tage
+                                    localArr: [1, 2]
+                                    binaryArr: [0, 1]
+                              - actionType: evalObject
+                                object:
+                                  - ..formData.deliveryMethodsTips@: "This product is shipping only."
+                                  - ..formData.deliveryMethodsTipsDisplay@: "flex"
+                              - ..formData.deliveryMethodsTipsDisplay@: "none"
+              - actionType: evalObject
+                object:
+                  - if:
+                      - =.builtIn.number.typeIsValid:
+                          dataIn:
+                            docType: =..formData.inventory.tage
+                            localArr: [1, 2]
+                            binaryArr: [1, 0]
+                      - actionType: evalObject
+                        object:
+                          - ..formData.deliveryMethod.type@: Pick up
+                          - =.builtIn.object.setProperty:
+                              dataIn:
+                                obj: =..formDataTemp.deliveryMethodTemp
+                                label: "value"
+                                text: =..formData.deliveryMethod.type
+                                arr: ["display", "show"]
+                                valueArr: ["block", "block"]
+                                errorArr: ["none", "none"]
+                              dataOut: ProductDetails.formDataTemp.deliveryMethodTemp
+                      - actionType: evalObject
+                        object:
+                          - if:
+                              - =.builtIn.number.typeIsValid:
+                                  dataIn:
+                                    docType: =..formData.inventory.tage
+                                    localArr: [1, 2]
+                                    binaryArr: [0, 1]
+                              - actionType: evalObject
+                                object:
+                                  - ..formData.deliveryMethod.type@: Ship to me
+                                  - =.builtIn.object.setProperty:
+                                      dataIn:
+                                        obj: =..formDataTemp.deliveryMethodTemp
+                                        label: "value"
+                                        text: =..formData.deliveryMethod.type
+                                        arr: ["display", "show"]
+                                        valueArr: ["block", "block"]
+                                        errorArr: ["none", "none"]
+                                      dataOut: ProductDetails.formDataTemp.deliveryMethodTemp
+                              - actionType: evalObject
+                                object:
+                                  - ..formData.deliveryMethod.type@: Ship to me
+                                  - =.builtIn.object.setProperty:
+                                      dataIn:
+                                        obj: =..formDataTemp.deliveryMethodTemp
+                                        label: "value"
+                                        text: =..formData.deliveryMethod.type
+                                        arr: ["display", "show"]
+                                        valueArr: ["block", "block"]
+                                        errorArr: ["none", "block"]
+                                      dataOut: ProductDetails.formDataTemp.deliveryMethodTemp
+
+                  - ..formData.deliveryMethodsTipsDisplay@: "none"
+                  # !如果规格是否是默认的
+                  - if:
+                      - =..formData.production.name.data.options.isHasOptions
+                      - actionType: evalObject
+                        object:
+                          # !判断是否选择了全部规格
+                          - if:
+                              - =.builtIn.object.judgeAllValue:
+                                  dataIn:
+                                    obj: =..formData.selectItem.property
+                              - actionType: evalObject
+                                object:
+                                  - ..formData.deliveryMethodsSelectDisplay@: "block"
+                              - actionType: evalObject
+                                object:
+                                  - ..formData.deliveryMethodsSelectDisplay@: "none"
+                      - ..formData.deliveryMethodsSelectDisplay@: "block"
+
+      - actionType: builtIn
+        funcName: redraw
+        viewTag: outOfStockTag
+      - actionType: builtIn
+        funcName: redraw
+        viewTag: dataListTag
+      - actionType: builtIn
+        funcName: redraw
+        viewTag: inventoryQuantity
+      - actionType: builtIn
+        funcName: redraw
+        viewTag: inventoryPrice
+      - actionType: builtIn
+        funcName: redraw
+        viewTag: productionNumTag
+      - actionType: builtIn
+        funcName: redraw
+        viewTag: ConfirmTag
+      - actionType: builtIn
+        funcName: redraw
+        viewTag: productionTipsTag
+    inputEvent:
+      - actionType: evalObject
+        object:
+          # 判断输入数量是否为空
+          - if:
+              - =.builtIn.string.equal:
+                  dataIn:
+                    string1: =..formData.selectItem.num
+                    string2: ""
+              - ..formData.selectItem.num@: 0
+              - continue
+          # 字符型转数值型
+          - =.builtIn.string.retainNumber:
+              dataIn:
+                value: =..formData.selectItem.num
+              dataOut: ProductDetails.formData.selectItem.num
+          - =.builtIn.string.retainNumber:
+              dataIn:
+                value: =..formData.inventory.name.title
+              dataOut: ProductDetails.formData.inventory.name.title
+          # 判断输入的数量是否小于1
+          - if:
+              # num1 >= num2
+              - =.builtIn.math.greater:
+                  dataIn:
+                    num1: =..formData.selectItem.num
+                    num2: 1
+              - actionType: evalObject
+                object:
+                  # 判断数量是否超出当前库存
+                  - if:
+                      - =.builtIn.math.greater:
+                          dataIn:
+                            num1: =..formData.selectItem.num # 输入的数量
+                            num2: =..formData.inventory.name.title # 当前库存
+                      - actionType: evalObject
+                        object:
+                          - ..formData.selectItem.num@: =..formData.inventory.name.title
+                      - actionType: evalObject
+                        object:
+                          - ..formData.pointerEvents.addBtn@: ""
+              - ..formData.selectItem.num@: 1
+      - actionType: builtIn
+        funcName: redraw
+        viewTag: numTag
+    reduceClick:
+      - actionType: evalObject
+        object:
+          - =.builtIn.string.retainNumber:
+              dataIn:
+                value: =..formData.selectItem.num
+              dataOut: ProductDetails.formData.selectItem.num
+          - =.builtIn.string.retainNumber:
+              dataIn:
+                value: =..formData.inventory.name.title
+              dataOut: ProductDetails.formData.inventory.name.title
+
+          # - actionType: evalObject
+          #   object:
+          # 判断输入的数量是否小于1 num1 >= num2
+          - if:
+              - =.builtIn.math.greater:
+                  dataIn:
+                    num1: =..formData.selectItem.num
+                    num2: 2
+              - actionType: evalObject
+                object:
+                  - ..formData.isClick@: ""
+                  - ..formData.pointerEvents.addBtn@: ""
+                  - =.builtIn.number.Subtraction:
+                      dataIn:
+                        num: =..formData.selectItem.num
+                        step: 1
+                      dataOut: ProductDetails.formData.selectItem.num
+              - actionType: evalObject
+                object:
+                  - ..formData.isClick@: "none" # 小于1,禁用按钮
+                  - ..formData.selectItem.num@: 1
+      - actionType: builtIn
+        funcName: redraw
+        viewTag: numTag
+    addClick:
+      - actionType: evalObject
+        object:
+          - =.builtIn.string.retainNumber:
+              dataIn:
+                value: =..formData.selectItem.num
+              dataOut: ProductDetails.formData.selectItem.num
+          - =.builtIn.string.retainNumber:
+              dataIn:
+                value: =..formData.inventory.name.title
+              dataOut: ProductDetails.formData.inventory.name.title
+          # - actionType: evalObject
+          #   object:
+          # 判断数量是否超出当前库存
+          - if:
+              - =.builtIn.math.greater:
+                  dataIn:
+                    num1: =..formData.selectItem.num
+                    num2: =..formData.inventory.name.title
+              - actionType: evalObject
+                object:
+                  - ..formData.pointerEvents.addBtn@: "none"
+                  - ..formData.selectItem.num@: =..formData.inventory.name.title
+              - actionType: evalObject
+                object:
+                  - ..formData.pointerEvents.addBtn@: ""
+                  - ..formData.isClick@: ""
+                  - =.builtIn.number.addition:
+                      dataIn:
+                        num: =..formData.selectItem.num
+                        step: 1
+                      dataOut: ProductDetails.formData.selectItem.num
+      - actionType: builtIn
+        funcName: redraw
+        viewTag: numTag
+    confirmClick:
+      - actionType: evalObject
+        object:
+          .Global._nonce@:
+            =.builtIn.math.random: ""
+      - actionType: evalObject
+        object:
+          # ! 处理商品状态
+          - ..apiRequest.production.docQueryReq.id@: =.Global.formData.currentProductInfo.productionId
+          - =..apiRequest.production.docAPI.get: ""
+          # ? 1 active; -1 draft(resp 后tage为0); 2 archived
+          - if:
+              - =.builtIn.string.equal:
+                  dataIn:
+                    string1: =..apiRequest.originProduct.docQueryResp.doc.0.tage
+                    string2: 1
+              - continue
+              - actionType: popUp
+                popUpView: unavailableTag
+                popUpDismiss: 2000
+                wait: true
+          - if:
+              - =.builtIn.string.equal:
+                  dataIn:
+                    string1: =..apiRequest.production.docQueryResp.doc.0.tage
+                    string2: 1
+              - continue
+              - actionType: popUp
+                popUpView: unavailableTag
+                popUpDismiss: 2000
+                wait: true
+          # 如果规格是否是默认的
+          - if:
+              - =..formData.production.name.data.options.isHasOptions
+              - actionType: evalObject
+                object:
+                  # 判断是否选择了全部规格
+                  - if:
+                      - =.builtIn.object.judgeAllValue:
+                          dataIn:
+                            obj: =..formData.selectItem.property
+                      - continue
+                      - actionType: popUp
+                        popUpView: noSelect
+                        popUpDismiss: 2000
+                        wait: true
+              - continue
+          - =.builtIn.object.concatObjectAttr:
+              dataIn:
+                obj: =..formData.selectItem.property
+              dataOut: ProductDetails.formData.productInfo
+
+          - ..formData.producObj.productInfo@: =.ProductDetails.formData.productInfo
+
+          - ..formData.producObj.num@: =..formData.selectItem.num
+          - ..formData.producObj.property.Options@: =..formData.inventory.name.data.options
+          - ..formData.producObj.price@: =..formData.inventory.name.data.price
+          - ..formData.producObj.inventoryId@: =..formData.inventory.id
+          - ..formData.producObj.shipping@: =.Global.formData.production.name.data.shipping
+          - if:
+              - =.builtIn.array.containingValue:
+                  dataIn:
+                    object: =.Global.formData.recommendation.name.data.goodsList
+                    key: productionId
+                    value: =.Global.formData.currentProductInfo.productionId
+              - =.builtIn.array.removeObjectByValue:
+                  dataIn:
+                    object: =.Global.formData.recommendation.name.data.goodsList
+                    values: productionId
+                    value: =.Global.formData.currentProductInfo.productionId
+              - continue
+          - actionType: evalObject
+            object:
+              - =.builtIn.array.pushAny:
+                  dataIn:
+                    messages: =.Global.formData.recommendation.name.data.goodsList
+                    newMessage: =..formData.producObj
+                  dataOut: Global.formData.recommendation.name.data.goodsList
+              # - ..formData.isDisplayPanel@: "none"
+          # - actionType: builtIn
+          #   funcName: redraw
+          #   viewTag: selectProduct
+          # - actionType: popUp
+          #   popUpView: successTag
+          #   wait: 2000
+          - actionType: builtIn
+            funcName: goBack
+            reload: true
+    addCartClick:
+      - actionType: evalObject
+        object:
+          .Global._nonce@:
+            =.builtIn.math.random: ""
+      - actionType: evalObject
+        object:
+          # ! 处理商品状态
+          - ..apiRequest.production.docQueryReq.id@: =.Global.formData.currentProductInfo.productionId
+          - =..apiRequest.production.docAPI.get: ""
+          - =.builtIn.ecos.shoppingCartProductionStatus:
+              dataIn:
+                cartList: =..apiRequest.production.docQueryResp.doc
+                productionIdPath: "id"
+                attr: ["warningShow", "contentShow", "pointEvent"]
+                valueArr: ["none", "block", "auto"] 
+                errorArr: ["block", "none", "none"]
+              dataOut: ProductDetails.formData.productStatusList
+          - if:
+              - =.builtIn.string.equal:
+                  dataIn:
+                    string1: =.ProductDetails.formData.productStatusList.0.contentShow
+                    string2: "none"
+              - actionType: popUp
+                popUpView: unavailableTag
+                popUpDismiss: 2000
+                wait: true
+              - continue
+      - actionType: evalObject
+        object:
+          - if:
+              - =.builtIn.number.typeIsValid:
+                  dataIn:
+                    docType: =..formData.inventory.tage
+                    localArr: [1, 2]
+                    binaryArr: [1, 0]
+              - actionType: evalObject
+                object:
+                  - ..formData.deliveryMethodsTips@: "This product is pick up only."
+                  - ..formData.deliveryMethodsTipsDisplay@: "flex"
+                  - ..formData.deliveryMethod.type@: Pick up
+              - actionType: evalObject
+                object:
+                  - if:
+                      - =.builtIn.number.typeIsValid:
+                          dataIn:
+                            docType: =..formData.inventory.tage
+                            localArr: [1, 2]
+                            binaryArr: [0, 1]
+                      - actionType: evalObject
+                        object:
+                          - ..formData.deliveryMethodsTips@: "This product is shipping only."
+                          - ..formData.deliveryMethodsTipsDisplay@: "flex"
+                          - ..formData.deliveryMethod.type@: Ship to me
+                      - actionType: evalObject
+                        object:
+                          - ..formData.deliveryMethodsTipsDisplay@: "none"
+                          - ..formData.deliveryMethod.type@: Ship to me
+          - ..formData.shoppingState@: true
+          - ..formData.isDisplayPanel@: "block"
+          - ..formData.deliveryMethodsSelectDisplay@: "none"
+      - actionType: builtIn
+        funcName: redraw
+        viewTag: selectProduct
+
+  style:
+    scrollBox:
+      width: "1"
+      height: "0.84729"
+      boxSizing: "border-box"
+      overflow: "scroll"
+      paddingBottom: "0.03"
+    btnBox:
+      width: "1"
+      height: "0.0972"
+      boxSizing: "border-box"
+      overflow: "hidden"
+      backgroundColor: "#ffffff"
+      borderTop: "1px solid #f0f0f0"
+    addBtn:
+      display: "inline-block"
+      marginTop: "0.0123"
+      marginLeft: "0.08"
+      width: "0.4"
+      height: "0.044334"
+      border: "none"
+      borderRadius: "4"
+      color: "#ffffff"
+      fontSize: .Nfont.h14
+      fontWeight: "600"
+      backgroundColor: "#2fb355"
+    buyBtn:
+      ..style.addBtn:
+      marginLeft: "0.04"
+      backgroundColor: "#2988e6"
+    popUpBox:
+      top: "0"
+      left: "0"
+      width: "1"
+      height: "1"
+      backgroundColor: "0x00000066"
+      overflow: hidden
+      zIndex: "50"
+    selectScroll:
+      marginTop: "0.0394088"
+      marginLeft: "0.04"
+      height: "0.509852"
+      width: "0.92"
+      overflow: scroll
+    topBox:
+      marginTop: "0.018472"
+      marginLeft: "0.04"
+      width: "0.92"
+      height: "auto"
+      overflow: hidden
+    goodImg:
+      display: "inline-block"
+      width: "0.16"
+      height: "0.07389162"
+      verticalAlign: middle
+    goodPrice:
+      marginLeft: "0.02"
+      display: "inline-block"
+      color: "#fb5051"
+      fontSize: .Nfont.h16
+      fontWeight: "700"
+      verticalAlign: middle
+      width: "0.6586666"
+    close:
+      marginLeft: "0.032"
+      display: "inline-block"
+      width: "0.048"
+      height: "0.022167"
+      verticalAlign: top
+    panelBox:
+      marginTop: "0.2771"
+      width: "1"
+      height: "0.7229064"
+      backgroundColor: "#ffffff"
+      overflow: hidden
+    title:
+      fontSize: .Nfont.h16
+      fontWeight: "600"
+      color: "#333333"
+    publickBox:
+      width: "auto"
+      height: "auto"
+      overflow: hidden
+    list:
+      width: "0.92"
+      margin: "0"
+      height: "auto"
+      boxSizing: "border-box"
+    listItem:
+      width: "0.92"
+      height: "auto"
+      boxSizing: "border-box"
+      overflow: hidden
+    selectBox:
+      ..style.publickBox:
+      marginTop: "0.022167"
+    optionTitle:
+      marginTop: "0.014778"
+      fontSize: .Nfont.h14
+      color: "#333333"
+      display: "inline-block"
+      width: "0.1533333"
+    optionBox:
+      display: "inline-block"
+    optionList:
+      margin: "0"
+      height: auto
+      # backgroundColor: "cyan"
+      width: "0.7653327"
+      axis: horizontal
+      marginTop: "0.014778"
+    optionListItem:
+      # display: "inline-block"
+      marginLeft: "0.0373333"
+      # height: "0.029556"
+      height: "auto"
+      # width: "0.1226666"
+      width: "auto"
+      boxSizing: "border-box"
+      backgroundColor: "#eff3f7"
+      borderRadius: "4"
+    optionBtn:
+      fontSize: .Nfont.h12
+      # height: "0.029556"
+      height: "auto"
+      # width: "0.1226666"
+      paddingLeft: "0.026"
+      paddingRight: "0.026"
+      paddingTop: "0.007"
+      paddingBottom: "0.007"
+      width: "auto"
+      boxSizing: "border-box"
+      textAlign:
+        x: center
+        y: center
+    amount:
+      ..style.optionTitle:
+      marginTop: "0"
+      width: "0.66"
+      verticalAlign: middle
+    numBox:
+      display: "inline-block"
+      width: "auto"
+      height: "auto"
+      verticalAlign: middle
+    numbtn:
+      display: "inline-block"
+      color: "#999999"
+      fontSize: .Nfont.h12
+      width: "0.08"
+      height: "0.036945"
+      border: "none"
+      borderRadius: "2"
+      boxSizing: "border-box"
+      backgroundColor: "#f8f8f8"
+      textAlign:
+        x: center
+    btn:
+      pointerEvents: ..formData.pointerEvents.confirm
+      marginTop: "0.0123"
+      marginLeft: "0.08"
+      height: "0.0443"
+      width: "0.84"
+      border:
+        style: 1
+      borderRadius: "4"
+      backgroundColor: ..formData.backgroundColor.confirm
+      color: "#ffffff"
+      fontSize: .Nfont.h14
+      boxSizing: border-box
+      fontWeight: "600"
+      textAlign:
+        x: center
+    tipsBox:
+      marginTop: "0.01"
+      width: "0.92"
+      height: "auto"
+      overflow: hidden
+    warnImg:
+      verticalAlign: middle
+      height: "0.022167"
+    warnInfo:
+      marginLeft: "0.032"
+      display: "inline-block"
+      width: "0.82"
+      color: "#e24445"
+      fontSize: .Nfont.h12
+      verticalAlign: middle
+      wordWrap: break-word
+    rotationBox:
+      width: "1"
+      height: "0.315270"
+      # backgroundColor: "#d3dce7"
+    img:
+      width: "1"
+      height: "0.315270"
+    rotation:
+      width: "1"
+      height: "0.315270"
+      margin: 0
+      padding: 0
+    goodsBox:
+      marginLeft: "0.04"
+      marginTop: "0.0270935"
+      width: "0.92"
+      height: "auto"
+    price:
+      display: "inline-block"
+      fontWeight: "700"
+      fontSize: .Nfont.h16
+      color: "#fb5051"
+      width: "0.7"
+      verticalAlign: middle
+      boxSizing: border-box
+    value:
+      marginLeft: "0.02"
+      display: "inline-block"
+      width: "0.2"
+      fontSize: .Nfont.h12
+      fontWeight: "700"
+      verticalAlign: middle
+      boxSizing: border-box
+      textAlign:
+        x: right
+    titleLabel:
+      marginLeft: "0.04"
+      marginTop: "0.014778"
+      width: "0.92"
+      height: "auto"
+      wordWrap: break-word
+      fontSize: .Nfont.h14
+      fontWeight: "600"
+      color: "#333333"
+    vendor:
+      marginTop: "0.01"
+      marginLeft: "0.04"
+      width: "0.92"
+      height: "auto"
+      fontSize: .Nfont.h12
+      fontWeight: "600"
+      color: "#666666"
+    describe:
+      marginTop: "0.0270935"
+      marginLeft: "0.04"
+      width: "0.92"
+      height: "auto"
+      wordWrap: break-word
+      color: "#333333"
+      fontSize: .Nfont.h14
+      lineHeight: "2.58vh"
+    addOrBuy:
+      width: auto
+      height: "auto"

@@ -31,7 +31,7 @@ android:
     test: 14.33
 ## 方式1 只给 cadlBaseUrl, 则从相对路径去加载 项目
 #cadlBaseUrl: '../product/aitmed/provider/'
-cadlBaseUrl: "./adsl_app/cadl/web/"
+cadlBaseUrl: "./hyuge_ai_site/cadl/web/"
 #cadlBaseUrl: '../testpage/testpage2/'
 # cadlBaseUrl: './HelloWorld/'
 ## 方式2 给了 baseUrl 则去线上加载config，并且以yml 结尾并根据加载到的 config文件加载 项目

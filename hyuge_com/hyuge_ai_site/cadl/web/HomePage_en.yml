@@ -164,15 +164,15 @@ HomePage:
     # 商品视频首页图片数组
     productCoverImageUrlList:
       [
-        "rotation_1.webp",
-        "rotation_2.webp",
-        "rotation_3.webp",
-        "rotation_4.webp",
-        "rotation_5.webp",
-        "rotation_6.webp",
-        "rotation_7.webp",
-        "rotation_8.webp",
-        "rotation_9.webp",
+        "The-Brain-Intelligent-Machines-AI-timeline.jpg",
+        "abacus-chinese.png",
+        "Electronic-Numerical-Integrator-And-Computer.png",
+        "iTI-59_programmable_calculator_with_magnetic_ca.jpg",
+        "IBM Deep Blue vs Kasparov.png",
+        "alpha-go-vs-lee.jpeg",
+        "chatGPT.webp",
+        "1678742454_microsoft-ai-supercomputer.jpg",
+        "AGI2019Hongtao.png",
       ]
     # 商品视频首页图片
     productCoverImageUrl: ""
@@ -188,15 +188,25 @@ HomePage:
     productionTipsShow: "none"
     assetIdsAboutProductionAfterTransform:
       [
-        "./adsl_app/cadl/web/assets/rotation_1.webp",
-        "./adsl_app/cadl/web/assets/rotation_2.webp",
-        "./adsl_app/cadl/web/assets/rotation_3.webp",
-        "./adsl_app/cadl/web/assets/rotation_4.webp",
-        "./adsl_app/cadl/web/assets/rotation_5.webp",
-        "./adsl_app/cadl/web/assets/rotation_6.webp",
-        "./adsl_app/cadl/web/assets/rotation_7.webp",
-        "./adsl_app/cadl/web/assets/rotation_8.webp",
-        "./adsl_app/cadl/web/assets/rotation_9.webp",
+ #       "./hyuge_ai_site/cadl/web/assets/rotation_1.webp",
+#        "./hyuge_ai_site/cadl/web/assets/rotation_2.webp",
+#        "./hyuge_ai_site/cadl/web/assets/rotation_3.webp",
+#        "./hyuge_ai_site/cadl/web/assets/rotation_4.webp",
+#        "./hyuge_ai_site/cadl/web/assets/rotation_5.webp",
+#        "./hyuge_ai_site/cadl/web/assets/rotation_6.webp",
+#        "./hyuge_ai_site/cadl/web/assets/rotation_7.webp",
+#        "./hyuge_ai_site/cadl/web/assets/rotation_8.webp",
+#        "./hyuge_ai_site/cadl/web/assets/rotation_9.webp",
+#        "./hyuge_ai_site/cadl/web/assets/chatGPT.webp",
+        "./hyuge_ai_site/cadl/web/assets/The-Brain-Intelligent-Machines-AI-timeline.jpg",
+        "./hyuge_ai_site/cadl/web/assets/abacus-chinese.jpeg",
+        "./hyuge_ai_site/cadl/web/assets/Electronic-Numerical-Integrator-And-Computer.png",
+        "./hyuge_ai_site/cadl/web/assets/TI-59_programmable_calculator_with_magnetic_ca.png",
+        "./hyuge_ai_site/cadl/web/assets/IBM Deep Blue vs Kasparov.png",
+        "./hyuge_ai_site/cadl/web/assets/alpha-go-vs-lee.jpeg",
+        "./hyuge_ai_site/cadl/web/assets/chatGPT.webp",
+        "./hyuge_ai_site/cadl/web/assets/1678742454_microsoft-ai-supercomputer.jpg",
+        "./hyuge_ai_site/cadl/web/assets/AGI2019Hongtao.png",
       ]
     assetIdsAboutProduction: []
     # 控制选中面板是否显示
@@ -727,20 +737,20 @@ HomePage:
     #         - type: button
     #           text: "SIGN UP"
 
-    - type: view
-      style:
-        width: calc(1514.77/1724.81*100vw)
-        margin: auto
-      children:
-        - .HomeSubTitle:
-          style:
-            justifyContent: center
-          text: "ONLINE APPOINTMENTS"
-
-        - .HomeTitle:
-          style:
-            marginTop: 0
-            justifyContent: center
-          text: "New services are coming soon!"
-
+#    - type: view
+#      style:
+#        width: calc(1514.77/1724.81*100vw)
+#        margin: auto
+#      children:
+#        - .HomeSubTitle:
+#          style:
+#            justifyContent: center
+#          text: "ONLINE APPOINTMENTS"
+#
+#        - .HomeTitle:
+#          style:
+#            marginTop: 0
+#            justifyContent: center
+#          text: "New services are coming soon!"
+#
     - .BaseFooter1:

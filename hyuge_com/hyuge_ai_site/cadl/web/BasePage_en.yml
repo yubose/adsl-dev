@@ -923,432 +923,432 @@ BaseHeader: # base top
                 - goto: .WebsitePathAdmin
 
 BaseFooter: # base footer
-  type: view
-  style:
-    left: "0"
-    marginTop: "0"
-    width: calc(1514.77/1724.81*100vw)
-    height: "0.56"
-    zIndex: "100"
-    margin: auto
-  children:
-    - type: view
-      # onClick:
-      #   - actionType: evalObject
-      #     object:
-      #       - =.builtIn.object.setProperty:
-      #           dataIn:
-      #             obj: =.Resource.baseHeaderData
-      #             label: "title"
-      #             text: "About"
-      #             arr: ["fontSize","fontWeight","fontColor"]
-      #             valueArr: ["2.28vh","400","0x000000"]
-      #             errorArr: ["2.28vh","400","0x000000"]
-      #           dataOut: Resource.baseHeaderData
-      #   - actionType: builtIn
-      #     funcName: redraw
-      #     viewTag: headRightView
-      style:
-        width: "1"
-        height: "0.45"
-        backgroundColor: "0xeeeeee"
-        display: flex
-        justifyContent: center
-        alignItems: center
-      children:
-        - type: view
-          style:
-            # left: "0"
-            width: "0.45"
-            height: "0.45"
-            # top: "0"
-            display: flex
-            justifyContent: center
-            alignItems: center
-            flexDirection: column
-            margin: "0"
-          children:
-            - type: view
-              style:
-                width: "0.2"
-                height: "0.2"
-                display: flex
-                justifyContent: center
-                alignItems: center
-              children:
-                - type: image
-                  path: HISLogo.png
-                  style:
-                    width: "0.065"
-
-            - type: view
-              style:
-                width: "0.23"
-                height: "0.08"
-                display: flex
-                justifyContent: space-evenly
-                alignItems: center
-              children:
-                - type: image
-                  path: externalLinkedin.png
-                  onClick:
-                    - goto: https://www.linkedin.com/company/aitmed
-                  style:
-                    width: "0.02"
-                - type: image
-                  path: socialFacebook.png
-                  onClick:
-                    - goto: https://www.facebook.com/AITMEDinc
-                  style:
-                    width: "0.02"
-                - type: image
-                  path: socialPinterest.png
-                  onClick:
-                    - goto: https://www.pinterest.com/aitmedinc/
-                  style:
-                    width: "0.02"
-                - type: image
-                  path: socialYoutube.png
-                  onClick:
-                    - goto: https://www.youtube.com/channel/UC1su9VCcj8-Ml02W9g35kpw
-                  style:
-                    width: "0.02"
-                - type: image
-                  path: socialTwitter.png
-                  onClick:
-                    - goto: https://twitter.com/AITmedInc
-                  style:
-                    width: "0.02"
-                - type: image
-                  path: externalTiktok.png
-                  onClick:
-                    - goto: https://www.tiktok.com/@aitmedinc?lang=en
-                  style:
-                    width: "0.02"
-
-        - type: view
-          style:
-            width: "0.55"
-            height: "0.45"
-            display: flex
-            justifyContent: center
-            alignItems: center
-          children:
-            - type: view
-              style:
-                width: "0.07"
-                height: "0.45"
-                display: flex
-                justifyContent: center
-                alignItems: center
-                flexDirection: column
-              children:
-                - .BaseFooterTitle1:
-                  text: About
-                  style:
-                    fontSize: .Sfont.h1
-                - .BaseFooterView1:
-                  children:
-                    - .BaseFooterText1:
-                      text: Company
-                      onClick:
-                        - actionType: evalObject
-                          object:
-                            - =.builtIn.object.setProperty:
-                                dataIn:
-                                  obj: =.Resource.baseHeaderData
-                                  label: "title"
-                                  text: "About"
-                                  arr: ["fontSize", "fontWeight", "fontColor"]
-                                  valueArr: ["2.28vh", "600", "0x388fcd"]
-                                  errorArr: ["2.28vh", "400", "0x000000"]
-                                dataOut: Resource.baseHeaderData
-                        - actionType: builtIn
-                          funcName: redraw
-                          viewTag: headRightView
-                        - goto: AboutAiTmed
-                    - .BaseFooterText1:
-                      text: Care
-                      style:
-                      onClick:
-                        - actionType: evalObject
-                          object:
-                            - =.builtIn.object.setProperty:
-                                dataIn:
-                                  obj: =.Resource.baseHeaderData
-                                  label: "title"
-                                  text: "Products"
-                                  arr: ["fontSize", "fontWeight", "fontColor"]
-                                  valueArr: ["2.28vh", "600", "0x388fcd"]
-                                  errorArr: ["2.28vh", "400", "0x000000"]
-                                dataOut: Resource.baseHeaderData
-                        - actionType: builtIn
-                          funcName: redraw
-                          viewTag: headRightView
-                        - goto: AiTmedCare
-                    - .BaseFooterText1:
-                      text: Provider
-                      style:
-                      onClick:
-                        - actionType: evalObject
-                          object:
-                            - =.builtIn.object.setProperty:
-                                dataIn:
-                                  obj: =.Resource.baseHeaderData
-                                  label: "title"
-                                  text: "Products"
-                                  arr: ["fontSize", "fontWeight", "fontColor"]
-                                  valueArr: ["2.28vh", "600", "0x388fcd"]
-                                  errorArr: ["2.28vh", "400", "0x000000"]
-                                dataOut: Resource.baseHeaderData
-                        - actionType: builtIn
-                          funcName: redraw
-                          viewTag: headRightView
-                        - goto: AiTmedProvider
-                    - .BaseFooterText1:
-                      text: Admin
-                      style:
-                      onClick:
-                        - actionType: evalObject
-                          object:
-                            - =.builtIn.object.setProperty:
-                                dataIn:
-                                  obj: =.Resource.baseHeaderData
-                                  label: "title"
-                                  text: "Products"
-                                  arr: ["fontSize", "fontWeight", "fontColor"]
-                                  valueArr: ["2.28vh", "600", "0x388fcd"]
-                                  errorArr: ["2.28vh", "400", "0x000000"]
-                                dataOut: Resource.baseHeaderData
-                        - actionType: builtIn
-                          funcName: redraw
-                          viewTag: headRightView
-                        - goto: AiTmedAdmin
-
-            - type: view
-              style:
-                width: "0.18"
-                height: "0.45"
-                display: flex
-                justifyContent: center
-                alignItems: center
-                flexDirection: column
-              children:
-                - .BaseFooterTitle1:
-                  text: Our Services
-                  style:
-                    fontSize: .Sfont.h1
-                    height: "0.06"
-                - .BaseFooterView1:
-                  style:
-                    width: "0.159"
-                  children:
-                    - .BaseFooterText1:
-                      text: Search & E-Referral
-                      onClick:
-                        - actionType: evalObject
-                          object:
-                            - =.builtIn.object.setProperty:
-                                dataIn:
-                                  obj: =.Resource.baseHeaderData
-                                  label: "title"
-                                  text: "Products"
-                                  arr: ["fontSize", "fontWeight", "fontColor"]
-                                  valueArr: ["2.28vh", "600", "0x388fcd"]
-                                  errorArr: ["2.28vh", "400", "0x000000"]
-                                dataOut: Resource.baseHeaderData
-                        - actionType: builtIn
-                          funcName: redraw
-                          viewTag: headRightView
-                        - goto: AitmedSearch
-                    - .BaseFooterText1:
-                      text: Cloud Waiting Room
-                      onClick:
-                        - actionType: evalObject
-                          object:
-                            - =.builtIn.object.setProperty:
-                                dataIn:
-                                  obj: =.Resource.baseHeaderData
-                                  label: "title"
-                                  text: "About"
-                                  arr: ["fontSize", "fontWeight", "fontColor"]
-                                  valueArr: ["2.28vh", "400", "0x000000"]
-                                  errorArr: ["2.28vh", "400", "0x000000"]
-                                dataOut: Resource.baseHeaderData
-                        - actionType: builtIn
-                          funcName: redraw
-                          viewTag: headRightView
-                        - goto: Cloudwaitingroom
-                    - .BaseFooterText1:
-                      text: Customized Telehealth Platform
-                      onClick:
-                        - actionType: evalObject
-                          object:
-                            - =.builtIn.object.setProperty:
-                                dataIn:
-                                  obj: =.Resource.baseHeaderData
-                                  label: "title"
-                                  text: "About"
-                                  arr: ["fontSize", "fontWeight", "fontColor"]
-                                  valueArr: ["2.28vh", "400", "0x000000"]
-                                  errorArr: ["2.28vh", "400", "0x000000"]
-                                dataOut: Resource.baseHeaderData
-                        - actionType: builtIn
-                          funcName: redraw
-                          viewTag: headRightView
-                        - goto: AiTmedCustomizedTelehealthPlatform
-                    - .BaseFooterText1:
-                      text: SelfScheduling
-                      onClick:
-                        - actionType: evalObject
-                          object:
-                            - =.builtIn.object.setProperty:
-                                dataIn:
-                                  obj: =.Resource.baseHeaderData
-                                  label: "title"
-                                  text: "About"
-                                  arr: ["fontSize", "fontWeight", "fontColor"]
-                                  valueArr: ["2.28vh", "400", "0x000000"]
-                                  errorArr: ["2.28vh", "400", "0x000000"]
-                                dataOut: Resource.baseHeaderData
-                        - actionType: builtIn
-                          funcName: redraw
-                          viewTag: headRightView
-                        - goto: AiTmedSelfScheduling
-                    - .BaseFooterText1:
-                      text: Documentation
-                      onClick:
-                        - actionType: evalObject
-                          object:
-                            - =.builtIn.object.setProperty:
-                                dataIn:
-                                  obj: =.Resource.baseHeaderData
-                                  label: "title"
-                                  text: "About"
-                                  arr: ["fontSize", "fontWeight", "fontColor"]
-                                  valueArr: ["2.28vh", "400", "0x000000"]
-                                  errorArr: ["2.28vh", "400", "0x000000"]
-                                dataOut: Resource.baseHeaderData
-                        - actionType: builtIn
-                          funcName: redraw
-                          viewTag: headRightView
-                        - goto: AiTmedDocumentation
-
-            - type: view
-              style:
-                width: "0.16"
-                height: "0.45"
-                display: flex
-                justifyContent: center
-                alignItems: center
-                flexDirection: column
-              children:
-                - .BaseFooterTitle1:
-                  text: Support
-                  style:
-                    fontSize: .Sfont.h1
-                - .BaseFooterView1:
-                  children:
-                    - .BaseFooterText1:
-                      text: Contact Us
-                      onClick:
-                        - actionType: evalObject
-                          object:
-                            - =.builtIn.object.setProperty:
-                                dataIn:
-                                  obj: =.Resource.baseHeaderData
-                                  label: "title"
-                                  text: "About"
-                                  arr: ["fontSize", "fontWeight", "fontColor"]
-                                  valueArr: ["2.28vh", "400", "0x000000"]
-                                  errorArr: ["2.28vh", "400", "0x000000"]
-                                dataOut: Resource.baseHeaderData
-                        - actionType: builtIn
-                          funcName: redraw
-                          viewTag: headRightView
-                        - goto: AiTmedContact
-                    - .BaseFooterText1:
-                      text: Terms of Service
-                      onClick:
-                        - actionType: evalObject
-                          object:
-                            - =.builtIn.object.setProperty:
-                                dataIn:
-                                  obj: =.Resource.baseHeaderData
-                                  label: "title"
-                                  text: "About"
-                                  arr: ["fontSize", "fontWeight", "fontColor"]
-                                  valueArr: ["2.28vh", "400", "0x000000"]
-                                  errorArr: ["2.28vh", "400", "0x000000"]
-                                dataOut: Resource.baseHeaderData
-                        - actionType: builtIn
-                          funcName: redraw
-                          viewTag: headRightView
-                        - goto: TermsOfService
-                      style:
-                    - .BaseFooterText1:
-                      text: Privacy Policy
-                      onClick:
-                        - actionType: evalObject
-                          object:
-                            - =.builtIn.object.setProperty:
-                                dataIn:
-                                  obj: =.Resource.baseHeaderData
-                                  label: "title"
-                                  text: "About"
-                                  arr: ["fontSize", "fontWeight", "fontColor"]
-                                  valueArr: ["2.28vh", "400", "0x000000"]
-                                  errorArr: ["2.28vh", "400", "0x000000"]
-                                dataOut: Resource.baseHeaderData
-                        - actionType: builtIn
-                          funcName: redraw
-                          viewTag: headRightView
-                        - goto: PrivacyPolicy
-                      style:
-    - type: view
-      style:
-        left: "0"
-        top: "0.45"
-        width: "1"
-        height: "0.11"
-        backgroundColor: "0x585858"
-        display: flex
-        justifyContent: space-evenly
-        alignItems: center
-      children:
-        - type: view
-          style:
-            width: "0.7"
-            display: flex
-            justifyContent: center
-            alignItems: center
-          children:
-            - type: label
-              text: "© 2021 AiTmed, Inc. All rights reserved. "
-              style:
-                height: "0.11"
-                width: "0.35"
-                fontFamily: Proxima Nova
-                fontSize: .Sfont.h1
-                color: "0xffffff"
-                display: flex
-                justifyContent: flex-start
-                alignItems: center
-
-        - type: view
-          style:
-            width: "0.3"
-            height: "0.11"
-            display: flex
-            justifyContent: center
-            alignItems: center
-          children:
-            - type: image
-              path: bottom2.png
-              onClick:
-                - goto: ^topView
-              style:
-                width: "0.035"
+##  type: view
+##  style:
+##    left: "0"
+##    marginTop: "0"
+##    width: calc(1514.77/1724.81*100vw)
+##    height: "0.56"
+##    zIndex: "100"
+##    margin: auto
+##  children:
+##    - type: view
+##      # onClick:
+##      #   - actionType: evalObject
+##      #     object:
+##      #       - =.builtIn.object.setProperty:
+##      #           dataIn:
+##      #             obj: =.Resource.baseHeaderData
+##      #             label: "title"
+##      #             text: "About"
+##      #             arr: ["fontSize","fontWeight","fontColor"]
+##      #             valueArr: ["2.28vh","400","0x000000"]
+##      #             errorArr: ["2.28vh","400","0x000000"]
+##      #           dataOut: Resource.baseHeaderData
+##      #   - actionType: builtIn
+##      #     funcName: redraw
+##      #     viewTag: headRightView
+##      style:
+##        width: "1"
+##        height: "0.45"
+##        backgroundColor: "0xeeeeee"
+##        display: flex
+##        justifyContent: center
+##        alignItems: center
+##      children:
+##        - type: view
+##          style:
+##            # left: "0"
+##            width: "0.45"
+##            height: "0.45"
+##            # top: "0"
+##            display: flex
+##            justifyContent: center
+##            alignItems: center
+##            flexDirection: column
+##            margin: "0"
+##          children:
+##            - type: view
+##              style:
+##                width: "0.2"
+##                height: "0.2"
+##                display: flex
+##                justifyContent: center
+##                alignItems: center
+##              children:
+##                - type: image
+##                  path: HISLogo.png
+##                  style:
+##                    width: "0.065"
+##
+##            - type: view
+##              style:
+##                width: "0.23"
+##                height: "0.08"
+##                display: flex
+##                justifyContent: space-evenly
+##                alignItems: center
+##              children:
+##                - type: image
+##                  path: externalLinkedin.png
+##                  onClick:
+##                    - goto: https://www.linkedin.com/company/aitmed
+##                  style:
+##                    width: "0.02"
+##                - type: image
+##                  path: socialFacebook.png
+##                  onClick:
+##                    - goto: https://www.facebook.com/AITMEDinc
+##                  style:
+##                    width: "0.02"
+##                - type: image
+##                  path: socialPinterest.png
+##                  onClick:
+##                    - goto: https://www.pinterest.com/aitmedinc/
+##                  style:
+##                    width: "0.02"
+##                - type: image
+##                  path: socialYoutube.png
+##                  onClick:
+##                    - goto: https://www.youtube.com/channel/UC1su9VCcj8-Ml02W9g35kpw
+##                  style:
+##                    width: "0.02"
+##                - type: image
+##                  path: socialTwitter.png
+##                  onClick:
+##                    - goto: https://twitter.com/AITmedInc
+##                  style:
+##                    width: "0.02"
+##                - type: image
+##                  path: externalTiktok.png
+##                  onClick:
+##                    - goto: https://www.tiktok.com/@aitmedinc?lang=en
+##                  style:
+##                    width: "0.02"
+##
+##        - type: view
+##          style:
+##            width: "0.55"
+##            height: "0.45"
+##            display: flex
+##            justifyContent: center
+##            alignItems: center
+##          children:
+##            - type: view
+##              style:
+##                width: "0.07"
+##                height: "0.45"
+##                display: flex
+##                justifyContent: center
+##                alignItems: center
+##                flexDirection: column
+##              children:
+##                - .BaseFooterTitle1:
+##                  text: About
+##                  style:
+##                    fontSize: .Sfont.h1
+##                - .BaseFooterView1:
+##                  children:
+##                    - .BaseFooterText1:
+##                      text: Company
+##                      onClick:
+##                        - actionType: evalObject
+##                          object:
+##                            - =.builtIn.object.setProperty:
+##                                dataIn:
+##                                  obj: =.Resource.baseHeaderData
+##                                  label: "title"
+##                                  text: "About"
+##                                  arr: ["fontSize", "fontWeight", "fontColor"]
+##                                  valueArr: ["2.28vh", "600", "0x388fcd"]
+##                                  errorArr: ["2.28vh", "400", "0x000000"]
+##                                dataOut: Resource.baseHeaderData
+##                        - actionType: builtIn
+##                          funcName: redraw
+##                          viewTag: headRightView
+##                        - goto: AboutAiTmed
+##                    - .BaseFooterText1:
+##                      text: Care
+##                      style:
+##                      onClick:
+##                        - actionType: evalObject
+##                          object:
+##                            - =.builtIn.object.setProperty:
+##                                dataIn:
+##                                  obj: =.Resource.baseHeaderData
+##                                  label: "title"
+##                                  text: "Products"
+##                                  arr: ["fontSize", "fontWeight", "fontColor"]
+##                                  valueArr: ["2.28vh", "600", "0x388fcd"]
+##                                  errorArr: ["2.28vh", "400", "0x000000"]
+##                                dataOut: Resource.baseHeaderData
+##                        - actionType: builtIn
+##                          funcName: redraw
+##                          viewTag: headRightView
+##                        - goto: AiTmedCare
+##                    - .BaseFooterText1:
+##                      text: Provider
+##                      style:
+##                      onClick:
+##                        - actionType: evalObject
+##                          object:
+##                            - =.builtIn.object.setProperty:
+##                                dataIn:
+##                                  obj: =.Resource.baseHeaderData
+##                                  label: "title"
+##                                  text: "Products"
+##                                  arr: ["fontSize", "fontWeight", "fontColor"]
+##                                  valueArr: ["2.28vh", "600", "0x388fcd"]
+##                                  errorArr: ["2.28vh", "400", "0x000000"]
+##                                dataOut: Resource.baseHeaderData
+##                        - actionType: builtIn
+##                          funcName: redraw
+##                          viewTag: headRightView
+##                        - goto: AiTmedProvider
+##                    - .BaseFooterText1:
+##                      text: Admin
+##                      style:
+##                      onClick:
+##                        - actionType: evalObject
+##                          object:
+##                            - =.builtIn.object.setProperty:
+##                                dataIn:
+##                                  obj: =.Resource.baseHeaderData
+##                                  label: "title"
+##                                  text: "Products"
+##                                  arr: ["fontSize", "fontWeight", "fontColor"]
+##                                  valueArr: ["2.28vh", "600", "0x388fcd"]
+##                                  errorArr: ["2.28vh", "400", "0x000000"]
+##                                dataOut: Resource.baseHeaderData
+##                        - actionType: builtIn
+##                          funcName: redraw
+##                          viewTag: headRightView
+##                        - goto: AiTmedAdmin
+##
+##            - type: view
+##              style:
+##                width: "0.18"
+##                height: "0.45"
+##                display: flex
+##                justifyContent: center
+##                alignItems: center
+##                flexDirection: column
+##              children:
+##                - .BaseFooterTitle1:
+##                  text: Our Services
+##                  style:
+##                    fontSize: .Sfont.h1
+##                    height: "0.06"
+##                - .BaseFooterView1:
+##                  style:
+##                    width: "0.159"
+##                  children:
+##                    - .BaseFooterText1:
+##                      text: Search & E-Referral
+##                      onClick:
+##                        - actionType: evalObject
+##                          object:
+##                            - =.builtIn.object.setProperty:
+##                                dataIn:
+##                                  obj: =.Resource.baseHeaderData
+##                                  label: "title"
+##                                  text: "Products"
+##                                  arr: ["fontSize", "fontWeight", "fontColor"]
+##                                  valueArr: ["2.28vh", "600", "0x388fcd"]
+##                                  errorArr: ["2.28vh", "400", "0x000000"]
+##                                dataOut: Resource.baseHeaderData
+##                        - actionType: builtIn
+##                          funcName: redraw
+##                          viewTag: headRightView
+##                        - goto: AitmedSearch
+##                    - .BaseFooterText1:
+##                      text: Cloud Waiting Room
+##                      onClick:
+##                        - actionType: evalObject
+##                          object:
+##                            - =.builtIn.object.setProperty:
+##                                dataIn:
+##                                  obj: =.Resource.baseHeaderData
+##                                  label: "title"
+##                                  text: "About"
+##                                  arr: ["fontSize", "fontWeight", "fontColor"]
+##                                  valueArr: ["2.28vh", "400", "0x000000"]
+##                                  errorArr: ["2.28vh", "400", "0x000000"]
+##                                dataOut: Resource.baseHeaderData
+##                        - actionType: builtIn
+##                          funcName: redraw
+##                          viewTag: headRightView
+##                        - goto: Cloudwaitingroom
+##                    - .BaseFooterText1:
+##                      text: Customized Telehealth Platform
+##                      onClick:
+##                        - actionType: evalObject
+##                          object:
+##                            - =.builtIn.object.setProperty:
+##                                dataIn:
+##                                  obj: =.Resource.baseHeaderData
+##                                  label: "title"
+##                                  text: "About"
+##                                  arr: ["fontSize", "fontWeight", "fontColor"]
+##                                  valueArr: ["2.28vh", "400", "0x000000"]
+##                                  errorArr: ["2.28vh", "400", "0x000000"]
+##                                dataOut: Resource.baseHeaderData
+##                        - actionType: builtIn
+##                          funcName: redraw
+##                          viewTag: headRightView
+##                        - goto: AiTmedCustomizedTelehealthPlatform
+##                    - .BaseFooterText1:
+##                      text: SelfScheduling
+##                      onClick:
+##                        - actionType: evalObject
+##                          object:
+##                            - =.builtIn.object.setProperty:
+##                                dataIn:
+##                                  obj: =.Resource.baseHeaderData
+##                                  label: "title"
+##                                  text: "About"
+##                                  arr: ["fontSize", "fontWeight", "fontColor"]
+##                                  valueArr: ["2.28vh", "400", "0x000000"]
+##                                  errorArr: ["2.28vh", "400", "0x000000"]
+##                                dataOut: Resource.baseHeaderData
+##                        - actionType: builtIn
+##                          funcName: redraw
+##                          viewTag: headRightView
+##                        - goto: AiTmedSelfScheduling
+##                    - .BaseFooterText1:
+##                      text: Documentation
+##                      onClick:
+##                        - actionType: evalObject
+##                          object:
+##                            - =.builtIn.object.setProperty:
+##                                dataIn:
+##                                  obj: =.Resource.baseHeaderData
+##                                  label: "title"
+##                                  text: "About"
+##                                  arr: ["fontSize", "fontWeight", "fontColor"]
+##                                  valueArr: ["2.28vh", "400", "0x000000"]
+##                                  errorArr: ["2.28vh", "400", "0x000000"]
+##                                dataOut: Resource.baseHeaderData
+##                        - actionType: builtIn
+##                          funcName: redraw
+##                          viewTag: headRightView
+##                        - goto: AiTmedDocumentation
+##
+##            - type: view
+##              style:
+##                width: "0.16"
+##                height: "0.45"
+##                display: flex
+##                justifyContent: center
+##                alignItems: center
+##                flexDirection: column
+##              children:
+##                - .BaseFooterTitle1:
+##                  text: Support
+##                  style:
+##                    fontSize: .Sfont.h1
+##                - .BaseFooterView1:
+##                  children:
+##                    - .BaseFooterText1:
+##                      text: Contact Us
+##                      onClick:
+##                        - actionType: evalObject
+##                          object:
+##                            - =.builtIn.object.setProperty:
+##                                dataIn:
+##                                  obj: =.Resource.baseHeaderData
+##                                  label: "title"
+##                                  text: "About"
+##                                  arr: ["fontSize", "fontWeight", "fontColor"]
+##                                  valueArr: ["2.28vh", "400", "0x000000"]
+##                                  errorArr: ["2.28vh", "400", "0x000000"]
+##                                dataOut: Resource.baseHeaderData
+##                        - actionType: builtIn
+##                          funcName: redraw
+##                          viewTag: headRightView
+##                        - goto: AiTmedContact
+##                    - .BaseFooterText1:
+##                      text: Terms of Service
+##                      onClick:
+##                        - actionType: evalObject
+##                          object:
+##                            - =.builtIn.object.setProperty:
+##                                dataIn:
+##                                  obj: =.Resource.baseHeaderData
+##                                  label: "title"
+##                                  text: "About"
+##                                  arr: ["fontSize", "fontWeight", "fontColor"]
+##                                  valueArr: ["2.28vh", "400", "0x000000"]
+##                                  errorArr: ["2.28vh", "400", "0x000000"]
+##                                dataOut: Resource.baseHeaderData
+##                        - actionType: builtIn
+##                          funcName: redraw
+##                          viewTag: headRightView
+##                        - goto: TermsOfService
+##                      style:
+##                    - .BaseFooterText1:
+##                      text: Privacy Policy
+##                      onClick:
+##                        - actionType: evalObject
+##                          object:
+##                            - =.builtIn.object.setProperty:
+##                                dataIn:
+##                                  obj: =.Resource.baseHeaderData
+##                                  label: "title"
+##                                  text: "About"
+##                                  arr: ["fontSize", "fontWeight", "fontColor"]
+##                                  valueArr: ["2.28vh", "400", "0x000000"]
+##                                  errorArr: ["2.28vh", "400", "0x000000"]
+##                                dataOut: Resource.baseHeaderData
+##                        - actionType: builtIn
+##                          funcName: redraw
+##                          viewTag: headRightView
+##                        - goto: PrivacyPolicy
+##                      style:
+#    - type: view
+#      style:
+#        left: "0"
+#        top: "0.45"
+#        width: "1"
+#        height: "0.11"
+#        backgroundColor: "0x585858"
+#        display: flex
+#        justifyContent: space-evenly
+#        alignItems: center
+#      children:
+#        - type: view
+#          style:
+#            width: "0.7"
+#            display: flex
+#            justifyContent: center
+#            alignItems: center
+#          children:
+#            - type: label
+#              text: "© 2024 HYUGE INTELLIGENT SYSTEMS. ALL RIGHTS RESERVED."
+#              style:
+#                height: "0.11"
+#                width: "0.35"
+#                fontFamily: Proxima Nova
+#                fontSize: .Sfont.h1
+#                color: "0xffffff"
+#                display: flex
+#                justifyContent: flex-start
+#                alignItems: center
+#
+#        - type: view
+#          style:
+#            width: "0.3"
+#            height: "0.11"
+#            display: flex
+#            justifyContent: center
+#            alignItems: center
+#          children:
+#            - type: image
+#              path: bottom2.png
+#              onClick:
+#                - goto: ^topView
+#              style:
+#                width: "0.035"
 BaseFooter1: # base footer
   type: view
   style:
@@ -1359,400 +1359,400 @@ BaseFooter1: # base footer
     zIndex: "100"
     margin: auto
   children:
-    - type: view
-      style:
-        width: calc(1514.77/1724.81*100vw)
-        height: calc(436.05/1724.81*100vw)
-        backgroundColor: "0xeeeeee"
-        display: flex
-        justifyContent: center
-        alignItems: center
-      children:
-        - type: view
-          style:
-            width: calc(776.16/1724.81*100vw)
-            height: calc(436.05/1724.81*100vw)
-            display: flex
-            justifyContent: center
-            alignItems: center
-            flexDirection: column
-            margin: "0"
-          children:
-            - type: view
-              style:
-                width: calc(344.95/1724.81*100vw)
-                height: calc(193.8/1724.81*100vw)
-                display: flex
-                justifyContent: center
-                alignItems: center
-              children:
-                - type: image
-                  path: HISLogo.png
-                  style:
-                    width: calc(112.11/1724.81*100vw)
-
-            - type: view
-              style:
-                width: calc(392.62/1724.81*100vw)
-                height: calc(76.72/1724.81*100vw)
-                display: flex
-                justifyContent: space-evenly
-                alignItems: center
-              children:
-                - type: image
-                  path: externalLinkedin.png
-                  onClick:
-                    - goto: https://www.linkedin.com/company/aitmed
-                  style:
-                    width: calc(34.5/1724.81*100vw)
-                - type: image
-                  path: socialFacebook.png
-                  onClick:
-                    - goto: https://www.facebook.com/AITMEDinc
-                  style:
-                    width: calc(34.5/1724.81*100vw)
-                - type: image
-                  path: socialPinterest.png
-                  onClick:
-                    - goto: https://www.pinterest.com/aitmedinc/
-                  style:
-                    width: calc(34.5/1724.81*100vw)
-                - type: image
-                  path: socialYoutube.png
-                  onClick:
-                    - goto: https://www.youtube.com/channel/UC1su9VCcj8-Ml02W9g35kpw
-                  style:
-                    width: calc(34.5/1724.81*100vw)
-                - type: image
-                  path: socialTwitter.png
-                  onClick:
-                    - goto: https://twitter.com/AITmedInc
-                  style:
-                    width: calc(34.5/1724.81*100vw)
-                - type: image
-                  path: externalTiktok.png
-                  onClick:
-                    - goto: https://www.tiktok.com/@aitmedinc?lang=en
-                  style:
-                    width: calc(34.5/1724.81*100vw)
-
-        - type: view
-          style:
-            width: calc(948.65/1724.81*100vw)
-            height: calc(436.05/1724.81*100vw)
-            display: flex
-            justifyContent: center
-            alignItems: center
-          children:
-            - type: view
-              style:
-                width: calc(117.73/1724.81*100vw)
-                height: calc(436.05/1724.81*100vw)
-                display: flex
-                justifyContent: center
-                alignItems: center
-                flexDirection: column
-              children:
-                - .BaseFooterTitle1:
-                  text: About
-                  style:
-                    fontSize: calc(19/1724.81*100vw)
-                - .BaseFooterView1:
-                  children:
-                    - .BaseFooterText1:
-                      text: Company
-                      onClick:
-                        - actionType: evalObject
-                          object:
-                            - =.builtIn.object.setProperty:
-                                dataIn:
-                                  obj: =.Resource.baseHeaderData
-                                  label: "title"
-                                  text: "About"
-                                  arr: ["fontSize", "fontWeight", "fontColor"]
-                                  valueArr: ["2.28vh", "600", "0x388fcd"]
-                                  errorArr: ["2.28vh", "400", "0x000000"]
-                                dataOut: Resource.baseHeaderData
-                        - actionType: builtIn
-                          funcName: redraw
-                          viewTag: headRightView
-                        - goto: AboutAiTmed
-                    - .BaseFooterText1:
-                      text: Care
-                      style:
-                      onClick:
-                        - actionType: evalObject
-                          object:
-                            - =.builtIn.object.setProperty:
-                                dataIn:
-                                  obj: =.Resource.baseHeaderData
-                                  label: "title"
-                                  text: "Products"
-                                  arr: ["fontSize", "fontWeight", "fontColor"]
-                                  valueArr: ["2.28vh", "600", "0x388fcd"]
-                                  errorArr: ["2.28vh", "400", "0x000000"]
-                                dataOut: Resource.baseHeaderData
-                        - actionType: builtIn
-                          funcName: redraw
-                          viewTag: headRightView
-                        - goto: AiTmedCare
-                    - .BaseFooterText1:
-                      text: Provider
-                      style:
-                      onClick:
-                        - actionType: evalObject
-                          object:
-                            - =.builtIn.object.setProperty:
-                                dataIn:
-                                  obj: =.Resource.baseHeaderData
-                                  label: "title"
-                                  text: "Products"
-                                  arr: ["fontSize", "fontWeight", "fontColor"]
-                                  valueArr: ["2.28vh", "600", "0x388fcd"]
-                                  errorArr: ["2.28vh", "400", "0x000000"]
-                                dataOut: Resource.baseHeaderData
-                        - actionType: builtIn
-                          funcName: redraw
-                          viewTag: headRightView
-                        - goto: AiTmedProvider
-                    - .BaseFooterText1:
-                      text: Admin
-                      style:
-                      onClick:
-                        - actionType: evalObject
-                          object:
-                            - =.builtIn.object.setProperty:
-                                dataIn:
-                                  obj: =.Resource.baseHeaderData
-                                  label: "title"
-                                  text: "Products"
-                                  arr: ["fontSize", "fontWeight", "fontColor"]
-                                  valueArr: ["2.28vh", "600", "0x388fcd"]
-                                  errorArr: ["2.28vh", "400", "0x000000"]
-                                dataOut: Resource.baseHeaderData
-                        - actionType: builtIn
-                          funcName: redraw
-                          viewTag: headRightView
-                        - goto: AiTmedAdmin
-
-            - type: view
-              style:
-                width: calc(310.47/1724.81*100vw)
-                height: calc(436.05/1724.81*100vw)
-                display: flex
-                justifyContent: center
-                alignItems: center
-                flexDirection: column
-              children:
-                - .BaseFooterTitle1:
-                  text: Our Services
-                  style:
-                    fontSize: calc(19/1724.81*100vw)
-                    height: calc(70.14/1724.81*100vw)
-                - .BaseFooterView1:
-                  style:
-                    width: calc(274.25/1724.81*100vw)
-                    # height: '0.15'
-                  children:
-                    - .BaseFooterText1:
-                      text: Search & E-Referral
-                      onClick:
-                        - actionType: evalObject
-                          object:
-                            - =.builtIn.object.setProperty:
-                                dataIn:
-                                  obj: =.Resource.baseHeaderData
-                                  label: "title"
-                                  text: "Products"
-                                  arr: ["fontSize", "fontWeight", "fontColor"]
-                                  valueArr: ["2.28vh", "600", "0x388fcd"]
-                                  errorArr: ["2.28vh", "400", "0x000000"]
-                                dataOut: Resource.baseHeaderData
-                        - actionType: builtIn
-                          funcName: redraw
-                          viewTag: headRightView
-                        - goto: AitmedSearch
-                    - .BaseFooterText1:
-                      text: Cloud Waiting Room
-                      onClick:
-                        - actionType: evalObject
-                          object:
-                            - =.builtIn.object.setProperty:
-                                dataIn:
-                                  obj: =.Resource.baseHeaderData
-                                  label: "title"
-                                  text: "About"
-                                  arr: ["fontSize", "fontWeight", "fontColor"]
-                                  valueArr: ["2.28vh", "400", "0x000000"]
-                                  errorArr: ["2.28vh", "400", "0x000000"]
-                                dataOut: Resource.baseHeaderData
-                        - actionType: builtIn
-                          funcName: redraw
-                          viewTag: headRightView
-                        - goto: Cloudwaitingroom
-                    - .BaseFooterText1:
-                      text: Customized Telehealth Platform
-                      onClick:
-                        - actionType: evalObject
-                          object:
-                            - =.builtIn.object.setProperty:
-                                dataIn:
-                                  obj: =.Resource.baseHeaderData
-                                  label: "title"
-                                  text: "About"
-                                  arr: ["fontSize", "fontWeight", "fontColor"]
-                                  valueArr: ["2.28vh", "400", "0x000000"]
-                                  errorArr: ["2.28vh", "400", "0x000000"]
-                                dataOut: Resource.baseHeaderData
-                        - actionType: builtIn
-                          funcName: redraw
-                          viewTag: headRightView
-                        - goto: AiTmedCustomizedTelehealthPlatform
-                    - .BaseFooterText1:
-                      text: SelfScheduling
-                      onClick:
-                        - actionType: evalObject
-                          object:
-                            - =.builtIn.object.setProperty:
-                                dataIn:
-                                  obj: =.Resource.baseHeaderData
-                                  label: "title"
-                                  text: "About"
-                                  arr: ["fontSize", "fontWeight", "fontColor"]
-                                  valueArr: ["2.28vh", "400", "0x000000"]
-                                  errorArr: ["2.28vh", "400", "0x000000"]
-                                dataOut: Resource.baseHeaderData
-                        - actionType: builtIn
-                          funcName: redraw
-                          viewTag: headRightView
-                        - goto: AiTmedSelfScheduling
-                    - .BaseFooterText1:
-                      text: Documentation
-                      onClick:
-                        - actionType: evalObject
-                          object:
-                            - =.builtIn.object.setProperty:
-                                dataIn:
-                                  obj: =.Resource.baseHeaderData
-                                  label: "title"
-                                  text: "About"
-                                  arr: ["fontSize", "fontWeight", "fontColor"]
-                                  valueArr: ["2.28vh", "400", "0x000000"]
-                                  errorArr: ["2.28vh", "400", "0x000000"]
-                                dataOut: Resource.baseHeaderData
-                        - actionType: builtIn
-                          funcName: redraw
-                          viewTag: headRightView
-                        - goto: AiTmedDocumentation
-
-            - type: view
-              style:
-                width: calc(275.97/1724.81*100vw)
-                height: calc(436.05/1724.81*100vw)
-                display: flex
-                justifyContent: center
-                alignItems: center
-                flexDirection: column
-              children:
-                - .BaseFooterTitle1:
-                  text: Support
-                  style:
-                    fontSize: calc(19/1724.81*100vw)
-                - .BaseFooterView1:
-                  children:
-                    - .BaseFooterText1:
-                      text: Contact Us
-                      onClick:
-                        - actionType: evalObject
-                          object:
-                            - =.builtIn.object.setProperty:
-                                dataIn:
-                                  obj: =.Resource.baseHeaderData
-                                  label: "title"
-                                  text: "About"
-                                  arr: ["fontSize", "fontWeight", "fontColor"]
-                                  valueArr: ["2.28vh", "400", "0x000000"]
-                                  errorArr: ["2.28vh", "400", "0x000000"]
-                                dataOut: Resource.baseHeaderData
-                        - actionType: builtIn
-                          funcName: redraw
-                          viewTag: headRightView
-                        - goto: AiTmedContact
-                    - .BaseFooterText1:
-                      text: Terms of Service
-                      onClick:
-                        - actionType: evalObject
-                          object:
-                            - =.builtIn.object.setProperty:
-                                dataIn:
-                                  obj: =.Resource.baseHeaderData
-                                  label: "title"
-                                  text: "About"
-                                  arr: ["fontSize", "fontWeight", "fontColor"]
-                                  valueArr: ["2.28vh", "400", "0x000000"]
-                                  errorArr: ["2.28vh", "400", "0x000000"]
-                                dataOut: Resource.baseHeaderData
-                        - actionType: builtIn
-                          funcName: redraw
-                          viewTag: headRightView
-                        - goto: TermsOfService
-                      style:
-                    - .BaseFooterText1:
-                      text: Privacy Policy
-                      onClick:
-                        - actionType: evalObject
-                          object:
-                            - =.builtIn.object.setProperty:
-                                dataIn:
-                                  obj: =.Resource.baseHeaderData
-                                  label: "title"
-                                  text: "About"
-                                  arr: ["fontSize", "fontWeight", "fontColor"]
-                                  valueArr: ["2.28vh", "400", "0x000000"]
-                                  errorArr: ["2.28vh", "400", "0x000000"]
-                                dataOut: Resource.baseHeaderData
-                        - actionType: builtIn
-                          funcName: redraw
-                          viewTag: headRightView
-                        - goto: PrivacyPolicy
-                    - .BaseFooterText1:
-                      text: FAQ
-                      onClick:
-                        - actionType: evalObject
-                          object:
-                            - =.builtIn.object.setProperty:
-                                dataIn:
-                                  obj: =.Resource.baseHeaderData
-                                  label: "title"
-                                  text: "About"
-                                  arr: ["fontSize", "fontWeight", "fontColor"]
-                                  valueArr: ["2.28vh", "400", "0x000000"]
-                                  errorArr: ["2.28vh", "400", "0x000000"]
-                                dataOut: Resource.baseHeaderData
-                        - actionType: builtIn
-                          funcName: redraw
-                          viewTag: headRightView
-                        - goto: FAQ
-                      style:
-                    - .BaseFooterText1:
-                      text: ONC Certification
-                      onClick:
-                        - actionType: evalObject
-                          object:
-                            - =.builtIn.object.setProperty:
-                                dataIn:
-                                  obj: =.Resource.baseHeaderData
-                                  label: "title"
-                                  text: "About"
-                                  arr: ["fontSize", "fontWeight", "fontColor"]
-                                  valueArr: ["2.28vh", "400", "0x000000"]
-                                  errorArr: ["2.28vh", "400", "0x000000"]
-                                dataOut: Resource.baseHeaderData
-                        - actionType: builtIn
-                          funcName: redraw
-                          viewTag: headRightView
-                        - goto: OncCertification
-                      style:
+#    - type: view
+#      style:
+#        width: calc(1514.77/1724.81*100vw)
+#        height: calc(436.05/1724.81*100vw)
+#        backgroundColor: "0xeeeeee"
+#        display: flex
+#        justifyContent: center
+#        alignItems: center
+#      children:
+#        - type: view
+#          style:
+#            width: calc(776.16/1724.81*100vw)
+#            height: calc(436.05/1724.81*100vw)
+#            display: flex
+#            justifyContent: center
+#            alignItems: center
+#            flexDirection: column
+#            margin: "0"
+#          children:
+#            - type: view
+#              style:
+#                width: calc(344.95/1724.81*100vw)
+#                height: calc(193.8/1724.81*100vw)
+#                display: flex
+#                justifyContent: center
+#                alignItems: center
+#              children:
+#                - type: image
+#                  path: HISLogo.png
+#                  style:
+#                    width: calc(112.11/1724.81*100vw)
+#
+#            - type: view
+#              style:
+#                width: calc(392.62/1724.81*100vw)
+#                height: calc(76.72/1724.81*100vw)
+#                display: flex
+#                justifyContent: space-evenly
+#                alignItems: center
+#              children:
+#                - type: image
+#                  path: externalLinkedin.png
+#                  onClick:
+#                    - goto: https://www.linkedin.com/company/aitmed
+#                  style:
+#                    width: calc(34.5/1724.81*100vw)
+#                - type: image
+#                  path: socialFacebook.png
+#                  onClick:
+#                    - goto: https://www.facebook.com/AITMEDinc
+#                  style:
+#                    width: calc(34.5/1724.81*100vw)
+#                - type: image
+#                  path: socialPinterest.png
+#                  onClick:
+#                    - goto: https://www.pinterest.com/aitmedinc/
+#                  style:
+#                    width: calc(34.5/1724.81*100vw)
+#                - type: image
+#                  path: socialYoutube.png
+#                  onClick:
+#                    - goto: https://www.youtube.com/channel/UC1su9VCcj8-Ml02W9g35kpw
+#                  style:
+#                    width: calc(34.5/1724.81*100vw)
+#                - type: image
+#                  path: socialTwitter.png
+#                  onClick:
+#                    - goto: https://twitter.com/AITmedInc
+#                  style:
+#                    width: calc(34.5/1724.81*100vw)
+#                - type: image
+#                  path: externalTiktok.png
+#                  onClick:
+#                    - goto: https://www.tiktok.com/@aitmedinc?lang=en
+#                  style:
+#                    width: calc(34.5/1724.81*100vw)
+#
+#        - type: view
+#          style:
+#            width: calc(948.65/1724.81*100vw)
+#            height: calc(436.05/1724.81*100vw)
+#            display: flex
+#            justifyContent: center
+#            alignItems: center
+#          children:
+#            - type: view
+#              style:
+#                width: calc(117.73/1724.81*100vw)
+#                height: calc(436.05/1724.81*100vw)
+#                display: flex
+#                justifyContent: center
+#                alignItems: center
+#                flexDirection: column
+#              children:
+#                - .BaseFooterTitle1:
+#                  text: About
+#                  style:
+#                    fontSize: calc(19/1724.81*100vw)
+#                - .BaseFooterView1:
+#                  children:
+#                    - .BaseFooterText1:
+#                      text: Company
+#                      onClick:
+#                        - actionType: evalObject
+#                          object:
+#                            - =.builtIn.object.setProperty:
+#                                dataIn:
+#                                  obj: =.Resource.baseHeaderData
+#                                  label: "title"
+#                                  text: "About"
+#                                  arr: ["fontSize", "fontWeight", "fontColor"]
+#                                  valueArr: ["2.28vh", "600", "0x388fcd"]
+#                                  errorArr: ["2.28vh", "400", "0x000000"]
+#                                dataOut: Resource.baseHeaderData
+#                        - actionType: builtIn
+#                          funcName: redraw
+#                          viewTag: headRightView
+#                        - goto: AboutAiTmed
+#                    - .BaseFooterText1:
+#                      text: Care
+#                      style:
+#                      onClick:
+#                        - actionType: evalObject
+#                          object:
+#                            - =.builtIn.object.setProperty:
+#                                dataIn:
+#                                  obj: =.Resource.baseHeaderData
+#                                  label: "title"
+#                                  text: "Products"
+#                                  arr: ["fontSize", "fontWeight", "fontColor"]
+#                                  valueArr: ["2.28vh", "600", "0x388fcd"]
+#                                  errorArr: ["2.28vh", "400", "0x000000"]
+#                                dataOut: Resource.baseHeaderData
+#                        - actionType: builtIn
+#                          funcName: redraw
+#                          viewTag: headRightView
+#                        - goto: AiTmedCare
+#                    - .BaseFooterText1:
+#                      text: Provider
+#                      style:
+#                      onClick:
+#                        - actionType: evalObject
+#                          object:
+#                            - =.builtIn.object.setProperty:
+#                                dataIn:
+#                                  obj: =.Resource.baseHeaderData
+#                                  label: "title"
+#                                  text: "Products"
+#                                  arr: ["fontSize", "fontWeight", "fontColor"]
+#                                  valueArr: ["2.28vh", "600", "0x388fcd"]
+#                                  errorArr: ["2.28vh", "400", "0x000000"]
+#                                dataOut: Resource.baseHeaderData
+#                        - actionType: builtIn
+#                          funcName: redraw
+#                          viewTag: headRightView
+#                        - goto: AiTmedProvider
+#                    - .BaseFooterText1:
+#                      text: Admin
+#                      style:
+#                      onClick:
+#                        - actionType: evalObject
+#                          object:
+#                            - =.builtIn.object.setProperty:
+#                                dataIn:
+#                                  obj: =.Resource.baseHeaderData
+#                                  label: "title"
+#                                  text: "Products"
+#                                  arr: ["fontSize", "fontWeight", "fontColor"]
+#                                  valueArr: ["2.28vh", "600", "0x388fcd"]
+#                                  errorArr: ["2.28vh", "400", "0x000000"]
+#                                dataOut: Resource.baseHeaderData
+#                        - actionType: builtIn
+#                          funcName: redraw
+#                          viewTag: headRightView
+#                        - goto: AiTmedAdmin
+#
+#            - type: view
+#              style:
+#                width: calc(310.47/1724.81*100vw)
+#                height: calc(436.05/1724.81*100vw)
+#                display: flex
+#                justifyContent: center
+#                alignItems: center
+#                flexDirection: column
+#              children:
+#                - .BaseFooterTitle1:
+#                  text: Our Services
+#                  style:
+#                    fontSize: calc(19/1724.81*100vw)
+#                    height: calc(70.14/1724.81*100vw)
+#                - .BaseFooterView1:
+#                  style:
+#                    width: calc(274.25/1724.81*100vw)
+#                    # height: '0.15'
+#                  children:
+#                    - .BaseFooterText1:
+#                      text: Search & E-Referral
+#                      onClick:
+#                        - actionType: evalObject
+#                          object:
+#                            - =.builtIn.object.setProperty:
+#                                dataIn:
+#                                  obj: =.Resource.baseHeaderData
+#                                  label: "title"
+#                                  text: "Products"
+#                                  arr: ["fontSize", "fontWeight", "fontColor"]
+#                                  valueArr: ["2.28vh", "600", "0x388fcd"]
+#                                  errorArr: ["2.28vh", "400", "0x000000"]
+#                                dataOut: Resource.baseHeaderData
+#                        - actionType: builtIn
+#                          funcName: redraw
+#                          viewTag: headRightView
+#                        - goto: AitmedSearch
+#                    - .BaseFooterText1:
+#                      text: Cloud Waiting Room
+#                      onClick:
+#                        - actionType: evalObject
+#                          object:
+#                            - =.builtIn.object.setProperty:
+#                                dataIn:
+#                                  obj: =.Resource.baseHeaderData
+#                                  label: "title"
+#                                  text: "About"
+#                                  arr: ["fontSize", "fontWeight", "fontColor"]
+#                                  valueArr: ["2.28vh", "400", "0x000000"]
+#                                  errorArr: ["2.28vh", "400", "0x000000"]
+#                                dataOut: Resource.baseHeaderData
+#                        - actionType: builtIn
+#                          funcName: redraw
+#                          viewTag: headRightView
+#                        - goto: Cloudwaitingroom
+#                    - .BaseFooterText1:
+#                      text: Customized Telehealth Platform
+#                      onClick:
+#                        - actionType: evalObject
+#                          object:
+#                            - =.builtIn.object.setProperty:
+#                                dataIn:
+#                                  obj: =.Resource.baseHeaderData
+#                                  label: "title"
+#                                  text: "About"
+#                                  arr: ["fontSize", "fontWeight", "fontColor"]
+#                                  valueArr: ["2.28vh", "400", "0x000000"]
+#                                  errorArr: ["2.28vh", "400", "0x000000"]
+#                                dataOut: Resource.baseHeaderData
+#                        - actionType: builtIn
+#                          funcName: redraw
+#                          viewTag: headRightView
+#                        - goto: AiTmedCustomizedTelehealthPlatform
+#                    - .BaseFooterText1:
+#                      text: SelfScheduling
+#                      onClick:
+#                        - actionType: evalObject
+#                          object:
+#                            - =.builtIn.object.setProperty:
+#                                dataIn:
+#                                  obj: =.Resource.baseHeaderData
+#                                  label: "title"
+#                                  text: "About"
+#                                  arr: ["fontSize", "fontWeight", "fontColor"]
+#                                  valueArr: ["2.28vh", "400", "0x000000"]
+#                                  errorArr: ["2.28vh", "400", "0x000000"]
+#                                dataOut: Resource.baseHeaderData
+#                        - actionType: builtIn
+#                          funcName: redraw
+#                          viewTag: headRightView
+#                        - goto: AiTmedSelfScheduling
+#                    - .BaseFooterText1:
+#                      text: Documentation
+#                      onClick:
+#                        - actionType: evalObject
+#                          object:
+#                            - =.builtIn.object.setProperty:
+#                                dataIn:
+#                                  obj: =.Resource.baseHeaderData
+#                                  label: "title"
+#                                  text: "About"
+#                                  arr: ["fontSize", "fontWeight", "fontColor"]
+#                                  valueArr: ["2.28vh", "400", "0x000000"]
+#                                  errorArr: ["2.28vh", "400", "0x000000"]
+#                                dataOut: Resource.baseHeaderData
+#                        - actionType: builtIn
+#                          funcName: redraw
+#                          viewTag: headRightView
+#                        - goto: AiTmedDocumentation
+#
+#            - type: view
+#              style:
+#                width: calc(275.97/1724.81*100vw)
+#                height: calc(436.05/1724.81*100vw)
+#                display: flex
+#                justifyContent: center
+#                alignItems: center
+#                flexDirection: column
+#              children:
+#                - .BaseFooterTitle1:
+#                  text: Support
+#                  style:
+#                    fontSize: calc(19/1724.81*100vw)
+#                - .BaseFooterView1:
+#                  children:
+#                    - .BaseFooterText1:
+#                      text: Contact Us
+#                      onClick:
+#                        - actionType: evalObject
+#                          object:
+#                            - =.builtIn.object.setProperty:
+#                                dataIn:
+#                                  obj: =.Resource.baseHeaderData
+#                                  label: "title"
+#                                  text: "About"
+#                                  arr: ["fontSize", "fontWeight", "fontColor"]
+#                                  valueArr: ["2.28vh", "400", "0x000000"]
+#                                  errorArr: ["2.28vh", "400", "0x000000"]
+#                                dataOut: Resource.baseHeaderData
+#                        - actionType: builtIn
+#                          funcName: redraw
+#                          viewTag: headRightView
+#                        - goto: AiTmedContact
+#                    - .BaseFooterText1:
+#                      text: Terms of Service
+#                      onClick:
+#                        - actionType: evalObject
+#                          object:
+#                            - =.builtIn.object.setProperty:
+#                                dataIn:
+#                                  obj: =.Resource.baseHeaderData
+#                                  label: "title"
+#                                  text: "About"
+#                                  arr: ["fontSize", "fontWeight", "fontColor"]
+#                                  valueArr: ["2.28vh", "400", "0x000000"]
+#                                  errorArr: ["2.28vh", "400", "0x000000"]
+#                                dataOut: Resource.baseHeaderData
+#                        - actionType: builtIn
+#                          funcName: redraw
+#                          viewTag: headRightView
+#                        - goto: TermsOfService
+#                      style:
+#                    - .BaseFooterText1:
+#                      text: Privacy Policy
+#                      onClick:
+#                        - actionType: evalObject
+#                          object:
+#                            - =.builtIn.object.setProperty:
+#                                dataIn:
+#                                  obj: =.Resource.baseHeaderData
+#                                  label: "title"
+#                                  text: "About"
+#                                  arr: ["fontSize", "fontWeight", "fontColor"]
+#                                  valueArr: ["2.28vh", "400", "0x000000"]
+#                                  errorArr: ["2.28vh", "400", "0x000000"]
+#                                dataOut: Resource.baseHeaderData
+#                        - actionType: builtIn
+#                          funcName: redraw
+#                          viewTag: headRightView
+#                        - goto: PrivacyPolicy
+#                    - .BaseFooterText1:
+#                      text: FAQ
+#                      onClick:
+#                        - actionType: evalObject
+#                          object:
+#                            - =.builtIn.object.setProperty:
+#                                dataIn:
+#                                  obj: =.Resource.baseHeaderData
+#                                  label: "title"
+#                                  text: "About"
+#                                  arr: ["fontSize", "fontWeight", "fontColor"]
+#                                  valueArr: ["2.28vh", "400", "0x000000"]
+#                                  errorArr: ["2.28vh", "400", "0x000000"]
+#                                dataOut: Resource.baseHeaderData
+#                        - actionType: builtIn
+#                          funcName: redraw
+#                          viewTag: headRightView
+#                        - goto: FAQ
+#                      style:
+#                    - .BaseFooterText1:
+#                      text: ONC Certification
+#                      onClick:
+#                        - actionType: evalObject
+#                          object:
+#                            - =.builtIn.object.setProperty:
+#                                dataIn:
+#                                  obj: =.Resource.baseHeaderData
+#                                  label: "title"
+#                                  text: "About"
+#                                  arr: ["fontSize", "fontWeight", "fontColor"]
+#                                  valueArr: ["2.28vh", "400", "0x000000"]
+#                                  errorArr: ["2.28vh", "400", "0x000000"]
+#                                dataOut: Resource.baseHeaderData
+#                        - actionType: builtIn
+#                          funcName: redraw
+#                          viewTag: headRightView
+#                        - goto: OncCertification
+#                      style:
 
     - type: view
       style:
@@ -1773,7 +1773,7 @@ BaseFooter1: # base footer
             alignItems: center
           children:
             - type: label
-              text: "© 2021 AiTmed, Inc. All rights reserved. "
+              text: "© 2024 HYUGE INTELLIGENT SYSTEMS. ALL RIGHTS RESERVED."
               style:
                 height: calc(106.59/1724.81*100vw)
                 width: calc(603.687/1724.81*100vw)

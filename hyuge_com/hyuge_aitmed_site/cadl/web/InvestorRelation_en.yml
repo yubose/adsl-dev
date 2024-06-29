@@ -1,0 +1,126 @@
+InvestorRelation:
+  viewPort: top
+  components:
+    - .BaseHeader:
+    - type: popUp
+      viewTag: topView
+    - type: view
+      style:
+        marginTop: "0"
+        width: calc(1160.35/1724.81*100vw)
+        margin: "auto"
+      children:
+        - .InvestorRelationTitle:
+          style:
+            marginTop: calc(222.111/1724.81*100vw)
+            textAlign:
+              y: center
+            fontStyle: "bold"
+            fontSize: calc(34.04/1724.81*100vw)
+            justifyContent: center
+            color: "0x595959"
+          text: "Investor Relations"
+
+        - type: image
+          path: investor_relation.webp
+          style:
+            display: block
+            margin: auto
+            maxWidth: "100%"
+            width: calc(1060.35/1724.81*100vw)
+
+        - .InvestorRelationLabel:
+          text: "At Hyuge Intelligent Systems, we are at the forefront of the AI revolution, developing groundbreaking technologies that enable personalized, efficient, and user-centric AI assistants. As we continue to push the boundaries of what's possible in artificial intelligence, we invite visionary investors to join us in shaping the future of human-machine collaboration."
+          style:
+            lineHeight: "1.5"
+            marginTop: calc(59.57/1724.81*100vw)
+
+        - .InvestorRelationTitle:
+          text: "Investment Opportunity"
+
+        - .InvestorRelationLabel:
+          text: "By investing in Hyuge Intelligent Systems, you have the opportunity to:"
+          style:
+            marginTop: calc(8.51/1724.81*100vw)
+
+        - .InvestorRelationLabel:
+          text: "- Be part of a pioneering company that is transforming the AI landscape with innovative technologies like PIE, PALM, ADSL, and BECOS"
+
+        - .InvestorRelationLabel:
+          text: "- Support the development of AI solutions that prioritize user privacy, security, and individual control over data"
+
+        - .InvestorRelationLabel:
+          text: "- Contribute to the democratization of AI, making it accessible and beneficial to a wide range of industries and applications"
+
+        - .InvestorRelationLabel:
+          text: "- Benefit from the growth potential of a company at the cutting edge of the rapidly expanding AI market"
+
+        - .InvestorRelationTitle:
+          text: "Our Growth Strategys"
+
+        - .InvestorRelationLabel:
+          text: "Hyuge Intelligent Systems is poised for significant growth in the coming years. Our strategy includes:"
+          style:
+            marginTop: calc(8.51/1724.81*100vw)
+
+        - .InvestorRelationLabel:
+          text: "- Continuing to innovate and refine our core technologies to maintain our competitive edge"
+
+        - .InvestorRelationLabel:
+          text: "- Expanding our partnerships with businesses and organizations across industries to develop tailored AI solutions"
+
+        - .InvestorRelationLabel:
+          text: "- Fostering a thriving open source community around our BECOS and ADSL technologies to drive adoption and collaboration"
+
+        - .InvestorRelationLabel:
+          text: "- Investing in top talent to further strengthen our research, development, and commercialization capabilities"
+
+        - .InvestorRelationTitle:
+          text: "Seed Round Funding"
+
+        - .InvestorRelationLabel:
+          text: "We are currently seeking seed round funding to accelerate our growth and bring our vision of personalized AI to life. Your investment will help us:"
+          style:
+            marginTop: calc(8.51/1724.81*100vw)
+
+        - .InvestorRelationLabel:
+          text: "- Expand our research and development efforts to advance our core technologies"
+
+        - .InvestorRelationLabel:
+          text: "- Grow our team of AI experts, engineers, and business professionals"
+
+        - .InvestorRelationLabel:
+          text: "- Enhance our infrastructure and resources to support the development and deployment of our AI solutions"
+
+        - .InvestorRelationLabel:
+          text: "- Strengthen our intellectual property portfolio to protect our innovations"
+
+        - .InvestorRelationLabel:
+          text: "- Extend our market reach and brand awareness to attract new customers and partners"
+
+        - .InvestorRelationLabel:
+          text: "If you share our vision for the future of AI and believe in the transformative potential of our technologies, we invite you to consider investing in Hyuge Intelligent Systems. Together, we can shape a world where AI empowers individuals, revolutionizes industries, and unlocks new possibilities for human achievement."
+
+        - type: view
+          style:
+            marginTop: calc(31.06/1724.81*100vw)
+            marginBottom: calc(59.57/1724.81*100vw)
+          children:
+            - .ClientsPartnersLabel:
+              text: "For more information or to discuss investment opportunities, please contact our investor relations team at "
+              style:
+                marginTop: calc(31.06/1724.81*100vw)
+                display: "inline"
+                verticalAlign: middle
+
+            - .ClientsPartnersLabel:
+              text: "driz@hyuge.com"
+              style:
+                display: "inline-block"
+                marginTop: 0
+                verticalAlign: middle
+                color: "0x5B7A8F"
+
+    - .BaseFooter1:
+      style:
+        marginTop: calc(59.57/1724.81*100vw)

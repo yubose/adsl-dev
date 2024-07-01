@@ -16,50 +16,37 @@ Resource: # the resource of page
       val: "0xe8e8e8"
       fontColor: "0x000000"
       fontSize: "2.28vh"
-      left: "0vw"
-      marginLeft: "0"
-      width: calc(7vw)
+      marginLeft: "calc(1vw)"
       textDecoration: none
     - title: "Our Solutions"
       fontColor: "0x000000"
       fontSize: "2.28vh"
-      left: "2vw"
-      marginLeft: "0"
-      width: calc(7vw)
+      marginLeft: "calc(2vw)"
       textDecoration: none
     - title: "Clients & Partners"
       fontColor: "0x000000"
       fontSize: "2.28vh"
-      left: "3vw"
-      width: calc(7vw)
-      marginLeft: "0.8vw"
+      marginLeft: "calc(2vw)"
       textDecoration: none
     - title: "Investor Relation"
       fontColor: "0x333333"
       fontSize: "2.28vh"
-      left: "5vw"
-      marginLeft: "0"
-      width: calc(7vw)
+      marginLeft: "calc(2vw)"
       textDecoration: none
     - title: "Privacy Policy"
       fontColor: "0x000000"
       fontSize: "2.28vh"
-      left: "7vw"
-      width: calc(7vw)
-      marginLeft: "0.8vw"
+      marginLeft: "calc(2vw)"
       textDecoration: none
     - title: "Contact"
       fontColor: "0x333333"
       fontSize: "2.28vh"
-      left: "8.7vw"
-      # left: "0"
+      marginLeft: "calc(2vw)"
     - title: "About"
       fontColor: "0x333333"
       fontSize: "2.28vh"
-      left: "11.7vw"
-      marginLeft: "0"
-      width: calc(9vw)
-      textDecoration: underline
+      marginLeft: "calc(2vw)"
+      textDecoration: none
   baseHeaderData2:
     - title: Home
       fontColor: "0x000000"

@@ -161,15 +161,13 @@ BaseHeader: # base top
             - type: image
               path: HISLogo.webp
               style:
-                width: calc(57.09/1724.81*100vw)
+                width: calc(157.09/1724.81*100vw)
                 top: calc(24.23/1724.81*100vw)
 
         - type: view
           viewTag: headRightView
           style:
-            # left: calc(11.6vw)
             width: calc(862.41/1724.81*100vw)
-            # top: "0"
             height: calc(116.28/1724.81*100vw)
           children:
             - type: list
@@ -177,10 +175,7 @@ BaseHeader: # base top
               listObject: .Resource.baseHeaderData
               iteratorVar: itemObject
               style:
-                width: calc(52vw)
                 margin: "0"
-                # top: "0"
-                # left: calc(1vw)
                 height: calc(116.28/1724.81*100vw)
                 axis: horizontal
               children:
@@ -248,34 +243,6 @@ BaseHeader: # base top
                                     string2: "About"
                               - goto: About
                               - continue
-                          - if:
-                              - =.builtIn.string.equal:
-                                  dataIn:
-                                    string1: $var.title
-                                    string2: "Aitmed Care"
-                              - .Resource.productFlag@: "1"
-                              - .Resource.productFlag@: "0"
-                          - if:
-                              - =.builtIn.string.equal:
-                                  dataIn:
-                                    string1: $var.title
-                                    string2: "Investor Relation"
-                              - goto: InvestorRelation
-                              - continue
-                          - if:
-                              - =.builtIn.string.equal:
-                                  dataIn:
-                                    string1: $var.title
-                                    string2: "Wellness"
-                              - .Resource.wellnessFlag@: "1"
-                              - .Resource.wellnessFlag@: "0"
-                          - if:
-                              - =.builtIn.string.equal:
-                                  dataIn:
-                                    string1: $var.title
-                                    string2: "Sign in / Sign up"
-                              - .Resource.signInFlag@: "1"
-                              - .Resource.signInFlag@: "0"
                     - actionType: evalObject
                       object:
                         - if:
@@ -294,24 +261,7 @@ BaseHeader: # base top
                             - actionType: popUpDismiss
                               popUpView: productView
                             - continue
-                    # - actionType: evalObject
-                    #   object:
-                    #     - if:
-                    #       - =.builtIn.string.equal:
-                    #           dataIn:
-                    #             string1: =.Resource.wellnessFlag
-                    #             string2: "1"
-                    #       - actionType: popUp
-                    #         popUpView: wellnessView
-                    #       - continue
-                    #     - if:
-                    #       - =.builtIn.string.equal:
-                    #           dataIn:
-                    #             string1: =.Resource.wellnessFlag
-                    #             string2: "0"
-                    #       - actionType: popUpDismiss
-                    #         popUpView: wellnessView
-                    #       - continue
+
                     - actionType: evalObject
                       object:
                         - if:
@@ -323,15 +273,7 @@ BaseHeader: # base top
                               popUpView: redict
                               dismissOnTouchOutside: true
                             - continue
-                        # - if:
-                        #   - =.builtIn.string.equal:
-                        #       dataIn:
-                        #         string1: =.Resource.signInFlag
-                        #         string2: "0"
-                        #   - actionType: popUpDismiss
-                        #     popUpView: redict
 
-                        #   - continue
                     - actionType: builtIn
                       funcName: redraw
                       viewTag: headRightView
@@ -342,17 +284,14 @@ BaseHeader: # base top
                     left: itemObject.left
                     marginLeft: itemObject.marginLeft
                     textAlign:
-                      # x: center
+                      x: center
                       y: center
                   children:
                     - type: label
                       dataKey: itemObject.title
                       style:
                         left: "0"
-                        # top: "0"
-                        # width: calc(8vw)
                         height: calc(116.28/1724.81*100vw)
-                        # color: "0x333333"
                         fontWeight: itemObject.fontWeight
                         color: itemObject.fontColor
                         fontSize: calc(16/1724.81*100vw)
@@ -361,31 +300,6 @@ BaseHeader: # base top
                         textAlign:
                           y: center
 
-            # - type: button
-            #   text: Sign Up For Free
-            #   onClick:
-            #     - actionType: popUp
-            #       popUpView: JFreeTag
-            #     - actionType: popUp
-            #       popUpView: JFreeShadowPop
-            #   style:
-            #     left: calc(803.90/1724.81*100vw)
-            #     # width: calc(155.23/1724.81*100vw)
-            #     top: calc(38.76/1724.81*100vw)
-            #     height: calc(38.76/1724.81*100vw)
-            #     border:
-            #       style: '1'
-            #     borderRadius: 5
-            #     color: "0xffffff"
-            #     right: "0"
-            #     fontSize: calc(16/1724.81*100vw)
-            #     fontFamily: Arial
-            #     backgroundColor: '0x33b450'
-            #     padding: 0 calc(10/1724.81*100vw)
-            #     whiteSpace: nowrap
-            #     textAlign:
-            #       x: center
-            #       y: center
     - type: popUp
       viewTag: productView
       onClick:
@@ -447,13 +361,7 @@ BaseHeader: # base top
                                     string2: "Health A-Z"
                               - goto: HealthAll
                               - continue
-                          # - if:
-                          #   - =.builtIn.string.equal:
-                          #       dataIn:
-                          #         string1: $var.title
-                          #         string2: "Search & Referral"
-                          #   - goto: AitmedSearch
-                          #   - continue
+
                   itemObject:
                   style:
                     width: calc(172.48/1724.81*100vw)

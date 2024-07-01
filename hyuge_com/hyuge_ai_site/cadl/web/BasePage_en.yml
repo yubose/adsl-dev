@@ -1352,12 +1352,11 @@ BaseFooter: # base footer
 BaseFooter1: # base footer
   type: view
   style:
-    left: "0"
-    marginTop: "0"
-    width: "calc(1514.77/1724.81*100vw)"
-    height: "calc(542.632/1724.81*100vw)"
-    zIndex: "100"
+    # left: "0"
     margin: auto
+    marginTop: calc(79.57/1724.81*100vw)
+    width: "calc(1514.77/1724.81*100vw)"
+    zIndex: "100"
   children:
 #    - type: view
 #      style:
